@@ -4,7 +4,6 @@ from collections import UserDict
 
 class MyDict(UserDict):
     def __init__(self, dict_data=()):
-        print(f'{id(dict_data)=}')
         super().__init__()
         self._dict_data = dict_data
         self.update(dict_data)
