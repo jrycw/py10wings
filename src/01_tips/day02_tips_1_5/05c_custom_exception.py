@@ -1,0 +1,3 @@
+# 05c
+class MyCoolError(Exception):
+    ...
