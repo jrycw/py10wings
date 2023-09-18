@@ -1,3 +1,5 @@
+# [Day05] 次翼 - Decorator : @Func to Func
+
 ## 次翼大綱
 `decorator`為`meta programming`的技巧之一，可以改變被其裝飾`obj`之行為。
 
@@ -344,9 +346,9 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     print(add1(1, 2))  # 3
     print(add2(1, 2))  # 3
-    my_class = MyClass()
-    print(my_class.add1(1, 2))  # 3
-    print(my_class.add2(1, 2))  # 3
+    my_inst = MyClass()
+    print(my_inst.add1(1, 2))  # 3
+    print(my_inst.add2(1, 2))  # 3
 ```
 ```
 INFO:root:wrapper is called, func=<function add1 at 0x0000029A770C6980>, args=(1, 2), kwargs={}
@@ -408,9 +410,9 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     print(add1(1, 2))  # 3
     print(add2(1, 2))  # 3
-    my_class = MyClass()
-    print(my_class.add1(1, 2))  # 3
-    print(my_class.add2(1, 2))  # 3
+    my_inst = MyClass()
+    print(my_inst.add1(1, 2))  # 3
+    print(my_inst.add2(1, 2))  # 3
 ```
 ```
 INFO:root:wrapper is called, func=<function add1 at 0x000002607BBC67A0>, args=(1, 2), kwargs={}
