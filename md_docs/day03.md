@@ -1,3 +1,4 @@
+# [Day03] 初翼 - Tips : 6~10
 今天我們繼續分享`tips 6~10`。
 
 ## 6. 當function回傳值為bool
