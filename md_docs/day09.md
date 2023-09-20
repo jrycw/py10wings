@@ -1,5 +1,4 @@
-# [Day09] 三翼 - property : 實例說明
-今日我們透過解題，來練習看看如何活用`property`。一樣。以下我會以`prop`來稱呼由`property`建立的`property` `instance`。
+今日我們透過解題，來練習看看如何活用`property`。以下會以`prop`來稱呼由`property`建立的`property` `instance`。
 
 ## 問題
 1. 建立一個`Color` `class`：
@@ -10,7 +9,7 @@
     * 實作一個名為`color`的`prop` ，其只有`getter`功能，而沒有`setter`功能。
 
 ### 解法1
-首先我們定義`Color` `class`，並實作`__init__`。
+首先定義`Color` `class`，並實作`__init__`。
 * `self.color = color`暗示其會呼叫`color` `prop`的`setter`，來幫忙設定`color`。
 * `self._hex`為`hex` `prop`底下真正包含的值，先於此定義。
 ```python=
@@ -20,7 +19,7 @@ class Color:
         self.color = color
         self._hex = None
 ```
-接著我們實作`color` `prop`的`getter`及`setter`。
+接著實作`color` `prop`的`getter`及`setter`。
 * `getter`會返回`self._color`這個`color` `prop`底下真正包含的值。
 * `setter`會先呼叫`_validate`做兩個檢查，確保給定的`color`值為`tuple`型態且`tuple`中每個元素都是範圍在`0~255`之間的`int`。如果通過的話，則將給定的`color`指定給`self._color`，並將`self._hex`設為`None`。`self._hex = None`相當於每次呼叫`color`的`setter`時會清除`hex` `prop`的快取機制。
 ```python=
@@ -45,7 +44,7 @@ class Color:
         self._color = color
         self._hex = None  # purge cache
 ```
-再來，我們實作`hex` `prop`。我們先確認`self._hex`是否為`None`，若是的話代表第一次呼叫或是快取已被清除，此時需真正計算`Hex color code`，最後再返回`self._hex`。請注意我們使用`self.color`來存取`self._color`，而非直接使用`self._color`。雖然兩種方式都可以，但是當有`property`這種公開的`interface`可以使用時，建議優先使用，因為這麼一來當`interface`有問題時很容易發現，因為我們是第一個使用者。
+再來實作`hex` `prop`。先確認`self._hex`是否為`None`，若是的話代表第一次呼叫或是快取已被清除，此時需真正計算`Hex color code`，最後再返回`self._hex`。請注意我們使用`self.color`來存取`self._color`，而非直接使用`self._color`。雖然兩種方式都可以，但是當有`property`這種公開的`interface`可以使用時，建議優先使用，因為這麼一來當`interface`有問題時很容易發現，因為我們是第一個使用者。
 ```python=
 # 01
 class Color:
@@ -57,7 +56,7 @@ class Color:
             self._hex = ''.join(f'{c:02x}' for c in self.color)
         return self._hex
 ```
-最後我們實作`Red` `class`。因為我們很明確知道紅色的`color`為`(255, 0, 0)`，所以可以直接在`__init__`中利用`super()`來請`Color` `class`來幫忙設定。
+最後實作`Red` `class`。因為我們很明確知道紅色的`color`為`(255, 0, 0)`，所以可以直接在`__init__`中利用`super()`來請`Color` `class`來幫忙設定。
 ```python=
 # 01
 class Red(Color):
@@ -87,7 +86,7 @@ class Red(Color):
     def color(self):
         return super().color
 ```
-至此我們完成`Red` `class`的實作。但當我們試圖建立`red`時，卻發現會`raise AttributeError`，這是怎麼一回事呢？
+至此我們完成`Red` `class`的實作。但當試圖建立`red`時，卻發現會`raise AttributeError`，這是怎麼一回事呢？
 ```python=
 >>> red = Red() # AttributeError: property 'color' of 'Red' object has no setter
 ```
@@ -135,7 +134,7 @@ class Color:
             self._hex = ''.join(f'{c:02x}' for c in self.color)
         return self._hex
 ```
-此外，我們可以善用`Enum`來幫助我們枚舉各種顏色，假設我們現在需要建立`Red`、`Green`及`Blue`三個`class`時，可以這麼寫。
+此外，可以善用`Enum`來幫助我們枚舉各種顏色，假設我們現在需要建立`Red`、`Green`及`Blue`三個`class`時，可以這麼寫。
 ```python=
 # 02
 from enum import Enum
@@ -176,7 +175,7 @@ class Blue(Color):
 ### 解法3
 由於`解法2`裡我們於繼承`Color`的`class`內都要實作`color` `prop`，我們開始思考是不是能把這個`prop`抽象出來。
 
-我們可以試著建立一個`ReadColorOnly` `class`來包住這個`prop`。這麼一來後續的`class`繼承`ReadColorOnly`及`Color`後，只需要實作`__init__`即可。
+我們嘗試建立一個`ReadColorOnly` `class`來包住這個`prop`。這麼一來後續的`class`繼承`ReadColorOnly`及`Color`後，只需要實作`__init__`即可。
 
 如果只需要建立`Red`、`Green`及`Blue`三個`class`時，我們會傾向`解法2`。但如果後續有很多像`LuckyColor`的`class`需要建立時，或許`解法3`會是比較好的選擇。
 
@@ -216,4 +215,3 @@ class LuckyColor(ReadColorOnly, Color):
 
 ## Code
 [本日程式碼傳送門](https://github.com/jrycw/py10wings/tree/master/src/03_property/day09_property_example)。
-
