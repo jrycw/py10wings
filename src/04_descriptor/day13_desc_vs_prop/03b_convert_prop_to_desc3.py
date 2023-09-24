@@ -1,4 +1,4 @@
-# 02c
+# 03b
 from abc import ABC, abstractmethod
 
 
@@ -35,7 +35,7 @@ class NegativeInt(BaseValidator):
 class MyClass:
     x = PositiveInt()
     y = PositiveInt()
-    z = PositiveInt()
+    z = NegativeInt()
 
     def __init__(self, x, y, z):
         self.x = x
@@ -44,19 +44,19 @@ class MyClass:
 
 
 if __name__ == '__main__':
-    my_inst = MyClass(1, 1, 1)
+    my_inst = MyClass(1, 1, -1)
 
     print(my_inst.x)  # 1
     print(my_inst.y)  # 1
-    print(my_inst.z)  # 1
+    print(my_inst.z)  # -1
 
     my_inst.x = 2
     my_inst.y = 2
-    my_inst.z = 2
+    my_inst.z = -2
     print(my_inst.x)  # 2
     print(my_inst.y)  # 2
-    print(my_inst.z)  # 2
+    print(my_inst.z)  # -2
 
     # my_inst.x = 0  # ValueError
     # my_inst.y = -1  # ValueError
-    # my_inst.z = -2.2  # ValueError
+    # my_inst.z = 1  # ValueError
