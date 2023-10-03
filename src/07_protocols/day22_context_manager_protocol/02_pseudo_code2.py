@@ -11,7 +11,7 @@ class MyContextManager:
         # 1. return self
         # 2. return self._new_x
         # 3. return None (implicitly)
-        return self._x
+        return self._new_x
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         # may need to handle exceptions
