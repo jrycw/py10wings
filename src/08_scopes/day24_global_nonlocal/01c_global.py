@@ -18,5 +18,6 @@ def get_a():
 my_func.a = get_a
 my_func(), my_func()
 print(f'{my_func.a()=}')  # 2
+print(f'{a=}')  # 2
 print(f'{id(my_func.a())=}')
 print(f'End: {id(a)=}')

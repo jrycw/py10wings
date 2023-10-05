@@ -10,4 +10,5 @@ def my_func():
 my_func.a = a
 
 my_func(), my_func()
-print(my_func.a)  # 0
+print(f'{my_func.a=}')  # 0
+print(f'{a=}')  # 2
