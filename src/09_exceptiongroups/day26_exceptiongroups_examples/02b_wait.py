@@ -51,8 +51,7 @@ async def main():
         for task in done:
             print(f'{task.result()}')
     except* Exception as eg:
-        excs = eg.exceptions
-        for exc in excs:
+        for exc in eg.exceptions:
             print(f'handling {exc}')
 
 if __name__ == '__main__':

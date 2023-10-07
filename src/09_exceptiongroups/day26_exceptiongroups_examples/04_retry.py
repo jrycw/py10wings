@@ -44,4 +44,9 @@ if __name__ == '__main__':
     try:
         print(f'{my_func()=}')  # 'ok'
     except* Exception as eg:
-        print(eg.exceptions)  # 4 possibilities
+        print(eg.exceptions)
+        # 4 possibilities
+        # (TypeError('1'), TypeError('1'))
+        # (TypeError('1'), ValueError('2'))
+        # (ValueError('2'), (TypeError('1'))
+        # (ValueError('2'), ValueError('2'))
