@@ -33,7 +33,7 @@
 [Talk Python](https://talkpython.fm)是由`Michael Kennedy`建立的學習平台，裡面有付費的課程以及幾乎每週更新的[podcast](https://talkpython.fm/episodes/all)。其每集podcast約一個小時出頭，會針對單一主題訪問一到數位該領域的高手，連咱們的Python老爹`Guido`也曾經當過嘉賓。
 
 ### Python Bytes
-[Python Bytes](https://pythonbytes.fm)是由`Michael Kennedy`及`Brian Okkan`連手經營的podcast，也幾乎是每週都有更新。相比於`Talk Python podcast`每集著重於一個主題，`Python Bytes`算是產業速報，每集約30~40分鐘，可以快速更新近來的Python大小事。
+[Python Bytes](https://pythonbytes.fm)是由`Michael Kennedy`及`Brian Okkan`一起經營的podcast，也幾乎是每週都有更新。相比於`Talk Python podcast`每集著重於一個主題，`Python Bytes`算是產業速報，每集約30~40分鐘，可以快速更新近來的Python大小事。
 
 ### Real Python
 [Real Python](https://realpython.com)以提供高品質的Python tutorial著稱。許多Python開發者在面對不熟悉的功能或package時，都會優先尋找`Real Python`是否有tutorial可以幫忙快速進入狀況。其[podcast](https://realpython.com/podcasts/rpp/)也為每週更新，風格近似於`Talk Python`。
