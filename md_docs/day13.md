@@ -231,7 +231,7 @@ class MyClass:
         self.z = z
 ```
 
-由於`NegativeInt`與`PositiveInt`不同之處，只有`_validate` `function`而已。或許您會想不如讓`NegativeInt`繼承`PositiveInt`，然候覆寫`_validate` `function`。此舉雖然可行，但是不太合理，這麼一來就像是暗示`NegativeInt`是一種`PositiveInt`。
+由於`NegativeInt`與`PositiveInt`不同之處，只有`_validate` `function`而已。或許您會想不如讓`NegativeInt`繼承`PositiveInt`，然後覆寫`_validate` `function`。此舉雖然可行，但是不太合理，這麼一來就像是暗示`NegativeInt`是一種`PositiveInt`。
 
 一個比較好的方法，是再往上一層建立一個`BaseValidator`，可以讓`PositiveInt`與`NegativeInt`繼承。
 

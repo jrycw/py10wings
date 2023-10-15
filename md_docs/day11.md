@@ -181,7 +181,7 @@ class MyClass:
 這個功能非常方便，可以讓我們在設計`descriptor`時，取得於`MyClass`中定義的名字。
 
 ### `__slots__`
-當`class`實作有`__slots__`(一般定義為`tuple`)，未被列在其中的`attribute`，將無法由`instance`存取，這包括我們一直習以為常使用的`__dict__`。當然您也可以選擇使用`__slots__`然候手動將`__dict__`加進`__slots__`。
+當`class`實作有`__slots__`(一般定義為`tuple`)，未被列在其中的`attribute`，將無法由`instance`存取，這包括我們一直習以為常使用的`__dict__`。當然您也可以選擇使用`__slots__`然後手動將`__dict__`加進`__slots__`。
 
 由`# 101`可以看出，當`MyClass`的`__slots__`設定為空的`tuple`時，我們無法使用`my_inst.__dict__`。但是在`MyClass2`中，我們手動加入`__dict__`後，就可以存取`my_inst2.__dict__`了。
 

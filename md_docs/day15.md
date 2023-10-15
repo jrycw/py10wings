@@ -102,7 +102,7 @@ class MyClass(object, metaclass=MyType):
  |      __prepare__() -> dict
  |      used to create the namespace for the class statement
 ```
-一般來說，`__prepare__`會返回`dict`(但事實上可以返回一個`mapping`)，接著傳遞給`__new__`作為其`cls_dict`參數(`註1`)。然候我們可於`__new__`中對`cls_dict`進行一些操作。最後當我們使用`cls = super().__new__(mcls, cls_name, cls_bases, cls_dict)`時，會將`cls_dict`中的東西複製到一個新的`dict`中(`註2`)。
+一般來說，`__prepare__`會返回`dict`(但事實上可以返回一個`mapping`)，接著傳遞給`__new__`作為其`cls_dict`參數(`註1`)。然後我們可於`__new__`中對`cls_dict`進行一些操作。最後當我們使用`cls = super().__new__(mcls, cls_name, cls_bases, cls_dict)`時，會將`cls_dict`中的東西複製到一個新的`dict`中(`註2`)。
 
 ```python=
 # 05

@@ -122,7 +122,7 @@ if __name__ == '__main__':
     for name, value in data:
         d[name].append(value)
 ```
-最後，我們想分享一個比較冷門的寫法，就是直接使用`dict.setdefault`，如`# 14d`。第一次用可能會覺得有點怪。但是寫久了之後，發現相比於`defaultdict`要先import，再產生`defaultdict` `instance`才能使用，直接生成`dict`然候連續兩個`.(dot)`好像更一氣呵成。
+最後，我們想分享一個比較冷門的寫法，就是直接使用`dict.setdefault`，如`# 14d`。第一次用可能會覺得有點怪。但是寫久了之後，發現相比於`defaultdict`要先import，再產生`defaultdict` `instance`才能使用，直接生成`dict`然後連續兩個`.(dot)`好像更一氣呵成。
 ```python=
 # 14d
 data = [('a', 1), ('b', 2), ('c', 3), ('a', 4)]

@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
 * `@x.setter`與`@x.deleter`裝飾的`function`必須與`@property`所裝飾的`function`名一致，即`x`。如果使用不同名字，使用上會變得很困難，且容易出錯(`註1`)。
 
-`# 01`是基本型態，但視您的程式需要，您可能需要先建立一個`prop`，然候再視情況加入`fget`、`fset`、`fdel`或`doc`，如`# 01a`。
+`# 01`是基本型態，但視您的程式需要，您可能需要先建立一個`prop`，然後再視情況加入`fget`、`fset`、`fdel`或`doc`，如`# 01a`。
 ```python=
 # 01a
 class MyClass:

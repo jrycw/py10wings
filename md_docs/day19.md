@@ -114,7 +114,7 @@ my_inst.my_func(1, 2)
 ```
 * 由於`my_inst.my_func`是個`non_data_desc`，所以`my_inst`會先尋找`my_inst.__dict__`中有沒有`my_func`。 因為沒有找到，所以會使用`my_func`的`__get__`。
 * 由於是從`my_inst`來取`my_func`，所以會回傳一個`MethodType`生的`bound method`，這個`method`將`my_func`與`my_inst` `bound`在一起。
-* 當我們真正呼叫`my_inst.my_func(1, 2)`相當於使用`bound method`中的`__call__`，它會將`my_inst`作為`my_func`的第一個參數，`1`與`2`作為`my_func`的剩餘參數，然候回傳計算結果。這就是為什麼我們可以使用`my_inst.my_func(1, 2)`，而不需使用`my_inst.my_func(my_inst, 1, 2)`的由來。
+* 當我們真正呼叫`my_inst.my_func(1, 2)`相當於使用`bound method`中的`__call__`，它會將`my_inst`作為`my_func`的第一個參數，`1`與`2`作為`my_func`的剩餘參數，然後回傳計算結果。這就是為什麼我們可以使用`my_inst.my_func(1, 2)`，而不需使用`my_inst.my_func(my_inst, 1, 2)`的由來。
 
 一個有趣的事實是，`function`的`__get__`每次由`instance`呼叫時，都會回傳一個新的`MethodType` `instance`，這代表:
 ```python=

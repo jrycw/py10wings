@@ -82,7 +82,7 @@ with (open('file1.txt') as f1,
 ## 8. list unpacking
 當有一個`list`包含一個`tuple`時，如`[('d', 4)]`的情況，該如何取得`'d'`及`4`呢？
 
-一般的解法是先利用`[('d', 4)][0]`來拿到內層的`('d', 4)`，然候使用`d, four = ('d', 4)`的`tuple unpacking`，如`# 08a`。
+一般的解法是先利用`[('d', 4)][0]`來拿到內層的`('d', 4)`，然後使用`d, four = ('d', 4)`的`tuple unpacking`，如`# 08a`。
 
 ```python=
 # 08a
@@ -145,7 +145,7 @@ if __name__ == '__main__':
     d = {k: v
          for k, v in zip(ascii_lowercase, range(1, 27))}
 ```
-但我們發覺`# 09b`這種寫法更加優雅。`zip`幫我們將`ascii_lowercase`與`count(1)`縫在一起，然候交給`dict`幫忙生成。短短一行，我們靈活地使用了`zip`與`itertools.count`。
+但我們發覺`# 09b`這種寫法更加優雅。`zip`幫我們將`ascii_lowercase`與`count(1)`縫在一起，然後交給`dict`幫忙生成。短短一行，我們靈活地使用了`zip`與`itertools.count`。
 
 `zip`的強大，不止在於縫製`iterable`，也可以體現於拆`iterable`。當您有一個`dict`，您會如何同時取得`keys`及`values`呢？
 * 一般來說，您應該會使用`dict.keys()`與`dict.values()`。

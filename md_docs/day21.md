@@ -196,7 +196,7 @@ if __name__ == '__main__':
     garage_iter._index = 0
     print(next(garage_iter))  # Koenigsegg Regera
 ```
-上面的程式中，我們先使用`iter(garage)`將`GarageIterator`生成的`iterator`拿在手上。接下來呼叫四次`next`，分別取得`Koenigsegg Regera`、`Ford Mustang`、`Tesla Model X`及`Peugeot 308`。接著我們將`garage_iter._index`設為`0`，然候再次呼叫`next`，就又可以再次取得`Koenigsegg Regera`了。
+上面的程式中，我們先使用`iter(garage)`將`GarageIterator`生成的`iterator`拿在手上。接下來呼叫四次`next`，分別取得`Koenigsegg Regera`、`Ford Mustang`、`Tesla Model X`及`Peugeot 308`。接著我們將`garage_iter._index`設為`0`，然後再次呼叫`next`，就又可以再次取得`Koenigsegg Regera`了。
 
 除了可以改變`iterator`的狀態外，我們還可以在`GarageIterator`內加上其它`attribute`或`function`，這是`方法1~4`無法做到的。
 

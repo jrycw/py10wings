@@ -108,7 +108,7 @@ class MyContextManager:
 Context Manager可以分為`single use`、`reusable`及`reentrant`三種[類型](https://docs.python.org/3/library/contextlib.html#single-use-reusable-and-reentrant-context-managers)。
 
 ### single use
-`single use`是最常用的類型。每次需要使用這類型的`context manager`都需重新建立，重覆使用將會`raise RuntimeError`。建議的使用方法是，盡量使用`with MyContextManager as ctx_mgr`的語法，而不要將其先存在一個變數，例如`ctx_mgr = MyContextManager()`，然候再`with ctx_mgr`，來降低發生重覆使用的機率。
+`single use`是最常用的類型。每次需要使用這類型的`context manager`都需重新建立，重覆使用將會`raise RuntimeError`。建議的使用方法是，盡量使用`with MyContextManager as ctx_mgr`的語法，而不要將其先存在一個變數，例如`ctx_mgr = MyContextManager()`，然後再`with ctx_mgr`，來降低發生重覆使用的機率。
 
 ### reentrant
 `reentrant`是指在`with ctx`區塊內再產生一個或以上的`with ctx`區塊。`redirect_stdout`與`redirect_stderr`即是此種類型，我們稍後會欣賞其源碼。

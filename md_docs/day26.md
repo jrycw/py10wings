@@ -140,7 +140,7 @@ for p in pending:
 for d in done:
     ...
 ```
-一般`asyncio.wait`之後，我們會針對`pending`打一個迴圈，來取消未完成的工作。然候再對`done`打一個迴圈，取出其結果。
+一般`asyncio.wait`之後，我們會針對`pending`打一個迴圈，來取消未完成的工作。然後再對`done`打一個迴圈，取出其結果。
 
 
 #### `return_when`為`ALL_COMPLETED`

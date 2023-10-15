@@ -182,7 +182,7 @@ if __name__ == '__main__':
     timer(MyClass2, x=-1, y=2)  # 0.000011
 ```
 * 一般來說，我們的實作會像`MyClass`，於`__init__`中進行操作。但是這有一個缺點是速度很慢，因為我們必須繼承`SlowNewClass`，透過其耗時的`__new__`來生成`instance`。換句話說，即使我們很快就判斷出需要`raise ValueError`，我們還是得等待`SlowNewClass.__new__`生成`instance`後才可操作。
-* `MyClass2`同時實作`__new__`及`__init__`。這樣一來，我們可以於`__new__`呼叫`super()__new__`前，就先決定是否要`raise ValueError`，然候將後續需要呼叫`super().__init__`的工作放到`__init__`。
+* `MyClass2`同時實作`__new__`及`__init__`。這樣一來，我們可以於`__new__`呼叫`super()__new__`前，就先決定是否要`raise ValueError`，然後將後續需要呼叫`super().__init__`的工作放到`__init__`。
 * 在正常情況下`MyClass`與`MyClass2`速度差不多，但是在有例外的情況下，`MyClass2`可以馬上`raise`。
 
 
