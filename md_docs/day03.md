@@ -29,7 +29,7 @@ def get_bool(iterable):
 if __name__ == '__main__':
     print(get_bool(range(10)), get_bool(range(11)))    # False, True
 ```
-* 但`len(iterable) > 10`本身就會回傳`True`或是`False`，我們何不直接返回呢，所以就有了`# 06c`的模式。我們覺得`# 06c`這種模式俗又有力，推薦您使用。
+* 但`len(iterable) > 10`本身就會回傳`True`或是`False`，可以直接返回。所以就有了`# 06c`的模式。我們覺得`# 06c`這種模式俗又有力，推薦您使用。
 ```python=
 # 06c
 def get_bool(iterable):
@@ -61,7 +61,7 @@ with open('file2.txt', 'w') as f:
     for s in text:
         print(s, file=f)
 ```
-* 又由於`print`可以接受多個參數，所以我們可以進一步改寫`# 07b`為`# 07c`，直接傳入`*text`，並指定`sep='\n'`來節省一個迴圈。`# 07c`的寫法善用`built-in function`，且相當Pythonic，推薦給您。
+* 又由於`print`可以接受多個參數，所以我們可以進一步改寫`# 07b`為`# 07c`，直接傳入`*text`，並指定`sep='\n'`來節省一個迴圈。`# 07c`的寫法善用`built-in function`，且相當pythonic，推薦給您。
 
 ```python=
 # 07c
@@ -147,7 +147,7 @@ if __name__ == '__main__':
 ```
 但我們發覺`# 09b`這種寫法更加優雅。`zip`幫我們將`ascii_lowercase`與`count(1)`縫在一起，然後交給`dict`幫忙生成。短短一行，我們靈活地使用了`zip`與`itertools.count`。
 
-`zip`的強大，不止在於縫製`iterable`，也可以體現於拆`iterable`。當您有一個`dict`，您會如何同時取得`keys`及`values`呢？
+`zip`的強大，不只在於縫製`iterable`，也可以體現於拆`iterable`。當您有一個`dict`，您會如何同時取得`keys`及`values`呢？
 * 一般來說，您應該會使用`dict.keys()`與`dict.values()`。
 * `keys, values = zip(*d.items())`是一種拆掉`d`的方法。這個方法得到的`keys`與`values`是`tuple`型態，所以可以使用`[]`來取值。而`dict.keys()`得到的`dict_keys`型態與`dict.values()`得到的`dict_values`型態，皆無法使用`[]`。
 ```python=
