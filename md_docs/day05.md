@@ -6,7 +6,7 @@
 由於`decorator`可以用`function`及`class`兩種方法來實作，我們定義以
 `function`實作的，稱為`decorator function`；而以`class`實作的，稱為`decorator class`。
 
-又由於`decorator`可以裝飾在`function`或`class`上，所以可能會有以下四種組合:
+又由於`decorator`可以裝飾在`function`或`class`上，所以可能會有以下四種組合：
 1. `decorator function`裝飾於`function`上([[Day05]](https://ithelp.ithome.com.tw/articles/10317757)內容)。
 2. `decorator function`裝飾於`class`上([[Day07]](https://ithelp.ithome.com.tw/articles/10317759)內容)。
 3. `decorator class`裝飾於`function`上([[Day06]](https://ithelp.ithome.com.tw/articles/10317758)內容)。
@@ -48,7 +48,7 @@ if __name__ == '__main__':
 `dec`其實只是接收了一個變數`my_func`，再將其返回。比較特別的是，我們新定義了一個與被裝飾的`my_func`同名的變數來接收其回傳值。在這個範例裡，新變數`my_func`其實就是一開始定義的`my_func` `function`，這可以透過觀察前後兩個`my_func`的`id`確認。
 
 ## 語法糖
-由於經常需要使用被裝飾的`function`名作為新變數名，Python提供了下列的`@dec`作為語法糖(`syntax suger`)，來幫助大家快速完成這類操作。因此，`# 01`可以改寫為`# 02`這個較常見的寫法:
+由於經常需要使用被裝飾的`function`名作為新變數名，Python提供了下列的`@dec`作為語法糖(`syntax suger`)，來幫助大家快速完成這類操作。因此，`# 01`可以改寫為`# 02`這個較常見的寫法：
 ```python=
 # 02
 def dec(func):
@@ -87,7 +87,7 @@ def my_func(*args: int, **kwargs: int) -> int:
 就`# 03`而言，不管`my_func`有沒有被`dec`裝飾，其結果是一樣的。但`decorator`可以視為一個hook，讓我們可以於函數呼叫前或後，進行一些操作。
 
 ### 基本型態2(加上`functools.wraps`)
-如果仔細觀察一下`my_func`及其相關的`metadata`:
+如果仔細觀察一下`my_func`及其相關的`metadata`：
 ```
 my_func=<function dec.<locals>.wrapper at 0x000001DBF55C4FE0>
 my_func.__module__='__main__'
@@ -127,7 +127,7 @@ my_func.__dict__={'__wrapped__': <function my_func at 0x00000239ECC16660>}
 ```
 
 ### 實例說明
-一個常用的情況是透過`decorator`來`logging`一些資訊，如`# 05`:
+一個常用的情況是透過`decorator`來`logging`一些資訊，如`# 05`：
 ```python=
 # 05
 import logging
@@ -162,7 +162,7 @@ INFO:root:wrapper is called, func=<function add at 0x000001E918BC6660>, args=(1,
 ## decorator factory(本身可接收參數)
 由於我們希望裝飾前後的函數，會接收相同的參數，如此較為方便使用。所以當想要傳入一些自訂的參數或是flag時，可以將其作為`decorator`本身的參數傳入。
 
-舉例來說，當我們想要有一個flag來控制這個`decorator`是否要`logging`，可以寫成`# 06`:
+舉例來說，當我們想要有一個flag來控制這個`decorator`是否要`logging`，可以寫成`# 06`：
 ```python=
 # 06
 import logging
@@ -188,7 +188,7 @@ def add(a: int, b: int) -> int:
 `log`這個`function`內又包了兩層`function`，乍看好像有點複雜，讓我們逐層拆解看看。
 * 首先，`log`接收一個參數，名為`to_log`，其預設值為`True`，並會返回內部第一層的`dec` `function`。此時，對於被裝飾的`function`來說，相當於我們直接將`dec`裝飾其上，並將給定的`to_log`往下傳遞。
 * 接下來，我們就像回到`基本型態`，`dec`接收一個`func`(即`add`)，並返回`wrapper` `function`。
-* 最後，於`wrapper`內，實作大部份邏輯。此時，於`wrapper`中我們擁有:
+* 最後，於`wrapper`內，實作大部份邏輯。此時，於`wrapper`中我們擁有：
     * 第一層接收的`to_log`參數。
     * 第二層接收的被裝飾的`add` `function`。
     * 第三層接收的`add`參數(`*args`及`**kwargs`)。此時，我們利用`to_log`來決定是否進行`logging`，並將呼叫`add(*args, **kwargs)`的結果作為`wrapper`的返回值。

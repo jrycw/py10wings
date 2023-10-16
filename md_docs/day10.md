@@ -13,7 +13,7 @@
 ## non-data descriptor
 當我們想由`instance`取得`attribute`或`function`時，如果遇到`non-data descriptor`，會先確認該`attribute`或`function`是否存在於`instance.__dict__`中，如果有的話會優先使用，如果沒有的話才會使用`non-data descriptor`的`__get__`。
 
-`__get__`的`signature`如下:
+`__get__`的`signature`如下：
 ```python=
 __get__(self, instance, owner_cls)
 ```
@@ -21,7 +21,7 @@ __get__(self, instance, owner_cls)
 * `instance`是`desc_instance`所在的`class`所生成的`instance`。
 * `owner_cls`是生成`instance`的`class`。
 
-乍看可能有點抽象，我們試著從`# 01`的例子中來說明。其中:
+乍看可能有點抽象，我們試著從`# 01`的例子中來說明。其中：
 * `self`就是`MyClass`中的`non_data_desc`。
 * `instance`就是`my_inst`。
 * `owner_cls`就是`MyClass`。
@@ -72,7 +72,7 @@ __set__(self, instance, value)
 * `instance`是`desc_instance`所在的`class`所生成的`instance`。
 * `value`是所傳入想指定的值。
 
-從`# 02`的例子中來說明。其中:
+從`# 02`的例子中來說明。其中：
 * `self`就是`MyClass`中的`data_desc`。
 * `instance`就是`my_inst`。
 * `value`就是`20`。

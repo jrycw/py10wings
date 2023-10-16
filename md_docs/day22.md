@@ -4,18 +4,18 @@
 ## Context Manager Protocol
 Context Manager Protocol要求需實作`__enter__`及`__exit__`兩個`dunder method`。
 ### `__enter__`
-`__enter__`的`signature`如下:
+`__enter__`的`signature`如下：
 ```python=
 __enter__()
 ```
 `__enter__`不接受參數，其返回值將可以用`with`搭配`as`的語法取得，例如`with ctxmgr() as obj`。
 
 ### `__exit__`
-`__exit__`的`signature`如下:
+`__exit__`的`signature`如下：
 ```python=
 __exit__(exc_type, exc_val, exc_tb)
 ```
-其接收三個參數:
+其接收三個參數：
 * `exc_type`為例外的`class`。
 * `exc_val`為例外的`obj`(或想成`exc_type`的`instance`)。
 * `exc_tb`為一個`traceback` `obj`。
@@ -26,7 +26,7 @@ __exit__(exc_type, exc_val, exc_tb)
 
 
 ## 基本型態
-`Context Manager`一般有兩種型態:
+`Context Manager`一般有兩種型態：
 * `型態1`是希望在進入時啟動資源，而在離開時關閉資源。常見的應用場景是開關檔案，建立`database client`、`ssh client`或`http client`等等。
 * `型態2`是希望能在`context manager`下，"暫時"有些特別的行為。常見的應用場景是設定臨時的環境變數或是臨時的`sys.stdout`或`sys.stderr`。
   
@@ -186,7 +186,7 @@ class _RedirectStream(AbstractContextManager):
     def __exit__(self, exctype, excinst, exctb):
         setattr(sys, self._stream, self._old_targets.pop())
 ```
-`_RedirectStream`於:
+`_RedirectStream`於：
 * `__init__`中，接收一個參數，為想要`redirect`的新目標。另外建立了一個`self._old_targets`的`list`來收集舊目標。
 * `__enter__`中，將當前的`sys.stdout`或`sys.stderr`附加到`self._old_targets`後，返回`self._new_target`(不是`self`)。這麼一來，我們就可以在`as`的關鍵字後，得回`self._new_target`。
 * `__enter__`中，將當前的`sys.stdout`或`sys.stderr`設為`self._old_targets`所`pop`出來的值。`list`的`pop`可以同時刪除最後一個元素並將其返回，用在此處可謂恰如其分。

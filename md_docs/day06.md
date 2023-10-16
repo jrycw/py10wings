@@ -125,7 +125,7 @@ class dec:
 
 
 ### 實例說明 
-`# 04`透過`decorator`來`logging`一些資訊:
+`# 04`透過`decorator`來`logging`一些資訊：
 ```python=
 # 04
 import logging
@@ -194,7 +194,7 @@ my_inst.add.__dict__={'func': <function MyClass.add at 0x0000015CBE88A160>, '__m
 ```
 
 ## decorator factory(本身可接收參數)
-當我們希望有一個flag來控制這個`decorator`是否要`logging`，可以寫成`# 05`:
+當我們希望有一個flag來控制這個`decorator`是否要`logging`，可以寫成`# 05`：
 ```python=
 # 05
 import logging

@@ -22,7 +22,7 @@ Python3.11相比於3.10，執行速度提高不少，有很大原因是因為微
 [PEP-701 Syntactic formalization of f-strings](https://peps.python.org/pep-0701/)中，說明了這個變更，將可以大幅降低維護的難度，並讓`f-strings`的`parser`符合[official Python grammar](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)。比較有趣的是`PEP-701`於`2022-11-15`提出，馬上就被接受並導入在Python3.12中，這開發速度著實有點驚人。因為Python3.12除了繼續使用各種策略進行速度提升外，也花費不少精力在[放寬Gil的限制](https://docs.python.org/3.12/whatsnew/3.12.html#pep-684-a-per-interpreter-gil)。
 
 ### Quote reuse
-在Python3.11以前，四種表示`str`型態的符號，包括`'`、`"`、`'''`及`"""`在同一個`f-string`中只能使用一次，不能`nested`，所以最極限的`f-string`寫法會像是:
+在Python3.11以前，四種表示`str`型態的符號，包括`'`、`"`、`'''`及`"""`在同一個`f-string`中只能使用一次，不能`nested`，所以最極限的`f-string`寫法會像是：
 ```
 #python3.11
 >>> f"""{f'''{f'{f"{1+1}"}'}'''}"""

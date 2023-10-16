@@ -53,7 +53,7 @@ asyncio.run(main())
 簡單說，使用`async def`來定義的`function`稱為`coroutine function`;而呼叫`coroutine function`會返回一個`coroutine object`。雖然為了方便溝通，我們常常使用`coroutine`來同時代稱這兩種概念，但是作為優秀的Python開發者，我們一定要能清楚分辨兩者的不同。
 
 ### asyncio.gather
-[asyncio.gather](https://docs.python.org/3/library/asyncio-task.html#asyncio.gather)的`signature`如下:
+[asyncio.gather](https://docs.python.org/3/library/asyncio-task.html#asyncio.gather)的`signature`如下：
 ```python=
 awaitable asyncio.gather(*aws, return_exceptions=False)
 ```
@@ -126,12 +126,12 @@ ValueError: 1
 
 
 ### asyncio.wait
-[asyncio.wait](https://docs.python.org/3/library/asyncio-task.html#asyncio.wait)的`signature`如下:
+[asyncio.wait](https://docs.python.org/3/library/asyncio-task.html#asyncio.wait)的`signature`如下：
 ```python=
 coroutine asyncio.wait(aws, *, timeout=None, return_when=ALL_COMPLETED)
 ```
 其接受一個`aws`的`iterable`，`Timeout`及`return_when`的flag。
-`return_when`共有三個選擇，預設為最常用的`ALL_COMPLETED`，其餘兩個為`FIRST_COMPLETED`與`FIRST_EXCEPTION`。其會返回兩個`set`，第一個`set`包含已經完成的`task`，第二個`set`則是未完成的`task`。一般使用的pattern會像這樣:
+`return_when`共有三個選擇，預設為最常用的`ALL_COMPLETED`，其餘兩個為`FIRST_COMPLETED`與`FIRST_EXCEPTION`。其會返回兩個`set`，第一個`set`包含已經完成的`task`，第二個`set`則是未完成的`task`。一般使用的pattern會像這樣：
 ```python=
 done, pending = await asyncio.wait(aws)
 for p in pending:
@@ -225,7 +225,7 @@ handling 2
 handling 3
 handling 1
 ```
-`wait`內，可以分為三段:
+`wait`內，可以分為三段：
 * 第一段針對`aws`建立`task`。 
 * 第二段執行`asyncio.wait`，並取消所有`pending` `task`，並多`await asyncio.wait`一次。
 * 第三段為收集例外。如果有收例外的話，則生成一個`EG`返回;如果沒有的話就返回`done`。
@@ -239,13 +239,13 @@ handling 1
 實際上要用哪個方法，得視應用情況而定。
 
 ### asyncio.TaskGroup
-`asyncio.TaskGroup`是一個`class`，我們實際要用的是它的`create_task` `function`，其`signature`如下:
+`asyncio.TaskGroup`是一個`class`，我們實際要用的是它的`create_task` `function`，其`signature`如下：
 ```python=
 create_task(coro, *, name=None, context=None)
 ```
 `create_task`接受單個`coroutine`，並可接受`name`及`context`兩個參數。
 
-其使用pattern會像:
+其使用pattern會像：
 ```python=
 async def main():
     async with asyncio.TaskGroup() as tg:

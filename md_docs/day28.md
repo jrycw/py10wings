@@ -274,7 +274,7 @@ async def main(tg: asyncio.TaskGroup, conn: EdgeDBCloudConn, token: str) -> None
 
 
 ## 後記
-這個project還有非常多可以改進的地方，例如:
+這個project還有非常多可以改進的地方，例如：
 * `get_loop_dict`及`get_conn_dict`這樣的方法，在連線數較少時可以使用，但是當連接數較高時，記憶體使用量也會增加不少。或許我們可以將其轉為其它格式，例如`pickle`，然後使用另一個背景程式來定時改動及讀取`pickle`。
 * 目前的`Try Free Res`是可以清除掉所有`threshold`大於`3`的`loops`及`conns`。
 * `_populate_qry_args`與`_populate_qry_kwargs`需要使用比`eval`與`exec`更安全的處理方式。
@@ -285,7 +285,7 @@ async def main(tg: asyncio.TaskGroup, conn: EdgeDBCloudConn, token: str) -> None
 * ...
 
 
-僅管如此，還是學習到了很多，例如:
+僅管如此，還是學習到了很多，例如：
 * 更加了解[EdgeDB-Python](https://www.edgedb.com/docs/clients/python/index)的各種功能。
 * 使用新的`asyncio.TaskGroup`與`ExceptionGroup`來處理`asyncio`問題。
 * 更加熟悉structural pattern matching的技巧。

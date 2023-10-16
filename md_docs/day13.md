@@ -134,7 +134,7 @@ class MyClass:
 
 
 ## 練習2
-`# 02a`中我們定義了三個`prop`，他們的功能都是:
+`# 02a`中我們定義了三個`prop`，他們的功能都是：
 * 給定的值需先通過`self._validate`驗證，確認為`int`且大於`0`時，才會設定給`self._x`、`self._y`及`self._y`。如果沒有通過`self.__validate`驗證，會`rasie ValueError`
 * 返回其底層的`self._x`、`self._y`及`self._y`。
 ```python=
@@ -235,7 +235,7 @@ class MyClass:
 
 一個比較好的方法，是再往上一層建立一個`BaseValidator`，可以讓`PositiveInt`與`NegativeInt`繼承。
 
-剛好Python有內建的`abc`模組來幫助我們完成這件事:
+剛好Python有內建的`abc`模組來幫助我們完成這件事：
 * `abc.ABC`不允許使用者直接使用`BaseValidator`生成`instance`，只能被其它`Validator`繼承。如果直接使用`BaseValidator`生成`instance`會`raise TypeError`。
 * `abc.abstractmethod`可以提醒我們，繼承了`BaseValidator`的`Validator`必定要實作自己的`_validate` `function`，否則會於生成`Validator`的`instance`時`raise TypeError`。
 

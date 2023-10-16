@@ -3,7 +3,7 @@
 
 ## `global`
 ### 問題觀察
-`# 01a`中:
+`# 01a`中：
 * 生成一個`a`變數於`G`，其值為`0`。
 * 定義一個`function` `my_func`，於其中使用`global a`後，並將`a`加上`1`。
 * 使用`my_func.a`，設定`my_fuc`的`a`為`a`。
@@ -109,7 +109,7 @@ End: id(a)=140726095700808
 ## `nonlocal`
 這個小節我們準備實作一個`decorator`，其可以有一個`attribute`或`function`告知我們，被裝飾的`function`被呼叫了幾次。
 ### 問題觀察
-`# 02a`中:
+`# 02a`中：
 * 定義一個`decorator function` `my_counter`。
     * 於`my_counter`中定義`count=0`。
     * 在`wrapper`中對`count`使用`nonlocal`的關鍵字，並將`counts`加上`1`。
@@ -184,7 +184,7 @@ print(my_func.counts())  # 2
 `方法1`在呼叫兩次`my_func()`後，可以順利取得`2`。請注意，如果採用這個方法，我們必須使用`my_func.counts()`來取得`counts`。
 
 ### 解決方法2
-`# 02c`中:
+`# 02c`中：
 * 定義一個`decorator class`為`MyCounter`。
 * `__init__`接收被裝飾的`function`，存為`self._fn`。此外也順便定義了`self._count=0`，作為底層真正記錄呼叫次數的變數。
 * `__call__`中我們將`self._count`加上`1`，並回傳`self._fn`搭配`__call__`所接收`args`及`kwargs`的呼叫結果。

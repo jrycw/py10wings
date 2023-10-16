@@ -124,7 +124,7 @@ class SlowNewClass:
         self.__dict__.update(**kwargs)
 ...
 ```
-題目要求:
+題目要求：
 * 建立客製化的`class`，且必須繼承`SlowNewClass`。
 * 客製化的`class`僅接受`**kwargs`參數，且`kwargs`內所有`value`必須滿足`value>=0`，否則`raise ValueError`。若`kwargs`中有`x`變數，需要將其從`kwargs`移出，進行某些操作(以`self.x = x+100`表示)，再將剩下的`kwargs`利用`super().__init__`往上傳遞。
 

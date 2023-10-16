@@ -3,15 +3,15 @@
 首先我們要先來聊聊`iterable`與`iterator`。
 
 ## iterable vs iterator
-從`iterable`在[Python docs](https://docs.python.org/3/glossary.html#term-iterable)的說明:
+從`iterable`在[Python docs](https://docs.python.org/3/glossary.html#term-iterable)的說明：
 > ... When an iterable object is passed as an argument to the built-in function iter(), it returns an iterator for the object. ... 
 
 我們可以定義說，如果將`obj`傳遞給`iter`，能夠順利取得`iterator`而不`raise TypeError`的話，那麼該`obj`就是`iterable`。
 
-那`iterator`又該怎麼定義呢? 從`iterator`在[Python docs](https://docs.python.org/3/glossary.html#term-iterator)的說明:
+那`iterator`又該怎麼定義呢? 從`iterator`在[Python docs](https://docs.python.org/3/glossary.html#term-iterator)的說明：
 > ...  Repeated calls to the iterator’s `__next__()` method (or passing it to the built-in function next()) return successive items in the stream. When no more data are available a StopIteration exception is raised instead. At this point, the iterator object is exhausted and any further calls to its `__next__()` method just raise StopIteration again. Iterators are required to have an `__iter__()` method that returns the iterator object itself so every iterator is also iterable and may be used in most places where other iterables are accepted. ...
 > 
-我們可以總結:
+我們可以總結：
 * 能夠使用`next`或`obj`的`__next__`連續取值。
 * 如果該`iterator`是有限的，那麼`iterator`耗盡後再呼叫`next`或`obj`的`__next__`，會`raise StopIteration`。
 * `iterator`是一種`iterable`。當對`iterator`使用`iter`時，將取回其`iterator`本身。
@@ -141,7 +141,7 @@ class GarageIterator:
 ```
 `方法5`我們於`__iter__`中回傳`GarageIterator`的`instance`，其接受一個參數`self`(即`Garage`所生成的`instance`)。
 
-我們逐一比對`GarageIterator`所生成的`instance`，是否會符合我們對`iterator`的定義:
+我們逐一比對`GarageIterator`所生成的`instance`，是否會符合我們對`iterator`的定義：
 * 可以使用`obj`的`__next__`連續取值。
 * 此`iterator`為有限的，當耗盡後若再呼叫`next`或`obj`的`__next__`，會`raise StopIteration`。
 * 其`__iter__`會回傳`self`，即`GarageIterator`生成的`instance`。

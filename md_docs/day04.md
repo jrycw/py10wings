@@ -1,7 +1,7 @@
 # [Day04] 初翼 - Tips : 11~15
 今天我們繼續分享`tips 11~15`。
 
-## 11. set的應用:在iterable_a裡卻不在iterable_b裡
+## 11. set的應用：在iterable_a裡卻不在iterable_b裡
 當想尋找在a裡卻不在b裡的元素時，一般會寫成`# 11a`。如果`iterable_a`是有序的且順序需要維持的，或許這是個不錯的方法。
 ```python=
 # 11a
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     result = set(iterable_a) - set(iterable_b)
     print(f'{result=}')  # result={1, 2}
 ```
-## 12. set的應用:if後接多個條件
+## 12. set的應用：if後接多個條件
 當想找出一個集合內，其值為某幾個數時，一般會寫成`# 12a`。如果`if`後接的條件只有少數幾個，我們會覺得這是個ok的寫法。
 ```python=
 # 12a
@@ -63,21 +63,21 @@ if __name__ == '__main__':
 ```
 
 ## 13. types模組
-在比較舊版本的Python，當想要取得有些物件的`type`時，需要先對該物件使用`type`。例如想取得`None`的`type`，必須這麼做:
+在比較舊版本的Python，當想要取得有些物件的`type`時，需要先對該物件使用`type`。例如想取得`None`的`type`，必須這麼做：
 ```python=
 # 13
 none_type1 = type(None)
 ```
 雖然這方式可行，但總覺得好像有點旁門左道。這就像您會直接使用`int`，而不會使用像`int_type = type(1)`的語法來取得`int`這個`type`一樣。
 
-新版Python的`types`模組，支援了各式各樣的`type`，讓我們可以直接取用。現在如果想要取得`None`的`type`，建議改成這麼做:
+新版Python的`types`模組，支援了各式各樣的`type`，讓我們可以直接取用。現在如果想要取得`None`的`type`，建議改成這麼做：
 ```python=
 # 13
 import types
 
 none_type2 = types.NoneType
 ```
-我們可以驗證兩種方法是一樣的:
+我們可以驗證兩種方法是一樣的：
 ```python=
 # 13
 print(none_type1 is none_type2)  # True

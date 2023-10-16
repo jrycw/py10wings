@@ -116,7 +116,7 @@ my_inst.my_func(1, 2)
 * 由於是從`my_inst`來取`my_func`，所以會回傳一個`MethodType`生的`bound method`，這個`method`將`my_func`與`my_inst` `bound`在一起。
 * 當我們真正呼叫`my_inst.my_func(1, 2)`相當於使用`bound method`中的`__call__`，它會將`my_inst`作為`my_func`的第一個參數，`1`與`2`作為`my_func`的剩餘參數，然後回傳計算結果。這就是為什麼我們可以使用`my_inst.my_func(1, 2)`，而不需使用`my_inst.my_func(my_inst, 1, 2)`的由來。
 
-一個有趣的事實是，`function`的`__get__`每次由`instance`呼叫時，都會回傳一個新的`MethodType` `instance`，這代表:
+一個有趣的事實是，`function`的`__get__`每次由`instance`呼叫時，都會回傳一個新的`MethodType` `instance`，這代表：
 ```python=
 >>> my_inst.my_func is my_inst.my_func # False
 >>> my_inst.my_func.__func__ is my_inst.my_func.__func__ # True
@@ -173,7 +173,7 @@ class ClassMethod:
 ## `__slots__`
 由於`__slots__`的實作需要用到`C`的`structure`及處理記憶體配置，所以Raymond說我們只能盡量仿效，以一個`_slotvalues`的`list`來替代真正的`slot` `structure`。
 
-`__slots__`的實作比較複雜，共分為五個部份:
+`__slots__`的實作比較複雜，共分為五個部份：
 1. 建立`Member` `class`，此為一個`data descriptor`，用來控制已寫在`slot_names`內`attribute`的存取。
 2. 建立`Type` `metaclass`，其功用為針對`slot_names`中所列名字，建立`class variable`，並將其值指為相對應的`Member` `instance`。
 3. 建立`Object` `class`，其功用為設定`_slotvalues`(相當於模擬配置`__slots__`的記憶體)及當設定或刪除不在`slot_names`內的`attribute`時，需`raise AttributeError`。
@@ -327,7 +327,7 @@ AttributeError: 'H' object has no attribute 'xz'
 ### MyObject
 `MyObject`繼承`Object`，並實作有`__init_subclass__`。
 
-於`__init_subclass__`中:
+於`__init_subclass__`中：
 * 先使用`super().__init_subclass__()`，確保`MRO`上的`class`如果有實作`__init_subclass__`的話，能確實被呼叫。
 * 接著的步驟與在`Type.__new__`類似，只是我們這裡是在`class`生成後，才 `mutate` `class`。而`Type.__new__`是於生成`class`前，就將這些操作放在`mapping`。
 

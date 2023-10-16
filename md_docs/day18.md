@@ -21,7 +21,7 @@
 至於`super().attr`，我們建議直接參考[`Guido`的tutorial](https://www.python.org/download/releases/2.2.3/descrintro/#cooperation)，但可能需要一些Python2的基礎，才能體會老爹於20年前建置`super()`的邏輯。但是即使是在有Python2及`descriptor`與`metaclasses`的基本知識下，這篇tutorial還是相當難啃呀! 期望未來有一天我們能靜下心來，像欣賞`Descriptor HowTo Guide`一樣，好好拜讀幾遍。
 
 ## 名詞定義
-首先我們來看一段[Descriptor HowTo Guide](https://docs.python.org/3/howto/descriptor.html#overview-of-descriptor-invocation)開頭的描述:
+首先我們來看一段[Descriptor HowTo Guide](https://docs.python.org/3/howto/descriptor.html#overview-of-descriptor-invocation)開頭的描述：
 > The Ten class is a descriptor whose `__get__()` method always returns the constant 10:...In the a.y lookup, the dot operator finds a descriptor instance, recognized by its `__get__` method. Calling that method returns 10.
 ```python=
 class Ten:
@@ -76,7 +76,7 @@ if __name__ == '__main__':
 ### `object.__getattribute__`
 下面是[`object.__getattribute__`](https://docs.python.org/3/howto/descriptor.html#invocation-from-an-instance)於Python的實作。
 ####  `find_name_in_mro`
-`find_name_in_mro`接受三個參數:
+`find_name_in_mro`接受三個參數：
 * `cls`為生成`obj`的`class`。
 * `name`為想尋找的`attribute`(`str`型態)。
 * `default`為一預設值。
@@ -173,7 +173,7 @@ def getattr_hook(obj, name):
 
 
 ## 2. How obj.attr works(obj is class)?
-`Descriptor HowTo Guide`講到[invocation from a class](https://docs.python.org/3/howto/descriptor.html#invocation-from-a-class)時，是這麼說的:
+`Descriptor HowTo Guide`講到[invocation from a class](https://docs.python.org/3/howto/descriptor.html#invocation-from-a-class)時，是這麼說的：
 > The logic for a dotted lookup such as A.x is in `type.__getattribute__()`. The steps are similar to those for `object.__getattribute__()` but the instance dictionary lookup is replaced by a search through the class’s method resolution order. If a descriptor is found, it is invoked with `desc.__get__(None, A)`.
 
 僅管文件中沒有提供相對應的Python程式碼。但是我們可以根據上面描述，試著實作看看。

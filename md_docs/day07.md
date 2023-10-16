@@ -57,7 +57,7 @@ def total_ordering(cls):
 ### 注意事項
 __理論上__ 您不需要實作`__eq__`，`total_ordering`也能提供一定程度的功能，因為`object`是預設有實作`__eq__`的。但`object`的`__eq__`預設是比較兩者是否為同一個`obj`，這可能不是您預期的行為。
 
-`# 01`中:
+`# 01`中：
 * `p1`及`p2`是`Point`的`instance`，而`Point`實作有`__lt__`，`__eq__`並搭配`total_ordering`，這是一個標準的範例，所以`p1 == p2`會如預期是`True`。
 * `p3`及`p4`是`PointWithoutCustomEq`的`instance`，而`PointWithoutCustomEq`只實作並搭配`total_ordering`，此時`p3 == p4`會是`False`，因為在`object`的`__eq__`判定兩個並不是同一個`obj`。的確兩個不是同一個`obj`，一個是`p3`，一個是`p4`，只是兩個`obj`都是由`PointWithoutCustomEq`生成而已。
 

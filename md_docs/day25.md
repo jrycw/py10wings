@@ -20,7 +20,7 @@ PEP654摘要裡說明，`ExceptionGroup` 的功用是可以"同時"收集"沒有
 ## PEP654動機
 由於Python3.11前的例外處理機制是，一次最多只能處理一個例外。但是有些情況，我們希望能同時`raise`多個"沒有關係"的例外，這在沒有引進新語法的情況下很難做到。
 
-文中舉了五個例子:
+文中舉了五個例子：
 1. Concurrent errors
   Python的`asyncio.gather`是一般大家處理`concurrent`問題時，會呼叫的api。它提供了一個參數`return_exceptions`來協助例外處理，當其為`True`時，會返回一個`list`，裡面包含所有成功的結果及例外;當其為`False`時，當遇到第一個例外時就會馬上`raise`。但使用`asyncio.gather`無法同時處理多種例外，雖然有像`Trio`這樣的library[試著解決這些問題](https://peps.python.org/pep-0654/#programming-without-except)，但使用起來比較不便。
 2. Multiple failures when retrying an operation
@@ -42,7 +42,7 @@ class BaseExceptionGroup(BaseException): ...
 class ExceptionGroup(BaseExceptionGroup, Exception):
 ```   
 
-`BaseExceptionGroup`與`Exception`的`signature`如下:
+`BaseExceptionGroup`與`Exception`的`signature`如下：
 ```python=
 BaseExceptionGroup(message, exceptions) : ...
 ExceptionGroup(message, exceptions) : ...
@@ -206,7 +206,7 @@ def leaf_generator(exc, tbs=None):
 * `except* xxxError`是根據`xxxError`是否為`EG`的`subclass`來判斷是否符合。
 * `except* xxxError as e`的`e`，一定會是`EG`而不是`Exception`。
 * 每一個`except*`都可以被執行最多一次。換句話說，一個`EG`可以走訪多個`except*`。
-* 而每一個`exception`只會:
+* 而每一個`exception`只會：
     * 被其中一個`except*`處理。
     * 沒有被任何`except*`處理，最後被`reraise`。
 * 在這樣的處理邏輯下，每一個`Exception`是根據不同的`except*`區塊來處理，而與`EG`內其它`Exception`無關。
@@ -420,7 +420,7 @@ During handling of the above exception, another exception occurred:
     +------------------------------------
 ```
 #### `raise` `Exception` in `except*`
-文件對此段的說明是:
+文件對此段的說明是：
 > Raising a new instance of a naked exception does not cause this exception to be wrapped by an exception group. Rather, the exception is raised as is, and if it needs to be combined with other propagated exceptions, it becomes a direct child of the new exception group created for that:
 
 而我們的理解是當於`except*`中`raise` `Exception`時，若其需要與其它`EG`合併的話，會生成新的`EG`，並將此`Exception`加入到最後。雖然與chaining不太一樣，但純看`trackback`的感覺卻很相似，所以我們決定將此段一起整理到這邊。
@@ -492,7 +492,7 @@ except* OSError as e:
     print(f'*OSError: {e!r}')
     raise
 ```
-從`traceback`可以清楚看出:
+從`traceback`可以清楚看出：
 * `except* ValueError as e`由於是顯性`raise e`，所以有自己的`metadata`，獨立了一個`EG`出來。
 * 而`except* OSError as e`於`raise`前，也是一個獨立的`EG`(記得`as e`之後，`e`一定是`EG`嗎?)，但因其又重新`raise`，所以會與還沒有被處理過的`TypeError`合併，成為最後被`raise`的`EG`。
 ```

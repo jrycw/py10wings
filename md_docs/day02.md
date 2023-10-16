@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
 一個常見的方法是使用`object()`來當預設值，一般我們會稱呼這樣的用法為`sentinel`。由於每次的`sentinel`是無法預測的，所以除非於寫code時，顯性傳進這個值，才能確定這個值是由自己傳入的。
 
-假設我們想要寫一個`get_given` `function`，其要求如下:
+假設我們想要寫一個`get_given` `function`，其要求如下：
 * 接受兩個參數`given`與`default`。
 * 當顯性給予`given`時，該`function`需回傳`given`，否則即回傳`default`，而`default`之預設值為`0`。
 

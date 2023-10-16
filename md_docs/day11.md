@@ -159,7 +159,7 @@ class MyClass:
 上面幾個方法讓我們對`descriptor`有了基本的認知。現在我們來充充電，講幾個實作`descriptor`時常會用到的觀念，為明天`descriptor`的通用寫法做好準備。
 
 ### 如何取得`desc_instance`
-當我們應用`descriptor`時，有時需要取得`desc_instance`，一個常見的作法如下:
+當我們應用`descriptor`時，有時需要取得`desc_instance`，一個常見的做法如下：
 ```python=
 def __get__(self, instance, owner_cls):
     if instance is None:
@@ -169,7 +169,7 @@ def __get__(self, instance, owner_cls):
 在`__get__`一開始，先判斷`instance`是不是`None`。如果是`None`，代表我們是由`class`來取，直接返回`desc_instance`。也就是說當我們想取得`desc_instance`時，可以利用`MyClass.desc`的來取得。雖然我們大多數情況都是使用`instance`呼叫`desc_instance`，但當想觀察`desc_instance`內部狀態時，可以透過這個小技巧來達成。從明天的`方法5`開始，我們會於`__get__`中加上這一段程式碼。
 
 ### `__set_name__`
-`__set_name__`的`signature`如下:
+`__set_name__`的`signature`如下：
 ```python=
 __set_name__(self, owner_cls, name)
 ```

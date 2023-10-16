@@ -165,7 +165,7 @@ if __name__ == '__main__':
 ## 10. 利用`continue`減少縮排
 [continue](https://docs.python.org/3/reference/simple_stmts.html#continue)是一個於迴圈中離開當下這個`cycle`，進入下一個`cycle`的語法。
 
-假設我們想要寫一個`my_filter` `function`(`註2`)，其要求如下:
+假設我們想要寫一個`my_filter` `function`(`註2`)，其要求如下：
 
 * 接受兩個參數`func`及`iterable`。`func`會針對`iterable`中每個`element`給出`True`或`False`
 * 最後`my_filter`會以`generator`型式返回`func`判斷為`True`的元素。

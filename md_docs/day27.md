@@ -30,7 +30,7 @@ Co-Founder兼CEO的[Yury Selivanov](https://github.com/1st1)是Python asyncio背
 
 ![benchmark](https://www.edgedb.com/benchmarks.svg)
 
-`EdgeDB`各語言的[library](https://www.edgedb.com/docs/clients/index)都在活躍開發中，目前已經支援的有:
+`EdgeDB`各語言的[library](https://www.edgedb.com/docs/clients/index)都在活躍開發中，目前已經支援的有：
 * Python
 * TypeScript/JavaScript
 * Go
@@ -162,9 +162,9 @@ def load_toml(toml_name: str = 'edgedbcloud.toml',
 #### `match_func_name`
 幫助我們選擇`AsyncIOClient` `query function`的小工具。
 
-`AsyncIOClient`的六種`query function`可以分成兩個大類:
+`AsyncIOClient`的六種`query function`可以分成兩個大類：
 * 一類是這個`query`是否需要返回`json`格式，可依`function`名最後是否有`_json`來判斷。
-* 一類是返回結果的長度，是否符合預期，總共又分成三類:
+* 一類是返回結果的長度，是否符合預期，總共又分成三類：
     * 不設限制，`function`名為`query`開頭。
     * 回傳長度不能超過一，`function`名為`query_single`開頭。
     * 回傳長度必須恰恰是一，`function`名為`query_required_single`開頭。
@@ -307,13 +307,13 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
 
 因為`logger`及`log_level`，這兩個變數所要傳遞的值比較明確，所以我們使用了`or`的語法，而不顯性比較是否為`None`。
 
-此外:
+此外：
 * `self._client`將會是`AsyncIOClient`建立的`client`之變數名，先預設為`None`。
 * `self._start`為計算進入`__aenter__`與離開`__aexit__`所用時間之用。
 * `self._dbcalls`為計算於`__aenter__`與`__aexit__`中實際呼叫`database`的次數之用。
 * `self._total_dbcalls`為計算實際呼叫`database`的總次數之用。
 
-最後一個`if`是用來設定`immutable query`的快取機制。這個手法相當微妙，這使得我們將會由`self.__dict__`中來存取`self._imquery`。現在的情況是:
+最後一個`if`是用來設定`immutable query`的快取機制。這個手法相當微妙，這使得我們將會由`self.__dict__`中來存取`self._imquery`。現在的情況是：
 * 由於`self._imquery`為一般`function`，只是`non-data descriptor`而不是`data descriptor`，所以當我們使用`self._imquery = alru_cache(ttl=ttl)(self._imquery)`的語法時，相當於在`self.__dict__`中，加入一個已經包過`alru_cache(ttl=ttl)`的`_imquery`。
 * `EdgeDBCloudConn.__dict__`中，還是保有原來沒加上`alru_cache`的`_imquery`。
 
@@ -447,7 +447,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
                                  required_single=required_single,
                                  **kwargs)
 ```
-`_query`中:
+`_query`中：
 * 以`logging.info`記錄其實際被呼叫。
 * 將`self._dbcalls`加上`1`。
 * 使用`_get_client_qry_func`取回的`function`，搭配`qry`、`*args`及`**kwargs`進行呼叫，並回傳計算結果。
@@ -556,7 +556,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
 
 
 ## 備註
-註1：由於這個project的目標是建立與`EdgeDB cloud`連結的`connection`，而不是學習`EdgeQL`的語法。如果是對其語法有興趣的朋友: 
+註1：由於這個project的目標是建立與`EdgeDB cloud`連結的`connection`，而不是學習`EdgeQL`的語法。如果是對其語法有興趣的朋友：
 * 可以參考[說明文件](https://www.edgedb.com/docs/edgeql/index)。
 * 或是從[Easy EdgeDB](https://www.edgedb.com/easy-edgedb)開始學習，它就像一本20回的小說一樣，學習起來十分有趣。其作者為[Dave MacLeod](https://www.youtube.com/@mithradates)，在YouTube上有不少精彩的`Rust`影片解說，此外其也是[Learn Rust in a Month of Lunches](https://www.manning.com/books/learn-rust-in-a-month-of-lunches)的作者。
 
