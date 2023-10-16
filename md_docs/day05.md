@@ -62,7 +62,7 @@ def my_func():
 
 ## 基本型態
 ### 基本型態1
-觀察`# 02`，會發現`my_func`沒有接受任何參數，這使得它的應用有些挶限。我們通常會希望`function`能根據不同的參數，給出相對應的結果。
+觀察`# 02`，會發現`my_func`沒有接受任何參數，這使得它的應用有些局限。我們通常會希望`function`能根據不同的參數，給出相對應的結果。
 
 根據上述期望，可以寫出`# 03`：
 ```python=
@@ -153,14 +153,14 @@ if __name__ == '__main__':
 ```
 在`wrapper`中，我們加了一行`logging.info`來協助記錄每次`wrapper`被呼叫時，其實際使用的`func`、`args`及`kwargs`。
 
-使時若呼叫`add`，會顯示logging的記錄，且返回正確答案。
+此時若呼叫`add`，會顯示logging的記錄，且返回正確答案。
 ```
 INFO:root:wrapper is called, func=<function add at 0x000001E918BC6660>, args=(1, 2), kwargs={}
 3
 ```
 
 ## decorator factory(本身可接收參數)
-由於我們希望裝飾前後的函數，會接收相同的參數，如此較為方便使用。所以當想要傳入一些自訂的的參數或是flag時，可以將其作為`decorator`本身的參數傳入。
+由於我們希望裝飾前後的函數，會接收相同的參數，如此較為方便使用。所以當想要傳入一些自訂的參數或是flag時，可以將其作為`decorator`本身的參數傳入。
 
 舉例來說，當我們想要有一個flag來控制這個`decorator`是否要`logging`，可以寫成`# 06`:
 ```python=
