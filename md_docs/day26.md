@@ -465,13 +465,13 @@ def dump_json(file, content):
 #### 例外處理
 由於`Happy path`的情況實在太樂觀了，正所謂不出意外的話，就要出意外了。
 
-我們在`download`過程中，不可避免的會糟遇到各種意外，例如`NetworkError`或`TimeoutException`。
+我們在`download`過程中，不可避免的會遭遇到各種意外，例如`NetworkError`或`TimeoutException`。
 
 我們在`download`內加上一些程式碼，使得每次執行`download`時，可能會：
 * 正常執行。
 * `raise httpx.NetworkError`。
 * `raise httpx.TimeoutException`。
-* 預期外的例外。
+* 發生預期外的例外。
 
 `await asyncio.sleep(0.1)`是為了防止各`task`執行太快，當其中一個有報錯時，已經執行完畢，看不出`asyncio.TaskGroup`的取消效果。
 
