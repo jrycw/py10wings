@@ -15,10 +15,10 @@
     * A new standard exception type, the ExceptionGroup, which represents a group of unrelated exceptions being propagated together.
     * A new syntax except* for handling ExceptionGroups.
 
-PEP654摘要裡說明，`ExceptionGroup` 的功用是可以"同時"收集"沒有相關"的`exception`，往後傳遞，並由`except*`語法來處理例外。
+PEP654摘要裡說明，`ExceptionGroup` 的功用是可以「同時」收集「沒有相關」的`exception`，往後傳遞，並由`except*`語法來處理例外。
 
 ## PEP654動機
-由於Python3.11前的例外處理機制是，一次最多只能處理一個例外。但是有些情況，我們希望能同時`raise`多個"沒有關係"的例外，這在沒有引進新語法的情況下很難做到。
+由於Python3.11前的例外處理機制是，一次最多只能處理一個例外。但是有些情況，我們希望能同時`raise`多個「沒有關係」的例外，這在沒有引進新語法的情況下很難做到。
 
 文中舉了五個例子：
 1. Concurrent errors

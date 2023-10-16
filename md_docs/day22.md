@@ -28,7 +28,7 @@ __exit__(exc_type, exc_val, exc_tb)
 ## 基本型態
 `Context Manager`一般有兩種型態：
 * `型態1`是希望在進入時啟動資源，而在離開時關閉資源。常見的應用場景是開關檔案，建立`database client`、`ssh client`或`http client`等等。
-* `型態2`是希望能在`context manager`下，"暫時"有些特別的行為。常見的應用場景是設定臨時的環境變數或是臨時的`sys.stdout`或`sys.stderr`。
+* `型態2`是希望能在`context manager`下，「暫時」有些特別的行為。常見的應用場景是設定臨時的環境變數或是臨時的`sys.stdout`或`sys.stderr`。
   
 ### 型態1
 `型態1`接收的參數，通常用來生成底層真正使用的`obj`。例如建立一個`PostgreSQL`的`connection`可能需要`host`、`port`、`database name`、`username`及`password`等等參數。
@@ -75,7 +75,7 @@ class MyContextManager:
 ```
 
 ### 型態2
-`型態2`通常只接收單個或少數參數，這些參數可以用來建構於`context manager`中"暫時"想要的行為。例如`redirect` `stdout`，或是暫時覆寫某些環境變數等。
+`型態2`通常只接收單個或少數參數，這些參數可以用來建構於`context manager`中「暫時」想要的行為。例如`redirect` `stdout`，或是暫時覆寫某些環境變數等。
 
 於`__enter__`中，我們會先使用`getter`儲存當前的狀態，再使用`setter`實現想要的行為。至於返回值，要看當前應用的情況，即使不返回(即返回`None`)也是常見的情況。
 

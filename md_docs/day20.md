@@ -62,7 +62,7 @@ if __name__ == '__main__':
 __getitem__ called, value=0
 my_seq[0]=0
 ```
-由於我們將`__getitem__`內取值的任務`delegate`給`list`，所以符合前面"`__iter__`的備案"所述的條件，因此Python會將`my_seq`視為`iterable`。
+由於我們將`__getitem__`內取值的任務`delegate`給`list`，所以符合前面「`__iter__`的備案」所述的條件，因此Python會將`my_seq`視為`iterable`。
 
 
 ```python=

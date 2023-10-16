@@ -27,7 +27,7 @@
 [Python Morsels](https://pym.dev/ref/forkind/)是由`Trey Hunner`建立的學習平台。一開始是每週經由E-mail寄出問題(含test)，並於幾天後寄出解答。現在已經進化成網站型式，且如果是年繳用戶的話，可以看到所有的問題(約有200多題)，網站會依您自訂的程度給出建議的問題。問題一般有一個基本題，然後2~3個bonus問題，其難度即便是`novice`級別，也相當具有挑戰性，每題基本上都得解上好幾個小時。到後面的`advanced`級別更是會讓您題題都懷疑人生，因為其test相當全面，要想全部通過著實不易。但實力總是在苦難中累積，經過這200多道題的摧殘之後，終於覺得自己有一點點懂Python，具有探索這個世界的門票了。此外，`Trey`最近也針對不同的Python知識寫下較短的文章，及拍影片講解。
 
 ### Weekly Python Exercise
-[Weekly Python Exercise](https://store.lerner.co.il/wpe)是由`Reuven Lerner`建立的學習系統。其共有`A1`、`A2`、`A3`、`B1`、`B2`及`B3`六個等級。每個等級是15週的課程，每週會寄出問題(含test)，下週會寄出答案。過程中有問題的話，可以上專屬的討論區詢問。每幾個星期會有線上Q&A環節，`Reuven`會當場講解，或是您想要先提供問題，之後再回看也可以。相比於`Python Morsels`，`Weekly Python Exercise`的問題屬於比較"親民"一點，我覺得比較適合初學到中等程度的朋友。`Reuven`是一個很樂於和人互動的老師，如果解題過程中需要幫助，可以直接在討論區tag他或是寫E-mail給他，一般來說，很快就會得到回覆。
+[Weekly Python Exercise](https://store.lerner.co.il/wpe)是由`Reuven Lerner`建立的學習系統。其共有`A1`、`A2`、`A3`、`B1`、`B2`及`B3`六個等級。每個等級是15週的課程，每週會寄出問題(含test)，下週會寄出答案。過程中有問題的話，可以上專屬的討論區詢問。每幾個星期會有線上Q&A環節，`Reuven`會當場講解，或是您想要先提供問題，之後再回看也可以。相比於`Python Morsels`，`Weekly Python Exercise`的問題屬於比較「親民」一點，我覺得比較適合初學到中等程度的朋友。`Reuven`是一個很樂於和人互動的老師，如果解題過程中需要幫助，可以直接在討論區tag他或是寫E-mail給他，一般來說，很快就會得到回覆。
 
 ### Talk Python
 [Talk Python](https://talkpython.fm)是由`Michael Kennedy`建立的學習平台，裡面有付費的課程以及幾乎每週更新的[podcast](https://talkpython.fm/episodes/all)。其每集podcast約一個小時出頭，會針對單一主題訪問一到數位該領域的高手，連咱們的Python老爹`Guido`也曾經當過嘉賓。
@@ -61,4 +61,4 @@
 * 本系列文的絕大部份為整理各種Python學習資料而來。我們盡量在引用他人成果時，附上連結或出處，但是請原諒部份內容是由過往零散的筆記中翻出，出處實已不可考。
 
 ## 備註
-註1：[十翼](https://zh.wikipedia.org/zh-tw/%E5%8D%81%E7%BF%BC)為輔助學習"易學"的十對翅膀，讓我們更有機會能略懂它的博大精深。本系列文藉此喻義，希望針對十個Python主題，寫下筆記，以便將來的自己在迷惘時，能有所參考。
+註1：[十翼](https://zh.wikipedia.org/zh-tw/%E5%8D%81%E7%BF%BC)為輔助學習「易學」的十對翅膀，讓我們更有機會能略懂它的博大精深。本系列文藉此喻義，希望針對十個Python主題，寫下筆記，以便將來的自己在迷惘時，能有所參考。

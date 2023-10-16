@@ -203,7 +203,7 @@ if __name__ == '__main__':
     my_inst = MyClass(1)
     print(my_inst.hi())  # hi
 ```
-但是這麼寫有點"微妙"，因為這相當於在每次生成`instance`時，都會`mutate` `cls`一次，建立一個新的`instance method` `hi`。
+但是這麼寫有點「微妙」，因為這相當於在每次生成`instance`時，都會`mutate` `cls`一次，建立一個新的`instance method` `hi`。
 
 ### 實例說明3
 `# 07`嘗試繼承`str`，並攔截給定字串，於其後加上`_123`。

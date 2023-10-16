@@ -87,7 +87,7 @@ class MyDict(UserDict):
 ```
 由於這樣類似的pattern很常出現，我們就開始動動腦，是不是有辦法免除這個`if`的確認呢？
 
-首先`# 03b`試著將`dict_data`設為`{}`。修但幾勒，我們了解大家會說你怎麼可以把`mutable`的`obj`作為預設值呢？難道你沒讀過Python人必看的[The Hitchhiker's Guide to Python](https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments)嗎？但仔細想想，如果沒有設一個`instance variable`給`dict_data`的話，我們"好像"沒有辦法`mutate`它(除非直接`mutate` `dict_data`)。
+首先`# 03b`試著將`dict_data`設為`{}`。修但幾勒，我們了解大家會說你怎麼可以把`mutable`的`obj`作為預設值呢？難道你沒讀過Python人必看的[The Hitchhiker's Guide to Python](https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments)嗎？但仔細想想，如果沒有設一個`instance variable`給`dict_data`的話，我們「好像」沒有辦法`mutate`它(除非直接`mutate` `dict_data`)。
 ```python=
 # 03b
 from collections import UserDict

@@ -36,8 +36,8 @@ def _gt_from_lt(self, other):
     return not op_result and self != other
 ```
 * 最後我們觀察`total_ordering`內部實作邏輯。
-    * 首先Python確認，我們"自己"實作了哪幾種不是由`object`繼承而來的`comparison`方法，然後將找到的方法名稱存在`roots`這個`set`內。如果沒有找到的話，代表我們連最少需要一種的要求都沒達到，則`raise ValueError`。
-    * 接著如果有找到的話，Python會依照`__lt__ => __le__ => __gt__ => __ge__`的喜好順序，從`_convert`挑出剩下三種，有可能需要Python幫忙實作的方法。接著對這些方法打一個迴圈，如果方法名不在`roots`內，則使用`setattr`，將Python幫忙實作的方法，指給`cls`。這也代表Python的思維是，盡量使用"使用者實作的`comparison`"，除非沒有給予時，才給予幫助。
+    * 首先Python確認，我們「自己」實作了哪幾種不是由`object`繼承而來的`comparison`方法，然後將找到的方法名稱存在`roots`這個`set`內。如果沒有找到的話，代表我們連最少需要一種的要求都沒達到，則`raise ValueError`。
+    * 接著如果有找到的話，Python會依照`__lt__ => __le__ => __gt__ => __ge__`的喜好順序，從`_convert`挑出剩下三種，有可能需要Python幫忙實作的方法。接著對這些方法打一個迴圈，如果方法名不在`roots`內，則使用`setattr`，將Python幫忙實作的方法，指給`cls`。這也代表Python的思維是，盡量使用「使用者實作的`comparison`」，除非沒有給予時，才給予幫助。
     * 最後回傳`cls`。
 
 ```python=

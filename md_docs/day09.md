@@ -63,7 +63,7 @@ class Red(Color):
     def __init__(self):
         super().__init__((255, 0, 0))
 ```
-但是這麼寫有個問題是，我們可以使用`color` `prop`的`setter`來直接指定`color`，像是下面這樣就變成"紅皮綠底"了啊。
+但是這麼寫有個問題是，我們可以使用`color` `prop`的`setter`來直接指定`color`，像是下面這樣就變成「紅皮綠底」了啊。
 ```python=
 >>> red = Red()
 >>> red.color = (0, 255, 0) # green 
