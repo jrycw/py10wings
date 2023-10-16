@@ -385,7 +385,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
 ```
 
 #### `_is_qry_immutable`
-是用來判斷我們的`query`內是否含有，可能會`mutate` database的關鍵字。我們定義當`query`內含有`insert`、`update`或 `delete`時，就將此`query`判定為會`mutate` `database`（`註3`）。由於`_mutated_kws`不會隨著不同`instance`而改變，所以我們將其設為`class variable`。
+是用來判斷我們的`query`內是否含有，可能會`mutate` database的關鍵字。我們定義當`query`內含有`insert`、`update`或 `delete`時，就將此`query`判定為會`mutate` `database`。由於`_mutated_kws`不會隨著不同`instance`而改變，所以我們將其設為`class variable`。
 
 ```python=
 class EdgeDBCloudConn(AbstractAsyncContextManager):
@@ -487,7 +487,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
 * 如果有`exception`發生的話，以`logging.error`記錄。
 * 將`self._dbcalls`加總至`self._total_dbcalls`後，呼叫`self._reset_db_calls`重設`self._dbcalls`為0。
 * 離開`__aexit__`前，計算在`with`中的時間，並以`logging.info`記錄。
-* 最後於離開`__aexit__`，呼叫`self._reset_start`重設`self._start`為0.0。
+* 最後於離開`__aexit__`，呼叫`self._reset_start`重設`self._start`為`0.0`。
 ```python=
 class EdgeDBCloudConn(AbstractAsyncContextManager):
     ...
