@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
 * 乍看之下，`# 01`只是生成了`my_inst`，還沒有任何與`prop` `x`互動。但仔細看看`__init__`，`my_inst`已經透過`property`這個介面呼叫了`prop` `x`的`fset`來進行`self.x = x`(`self`就是`my_inst`啊)。
 
-* `@x.setter`與`@x.deleter`裝飾的`function`必須與`@property`所裝飾的`function`名一致，即`x`。如果使用不同名字，使用上會變得很困難，且容易出錯(`註1`)。
+* `@x.setter`與`@x.deleter`裝飾的`function`必須與`@property`所裝飾的`function`名一致，即`x`。如果使用不同名字，使用上會變得很困難，且容易出錯（`註1`）。
 
 `# 01`是基本型態，但視您的程式需要，您可能需要先建立一個`prop`，然後再視情況加入`fget`、`fset`、`fdel`或`doc`，如`# 01a`。
 ```python=

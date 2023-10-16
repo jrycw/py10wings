@@ -19,7 +19,7 @@
 
 
 ## 核心概念
-`decorator`的核心概念為接受一個`function`，從中做一些操作，最後返回一個`function`。一般來說，返回的`function`會接收與原`function`相同的參數，並返回相同的結果，但卻能具有`decorator`額外賦予的功能(`註1`)。
+`decorator`的核心概念為接受一個`function`，從中做一些操作，最後返回一個`function`。一般來說，返回的`function`會接收與原`function`相同的參數，並返回相同的結果，但卻能具有`decorator`額外賦予的功能（`註1`）。
 
 
 ## 原理
@@ -86,7 +86,7 @@ def my_func(*args: int, **kwargs: int) -> int:
 
 就`# 03`而言，不管`my_func`有沒有被`dec`裝飾，其結果是一樣的。但`decorator`可以視為一個hook，讓我們可以於函數呼叫前或後，進行一些操作。
 
-### 基本型態2(加上`functools.wraps`)
+### 基本型態2（加上`functools.wraps`）
 如果仔細觀察一下`my_func`及其相關的`metadata`：
 ```
 my_func=<function dec.<locals>.wrapper at 0x000001DBF55C4FE0>
@@ -99,7 +99,7 @@ my_func.__dict__={}
 ```
 會發現`my_func`顯示為`wrapper`，且其`metadata`也不符合我們的預期，我們會希望即使是被裝飾過的`function`，其`metadata`還是可以保留。
 
-Python內建的`functools.wraps`可以作為`decorator`使用(`註2`)，幫助我們更新正確的`metadata`至`wrapper` `function`，如`# 04`所示。
+Python內建的`functools.wraps`可以作為`decorator`使用（`註2`），幫助我們更新正確的`metadata`至`wrapper` `function`，如`# 04`所示。
 ```python=
 # 04
 from functools import wraps
@@ -159,7 +159,7 @@ INFO:root:wrapper is called, func=<function add at 0x000001E918BC6660>, args=(1,
 3
 ```
 
-## decorator factory(本身可接收參數)
+## decorator factory（本身可接收參數）
 由於我們希望裝飾前後的函數，會接收相同的參數，如此較為方便使用。所以當想要傳入一些自訂的參數或是flag時，可以將其作為`decorator`本身的參數傳入。
 
 舉例來說，當我們想要有一個flag來控制這個`decorator`是否要`logging`，可以寫成`# 06`：
@@ -270,7 +270,7 @@ INFO:root: `wrapper` is called, func=<function add at 0x000002D40BB3CFE0>, args=
 INFO:root: `wrapper` is finished.
 3.5 <class 'float'>
 ```
-* 第一層`log`接收兩個`keyword-only arguments`，`to_log`及`validate_input`，預設皆為`True`。當`to_log`為`True`時，會呼叫`logging`模組，記錄不同等級的資訊，如`logging.info`，`logging.warning`及`logging.error`等等。當`validate_input`為`True`，會確認給定的`args`、`kwargs`及計算結果與`type hint`是否相符(`註3`)。最後會回傳第二層的`dec` `function`。
+* 第一層`log`接收兩個`keyword-only arguments`，`to_log`及`validate_input`，預設皆為`True`。當`to_log`為`True`時，會呼叫`logging`模組，記錄不同等級的資訊，如`logging.info`，`logging.warning`及`logging.error`等等。當`validate_input`為`True`，會確認給定的`args`、`kwargs`及計算結果與`type hint`是否相符（`註3`）。最後會回傳第二層的`dec` `function`。
 * 第二層的`dec` `function` 會接收被裝飾的`function`為參數，即`func`。最後會回傳第三層的`wrapper` `function`。
 * 第三層的`wrapper`會接收使用者呼叫`func`的參數，即`*args`及`**kwargs`。我們將`functools.wraps`裝飾於`wrapper`上，讓其幫忙將`func`的`metadata`更新給`wrapper`。
 * 接下來我們對`wrapper`逐段說明。
@@ -278,14 +278,14 @@ INFO:root: `wrapper` is finished.
     * 如果`validate_input`為`True`，將會分別確認三件事。如果其中任何一件事不符合，則會呼叫`logging.error`並`raise TypeError`。
         * 首先，我們呼叫`types.get_type_hints`來取得`func`的`type hint`，接著確認是不是每個參數與回傳值都有給定`annotation`。
         * 再來，由於使用者呼叫`add`時，可能會使用`positional`或`keyword`兩種型態傳遞參數，所以要分別確認`args`及`kwargs`。
-        * 由於`args`必定會出現於`kwargs`之前，再加上Python於3.7後，其`dict`會維持插入時的順序(3.6屬於非正式支援)，所以我們可以使用`zip(args, type_hints.values())`搭配`isinstance`來確認`args`內的每個`obj`都是`type_hints`內所描述`type`的`instance`(`註4`)。
+        * 由於`args`必定會出現於`kwargs`之前，再加上Python於3.7後，其`dict`會維持插入時的順序(3.6屬於非正式支援)，所以我們可以使用`zip(args, type_hints.values())`搭配`isinstance`來確認`args`內的每個`obj`都是`type_hints`內所描述`type`的`instance`（`註4`）。
         * 針對`kwargs`，我們可以試著尋找`kwargs`與`type_hints`的共同`key`，並搭配`isinstance`確認這些共同`key`的`value`皆為`type_hints`內所描述型態的`instance`。
     * `result = func(*args, **kwargs)`是`func`真正被呼叫，進行計算的地方。
     * 如果`validate_input`為`Ture`，則檢查`result`是否為給定`type hint`的`instance`。此時，即便是未通過檢查，也僅呼叫`logging.warning`，而不`raise TypeError`。這是一個折衷的寫法，一般來說如果`result`能順利計算完畢，相比於`raise Exception`，我們會傾向回傳所計算結果，但以`warning`提醒，讓使用者自己確認，究竟是給錯型態，又或者結果真的不符預期。
     * 如果`to_log`為`Ture`，呼叫`logging.info`記錄`wrapper`執行完畢。
     * 最後回傳`result`。
 
-## 常用型態(@dec | @dec())
+## 常用型態（@dec | @dec()）
 如果依照上述的寫法，我們需要呼叫`decorator factory`，才能取得真正的`decorator`，也就是說即使我們沒有要修改`decorator factory`的預設值，我們仍然需要使用`@log()`的語法才能裝飾`function`，使用起來有點麻煩。
 
 **我們的目標是，希望在沒有要修改`decorator factory`預設值時，能夠僅使用`@log`，且`@log`與`@log()`是同義的。**
@@ -424,7 +424,7 @@ INFO:root:wrapper is called, func=<function MyClass.add1 at 0x000002607C0862A0>,
 INFO:root:wrapper is called, func=<function MyClass.add2 at 0x000002607C0863E0>, args=(<__main__.MyClass object at 0x000002607BA98950>, 1, 2), kwargs={}
 3
 ```
-`方法2`的寫法非常優雅，且可以免去定義一層中間的`function`，但需要對`decorator`有較深的體會才容易運用自如(`註5`)。
+`方法2`的寫法非常優雅，且可以免去定義一層中間的`function`，但需要對`decorator`有較深的體會才容易運用自如（`註5`）。
 
 ## 當日筆記
 * 不論`decorator`包含了幾層`function`，我們的目的可以想作是返回一個`wrapper` `function`，其所接收的參數與返回值，會與被裝飾的`function`相同，而我們可以在過程中動點手腳，例如進行`logging`或驗證型別等。

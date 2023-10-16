@@ -73,7 +73,7 @@ if __name__ == '__main__':
 ## 3. tuple作為預設值
 在建立`class`的時候，常常會有一種情況是希望於`__init__`中選擇性接收一些值，來更新內部的某個`mutable`的`container`，像是`dict`、`set`或`list`等。
 
-舉例來說，`# 03a`中的`MyDict`繼承`UserDict`(`註1`)。於`__init__`中接收一個選擇性的`dict_data`。當其不為`None`時，我們希望能將傳入的值，更新到`self`。
+舉例來說，`# 03a`中的`MyDict`繼承`UserDict`（`註1`）。於`__init__`中接收一個選擇性的`dict_data`。當其不為`None`時，我們希望能將傳入的值，更新到`self`。
 ```python=
 # 03a
 from collections import UserDict

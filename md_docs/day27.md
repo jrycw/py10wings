@@ -299,7 +299,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
 ```
 
 #### `__init__`
-共接收七個變數(`註2`)。
+共接收七個變數（`註2`）。
 * `host`、`port`、`database`與`secret_key`將由`load_toml`讀取`edgedb.toml`所得，為實際建立連接所需要的參數。
 * `ttl`為設定的快取時間，預設為`0`，即不快取。
 * `logger`為指定的`logger instance`。當沒有指定的時候，會呼叫`get_logger`來取得一個預設的`logger`。
@@ -385,7 +385,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
 ```
 
 #### `_is_qry_immutable`
-是用來判斷我們的`query`內是否含有，可能會`mutate` database的關鍵字。我們定義當`query`內含有`insert`、`update`或 `delete`時，就將此`query`判定為會`mutate` `database`(`註3`)。由於`_mutated_kws`不會隨著不同`instance`而改變，所以我們將其設為`class variable`。
+是用來判斷我們的`query`內是否含有，可能會`mutate` database的關鍵字。我們定義當`query`內含有`insert`、`update`或 `delete`時，就將此`query`判定為會`mutate` `database`（`註3`）。由於`_mutated_kws`不會隨著不同`instance`而改變，所以我們將其設為`class variable`。
 
 ```python=
 class EdgeDBCloudConn(AbstractAsyncContextManager):
@@ -517,7 +517,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
 ```
 
 #### `_healthy_check_url`與`is_healthy`
-`_healthy_check_url`是`EdgeDB`內建能判斷`database`現在狀態的`url`(`註3`)。
+`_healthy_check_url`是`EdgeDB`內建能判斷`database`現在狀態的`url`（`註3`）。
 
 `is_healthy`針對`self._healthy_check_url`發出`GET` request，並檢查返回`status_code`是否為`200`，來判斷`database`是否健康。如果遭遇到任何錯誤，設定回傳`False`。
 
@@ -548,7 +548,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
 開頭的多個`function`為重設時間或資料庫呼叫次數所用。
 
 ### tests.py
-總共有四個`TestClass`，都是實際對`database`進行`query`，沒有`mocking`(`註4`)。
+總共有四個`TestClass`，都是實際對`database`進行`query`，沒有`mocking`（`註4`）。
 * `TestHealthy`測試`_healthy_check_url`及`is_healthy`。
 * `TestImqryCachedConn`測試在少量及大量`query`時都有進行快取。
 * `TestImqryNonCachedConn`測試其沒有快取機制。

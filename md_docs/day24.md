@@ -218,7 +218,7 @@ print(my_func.counts)  # 2
 `解決方法2`在呼叫兩次`my_func()`後，也可以順利取得`2`。請注意，如果採用這個方法，可以使用`my_func.counts`來取得`counts`(謝謝`property`)。
 
 ### 解決方法比較
-`decorator function`是一般人比較熟悉的，大部份情況，我們也會優先使用`decorator function`，因為實作起來比較直觀。但是如果當`decorator function`中使用很多的`nonlocal`時(有許多狀態需要儲存)，或許改用`decorator class`會是比較好的方法。在這種情況下，`解決方法2`比`解決方法1`簡潔不少，而且`解決方法2`還可以使用`my_func.counts`取值，不必像`解決方法1`一樣得使用`my_func.counts()`。
+`decorator function`是一般人比較熟悉的，大部份情況，我們也會優先使用`decorator function`，因為實作起來比較直觀。但是如果當`decorator function`中使用很多的`nonlocal`時（有許多狀態需要儲存），或許改用`decorator class`會是比較好的方法。在這種情況下，`解決方法2`比`解決方法1`簡潔不少，而且`解決方法2`還可以使用`my_func.counts`取值，不必像`解決方法1`一樣得使用`my_func.counts()`。
 
 
 ## 當日筆記

@@ -134,7 +134,7 @@ if __name__ == '__main__':
 ## 9. zip與dict的搭配使用
 一般大家會使用`zip`的情況，應該是需要對多個`iterable`打迴圈的時候才會用到，但我們發現`zip`搭配`dict`也有許多妙用。
 
-當需要一個`dict`，其`keys`為`a~z`，而`values`為`1~26`，您會如何建立呢(`註1`)？
+當需要一個`dict`，其`keys`為`a~z`，而`values`為`1~26`，您會如何建立呢（`註1`）？
 一般來說，您應該會利用`dict-comprehension`，如`# 09a`。
 ```python=
 # 09a
@@ -165,7 +165,7 @@ if __name__ == '__main__':
 ## 10. 利用`continue`減少縮排
 [continue](https://docs.python.org/3/reference/simple_stmts.html#continue)是一個於迴圈中離開當下這個`cycle`，進入下一個`cycle`的語法。
 
-假設我們想要寫一個`my_filter` `function`(`註2`)，其要求如下：
+假設我們想要寫一個`my_filter` `function`（`註2`），其要求如下：
 
 * 接受兩個參數`func`及`iterable`。`func`會針對`iterable`中每個`element`給出`True`或`False`
 * 最後`my_filter`會以`generator`型式返回`func`判斷為`True`的元素。

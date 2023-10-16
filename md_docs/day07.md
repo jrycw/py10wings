@@ -26,7 +26,7 @@ _convert = {
                ('__lt__', _lt_from_ge)]
 }
 ```
-* 這些方法可以由數學上推論而得，我們舉`_gt_from_lt`為例，如何在有`__lt__`及`__eq__`(`註1`)的情況下推得`__gt__`。由Python註解可知`a > b`相當於`not (a < b)`及` a != b`的，而後者都是我們可以使用的方法。靠著已知的操作組合出新的`comparison`功能，`total_ordering`是不是相當巧妙的設計呢!
+* 這些方法可以由數學上推論而得，我們舉`_gt_from_lt`為例，如何在有`__lt__`及`__eq__`（`註1`）的情況下推得`__gt__`。由Python註解可知`a > b`相當於`not (a < b)`及` a != b`的，而後者都是我們可以使用的方法。靠著已知的操作組合出新的`comparison`功能，`total_ordering`是不是相當巧妙的設計呢!
 ```python=
 def _gt_from_lt(self, other):
     'Return a > b.  Computed by @total_ordering from (not a < b) and (a != b).'
@@ -124,7 +124,7 @@ __所以實務上__ 還是建議依照Python docs的指示，自己實作`__eq__
     * 第二個命名為`warn_using_private_func`，是用來裝飾在需要報`Warning`的`function`之上。
 
 ### my_warn實作
-`my_warn`接收`cls`為變數，接下來我們對`cls.__dict__`打一個迴圈，如果該`obj`是`callable`且名字為`_call`開頭，則是我們要裝飾的對象(`註2`)。我們使用`setattr`重新將`cls.name`設定給裝飾過後的`obj`(即(`warn_using_private_func(obj)`)後，返回`cls`。
+`my_warn`接收`cls`為變數，接下來我們對`cls.__dict__`打一個迴圈，如果該`obj`是`callable`且名字為`_call`開頭，則是我們要裝飾的對象（`註2`）。我們使用`setattr`重新將`cls.name`設定給裝飾過後的`obj`(即(`warn_using_private_func(obj)`)後，返回`cls`。
 ```python=
 #02
 def my_warn(cls):

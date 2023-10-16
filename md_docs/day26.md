@@ -23,7 +23,7 @@ async def coro3():
 async def coro4():
     return 'coro4 is good'
 ```
-如果對`asyncio`有想深入了解的朋友，我們相當推薦`Łukasz Langa`(`註1`)代表`EdgeDB`錄製的[asyncio介紹系列](https://www.youtube.com/watch?v=Xbl7XjFYsN4&list=PLhNSoGM2ik6SIkVGXWBwerucXjgP1rHmB)。
+如果對`asyncio`有想深入了解的朋友，我們相當推薦`Łukasz Langa`（`註1`）代表`EdgeDB`錄製的[asyncio介紹系列](https://www.youtube.com/watch?v=Xbl7XjFYsN4&list=PLhNSoGM2ik6SIkVGXWBwerucXjgP1rHmB)。
 
 ### Coroutine function vs Coroutine object
 在開始分享之前，在`asyncio`的世界裡，我們需要很清楚分別何謂`coroutine`。
@@ -467,7 +467,11 @@ def dump_json(file, content):
 
 我們在`download`過程中，不可避免的會糟遇到各種意外，例如`NetworkError`或`TimeoutException`。
 
-我們在`download`內加上一些程式碼，使得每次執行`download`時，可能會(1)正常執行(2)`raise httpx.NetworkError`(3)`raise httpx.TimeoutException`(4)預期外的例外。
+我們在`download`內加上一些程式碼，使得每次執行`download`時，可能會：
+* 正常執行。
+* `raise httpx.NetworkError`。
+* `raise httpx.TimeoutException`。
+* 預期外的例外。
 
 `await asyncio.sleep(0.1)`是為了防止各`task`執行太快，當其中一個有報錯時，已經執行完畢，看不出`asyncio.TaskGroup`的取消效果。
 
@@ -544,10 +548,10 @@ task=<Task finished name='Get user_1_comments' coro=<download() done, defined at
 
 我們的目標是建立一個`retry`的`decorator function`:
 * 其可利用`@retry(max_retries=n)`的語法，來對被裝飾的`function`，進行`n`次的retry。
-* 或是利用`@retry`的語法，來對被裝飾的`function`，執行預設次數(預設1次)的retry。
+* 或是利用`@retry`的語法，來對被裝飾的`function`，執行預設次數（預設1次）的retry。
 * 若retry結束，被裝飾的`function`仍然無法成功完成的話，會收集所有retry過程中的例外，生成一個`EG`返回。
 
-`# 04`中的`my_func`為被`retry`所裝飾的`function`，其可能會`raise TypeError('1')`、`raise ValueError('2')`或會成功返回`ok`。
+`# 04`中的`my_func`為被`retry`所裝飾的`function`，其可能會`raise TypeError('1')`、`raise ValueError('2')`或成功返回`ok`。
 ```python=
 # 04
 ...
@@ -689,7 +693,7 @@ handling DBCloseError...
 * 於離開`with Connection() as conn`時，`__exit__`中的`self._client.close()`會`raise DBCloseError`。
 * 於最外層我們試著補抓`HTTPError`與`DBCloseError`，結果只會抓到`DBCloseError`。
 
-我們真正想做的操作是`conn.do_something()`(無例外)及`conn.send_report()`(有例外)，但因為離開`context manager`時也有例外，導致我們於外層只能補抓到`context manager`的例外，而無法補捉到真正操作發生的例外。
+我們真正想做的操作是`conn.do_something()`（無例外）及`conn.send_report()`（有例外），但因為離開`context manager`時也有例外，導致我們於外層只能補抓到`context manager`的例外，而無法補捉到真正操作發生的例外。
 
 ### `try-except*`
 `except*`語法可以改變這種行為。

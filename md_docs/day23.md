@@ -30,7 +30,7 @@ unboundlocalerror_func()  # UnboundLocalError
 在使用各種`Comprehension`時，也是一個容易出錯的地方。我們透過一連串小例子，慢慢說明。
 
 ### 暖身一下
-`# 02a`中，當我們真正呼叫`adders`中每一個`adder`時，Python會依照`LEGB`原則尋找`n`。由於在`L`找不到`n`，又沒有`E`，最後在`G`中找到`n`，其值為3(不是10)，因為在`for n in range(1, 4)`中，`n`最後於`G`中被指為3。
+`# 02a`中，當我們真正呼叫`adders`中每一個`adder`時，Python會依照`LEGB`原則尋找`n`。由於在`L`找不到`n`，又沒有`E`，最後在`G`中找到`n`，其值為`3`（不是`10`），因為在`for n in range(1, 4)`中，`n`最後於`G`中被指為`3`。
 ```python=
 # 02a
 n = 10
@@ -93,7 +93,7 @@ adders2 = get_adders()
 for adder in adders2:
     print(adder(1))  # 4 4 4
 ```
-當我們呼叫每個`adder`時，由於`L`中找不到`n`，所以我們是在`E`這層找到`n`，其值為3，因為`for n in range(1, 4)`在最後將`n`指為3。
+當我們呼叫每個`adder`時，由於`L`中找不到`n`，所以我們是在`E`這層找到`n`，其值為`3`，因為`for n in range(1, 4)`在最後將`n`指為`3`。
 
 ### 修正寫法
 如果我們想要每個`adder`都能獲得不同的`n`值，`# 02f`是一個可以參考的寫法。我們將n定義為`lambda`的`keyword argument`，並預設其值為`n`。這麼一來，於迴圈中我們就可以接受不同的`n`值了。

@@ -16,7 +16,7 @@
 1. How obj.attr works(obj is instance)?
 2. How obj.attr works(obj is class)?
 3. How obj.attr=value works(obj is instance)?
-4. How obj.attr=value works(obj is class)?(實驗性質，待研究)
+4. How obj.attr=value works(obj is class)?（實驗性質，待研究）
 
 至於`super().attr`，我們建議直接參考[`Guido`的tutorial](https://www.python.org/download/releases/2.2.3/descrintro/#cooperation)，但可能需要一些Python2的基礎，才能體會老爹於20年前建置`super()`的邏輯。但是即使是在有Python2及`descriptor`與`metaclasses`的基本知識下，這篇tutorial還是相當難啃呀! 期望未來有一天我們能靜下心來，像欣賞`Descriptor HowTo Guide`一樣，好好拜讀幾遍。
 
@@ -370,7 +370,7 @@ if __name__ == '__main__':
 ![class_get2](https://py10wings.jp-osa-1.linodeobjects.com/day18/class_get2.png)
 
 ## 3. How obj.attr=value works(obj is instance)?
-[`object.__setattr__`](https://docs.python.org/3/reference/datamodel.html#object.__setattr__)是Python設定`attribute`值的`dunder method`(`註1`)。
+[`object.__setattr__`](https://docs.python.org/3/reference/datamodel.html#object.__setattr__)是Python設定`attribute`值的`dunder method`（`註1`）。
 
 根據`Dr. Fred Baptiste`的說明，我們可以將`obj.attr=value`整理如下
 ### 流程整理格式

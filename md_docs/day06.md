@@ -26,11 +26,11 @@ def my_func(*args, **kwargs):
 * 定義一個被`dec`裝飾的`function`，名為`my_func`，其可接受`*args`及`**kwargs`。
 
 
-藉由`decorator`，`my_func`已經從原先的`my_func`變成`dec_instance`了。由於`__call__`(`註1`)與原先的`my_func`接收相同的參數(即`*args`及`**kwargs`)，所以裝飾前後，`my_func`的呼叫方式是一致的。
+藉由`decorator`，`my_func`已經從原先的`my_func`變成`dec_instance`了。由於`__call__`（`註1`）與原先的`my_func`接收相同的參數(即`*args`及`**kwargs`)，所以裝飾前後，`my_func`的呼叫方式是一致的。
 
 當呼叫`my_func`時，實際上是在呼叫`dec_instance`。舉例來說，此時的`my_func(1, 2)`，相當於呼叫`dec_instance(1, 2)`，即`dec_instance.__call__(1, 2)`。而`dec_instance.__call__`則返回原先傳入的`self.func`搭配上`args = (1, 2)，kwargs = {}`這些參數的計算結果。
 
-### 基本型態2(加上`__get__`)
+### 基本型態2（加上`__get__`）
 `# 01`的`code`有個潛在問題，就是當它裝飾在`class`內的`function`時，如`01a`，會`raise TypeError`。
 ```python=
 # 01a
@@ -67,7 +67,7 @@ class MyClass:
 
 或許您還是有疑惑，為什麼我們明明使用`my_inst.my_func()`，為什麼`my_inst`沒有自動傳遞給`my_func`，作為第一個參數`self`呢？那是因為`function`是一種`non-data descriptor`，其具備有`__get__`，並於其內使用`MethodType`來將`descriptor`的`instance`與呼叫其的`instance` `bound`在一起，所以才會有我們習慣的自動傳遞`instance`到`function`中，作為第一個參數`self`的行為。如果有些不明白的話，我們會於後續`導讀Descriptor HowTo Guide`的部份再詳談。
 
-重點是，當使用`decorator class`裝飾`class`中的`function`，實作`__get__`可以讓它用起來，就像是一般的`instance method`(`註2`)，如`# 02`。
+重點是，當使用`decorator class`裝飾`class`中的`function`，實作`__get__`可以讓它用起來，就像是一般的`instance method`（`註2`），如`# 02`。
 
 ```python=
 # 02
@@ -99,7 +99,7 @@ if __name__ == '__main__':
 ```
 `dec`的`__get__`中的`MethodType(self, instance)`會幫忙將`dec_instance`與`my_inst` `bound`在一起。
 
-### 基本型態3(加上functools.update_wrapper)
+### 基本型態3（加上functools.update_wrapper）
 `基本型態1`與`基本型態2`的寫法皆會喪失被裝飾`function`的`metadata`。一個折衷的辦法是將這些`metadata`更新到`dec_instance.__dict__`，即`__init__`中的`update_wrapper(self, self.func)`。
 
 ```python=
@@ -193,7 +193,7 @@ my_inst.add.__annotations__={'a': <class 'int'>, 'b': <class 'int'>, 'return': <
 my_inst.add.__dict__={'func': <function MyClass.add at 0x0000015CBE88A160>, '__module__': '__main__', '__name__': 'add', '__qualname__': 'MyClass.add', '__doc__': 'Take two integers and return their sum.', '__annotations__': {'a': <class 'int'>, 'b': <class 'int'>, 'return': <class 'int'>}, '__wrapped__': <function MyClass.add at 0x0000015CBE88A160>}
 ```
 
-## decorator factory(本身可接收參數)
+## decorator factory（本身可接收參數）
 當我們希望有一個flag來控制這個`decorator`是否要`logging`，可以寫成`# 05`：
 ```python=
 # 05
@@ -324,8 +324,8 @@ INFO:root: `wrapper` is finished.
 * `# 06`將接收的參數邏輯放在`__init__`。
 * `# 06`將`wrapper`放在`__call__`。
 
-## 常用型態(@dec | @dec())
-如果想要同時能夠使用`@log`及`@log()`兩種語法，勢必要面對回傳值有時是`function`，有時是`instance`的情況，所以相關`metadata`的處理也要記得分開處理，我們做了一些嘗試(`註3`)。
+## 常用型態（@dec | @dec()）
+如果想要同時能夠使用`@log`及`@log()`兩種語法，勢必要面對回傳值有時是`function`，有時是`instance`的情況，所以相關`metadata`的處理也要記得分開處理，我們做了一些嘗試（`註3`）。
 
 相較之下，我們會建議使用一個`function`來包住一個`decorator class`，如`# 07`所示。原理其實和`decorator function`的`# 08`差不多。
 ```python=

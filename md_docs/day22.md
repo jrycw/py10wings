@@ -21,8 +21,8 @@ __exit__(exc_type, exc_val, exc_tb)
 * `exc_tb`為一個`traceback` `obj`。
 
 當`__exit__`回傳值為：
-* `truthy`時(`bool(回傳值)`為`True`)，會忽略例外。
-* `falsey`時(`bool(回傳值)`為`False`)，會正常報錯。由於當`function`沒有顯性設定回傳值時，會回傳`None`。而`None`是`falsey`，所以context manager預設情況為正常報錯。
+* `truthy`時（`bool(回傳值)`為`True`），會忽略例外。
+* `falsey`時（`bool(回傳值)`為`False`），會正常報錯。由於當`function`沒有顯性設定回傳值時，會回傳`None`。而`None`是`falsey`，所以context manager預設情況為正常報錯。
 
 
 ## 基本型態

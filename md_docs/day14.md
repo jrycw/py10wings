@@ -4,7 +4,7 @@
 
 在日常應用中，直接使用`metaclasses`的機會不高，但了解`metaclasses`能讓我們由另一個視角，來欣賞Python的優雅。
 
-下面引用Python大神，`Tim Peters`(`註1`)，對於`metaclasses`的描述：
+下面引用Python大神，`Tim Peters`（`註1`），對於`metaclasses`的描述：
 > “Metaclasses are deeper magic than 99% of users should ever worry about. If you wonder whether you need them, you don’t (the people who actually need them know with certainty that they need them, and don’t need an explanation about why).”
 — Tim Peters
 
@@ -57,9 +57,9 @@ if __name__ == '__main__':
 事實上，`object.__new__`才是Python真正建立`instance`時所呼叫的。
 
 `# 02`中，建立了客製化的`__new__`(即overwrite了`object.__new__`)。
-* `__new__`的第一個參數為`cls`，在`# 02`中即為`MyClass`，至於其它參數則需要與`__init__`一致(如果有的話)。
+* `__new__`的第一個參數為`cls`，在`# 02`中即為`MyClass`，至於其它參數則需要與`__init__`一致（如果有的話）。
 * 在`__new__`中呼叫`super().__new__(cls)`來建立`instance`，在`# 02`中呼叫`super().__new__(cls)`相當於呼叫`object.__new__(cls)`，但習慣使用`super()`的寫法，可以幫助我們在繼承的時候，減少一些問題(`註2`)。
-* 當`__new__`回傳一個`MyClass`的`instance`時(`註3`)，會自動呼叫`__init__`，我們可以`id`來確認`__new__`中的`instance`就是傳入`__init__`中的`self`。
+* 當`__new__`回傳一個`MyClass`的`instance`時（`註3`），會自動呼叫`__init__`，我們可以`id`來確認`__new__`中的`instance`就是傳入`__init__`中的`self`。
 
 ```python=
 # 02
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     print(my_inst.__dict__)  # {'x': 1}
 ```
 ### 實例說明1
-假設現在有個`SlowNewClass`，而其`__new__`有很多操作，需時良久(以`time.sleep(1)`表示)。
+假設現在有個`SlowNewClass`，而其`__new__`有很多操作，需時良久（以`time.sleep(1)`表示）。
 ```python=
 # 05
 import time
@@ -229,8 +229,8 @@ if __name__ == '__main__':
 
 ## 當日筆記
 ### 何時適合於`class`中實作`__new__`
-* 想要搶在`__init__`之前，於建立`instance`前後做一些操作時(`實例說明1`)。
-* 於`__new__`中操控`cls`，暗指每次生成`instance`時，都會`mutate` `cls`，需謹慎考慮這是否為您想要的行為(`實例說明2`)。
+* 想要搶在`__init__`之前，於建立`instance`前後做一些操作時（`實例說明1`）。
+* 於`__new__`中操控`cls`，暗指每次生成`instance`時，都會`mutate` `cls`，需謹慎考慮這是否為您想要的行為（`實例說明2`）。
 * 當繼承以`C`實作的`built-in` `type`時。
 
 ## 備註

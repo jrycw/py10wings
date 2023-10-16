@@ -47,7 +47,7 @@ class Property:
             raise AttributeError(f"property '{self._name}' has no deleter")
         self.fdel(obj)
 ```
-* `getter`、`setter`與`deleter`三種`function`的內容非常像。原則就是每次都建立一個新的`property` `instance`。舉`getter`為例，` type(self)`其實就是`property`這個`class`，我們將傳入的`fget`指定為`Property`的第一個參數`fget`，剩餘的`self.fset`、`self.fdel`及 `self.__doc__`就從`self`內來取。接著需要手動更新`property` `instance`的`_name`，因為`class`內有`__set_name__`的`attribute`只會在`class`被定義時呼叫一次(`註1`)，所以當我們後續利用`getter`、`setter`或`deleter`介面加入新`function`到`property` `instance`時，需自己更新。這麼一來就可以像是疊加一樣，彈性地加入需要的`function`。
+* `getter`、`setter`與`deleter`三種`function`的內容非常像。原則就是每次都建立一個新的`property` `instance`。舉`getter`為例，` type(self)`其實就是`property`這個`class`，我們將傳入的`fget`指定為`Property`的第一個參數`fget`，剩餘的`self.fset`、`self.fdel`及 `self.__doc__`就從`self`內來取。接著需要手動更新`property` `instance`的`_name`，因為`class`內有`__set_name__`的`attribute`只會在`class`被定義時呼叫一次（`註1`），所以當我們後續利用`getter`、`setter`或`deleter`介面加入新`function`到`property` `instance`時，需自己更新。這麼一來就可以像是疊加一樣，彈性地加入需要的`function`。
 
 
 ```python=
@@ -243,7 +243,7 @@ class Type(type):
 ```
 ### 3. Object
 `Object` `class`的目的為被後續`class`繼承。
-* `__new__`先利用`super().__new__(cls)`生成`instance`。接著看看`cls`是不是有`slot_names`，如果有的話就建立一個長度為`len(slot_names)`的`list`，並將`list`中每個值都預設為`null`。接著透過`object.__setattr__`將`list`設為名為`_slotvalues`的`instance variable`，並回傳`instance`。請注意此處`object.__setattr__`的使用實有其必要(`註2`)。
+* `__new__`先利用`super().__new__(cls)`生成`instance`。接著看看`cls`是不是有`slot_names`，如果有的話就建立一個長度為`len(slot_names)`的`list`，並將`list`中每個值都預設為`null`。接著透過`object.__setattr__`將`list`設為名為`_slotvalues`的`instance variable`，並回傳`instance`。請注意此處`object.__setattr__`的使用實有其必要（`註2`）。
 * `__setattr__`中會檢查`cls`中是否有`slot_names`。如果有的話，檢查其名字是否有在`cls.slot_names`中，如果不在的話`raise AttributeError`。如果通過檢查的話，則`delegate`給`super().__setattr__`。
 * `__delattr__`的邏輯類似`__setattr__`。如果沒通過檢查的話`raise AttributeError`，有通過的話，則`delegate`給`super().__delattr__`。
 

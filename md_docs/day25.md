@@ -1,7 +1,7 @@
 # [Day25] 九翼 - Exception Groups與except* : 導讀PEP654 
 
 ## 九翼大綱
-`Exception Groups`與`except*`是在Python3.11新增加的例外處理功能。一直以來都想好好搞懂，但...(下略三千字)。這次終於趁著鐵人賽的機會，靜下心來研究如何使用這個新功能，其及相關應用場景。
+`Exception Groups`與`except*`是在Python3.11新增加的例外處理功能。一直以來都想好好搞懂，但...（下略三千字）。這次終於趁著鐵人賽的機會，靜下心來研究如何使用這個新功能，其及相關應用場景。
 
 本翼的程式碼幾乎全取自`PEP654`及參考資料。我們特別推薦[`Or Chen`於EuroPython中的講解](https://www.youtube.com/watch?v=w2aSfeXVn8A)。其內容深入淺出，很快就能掌握基本原理。
 

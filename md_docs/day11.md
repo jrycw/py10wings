@@ -7,7 +7,7 @@
 
 一般來說，有兩個地方可以考慮，一個是`desc_instance`內，另一個是`instance.__dict__`，兩者都各有一些眉角。
 
-接下來兩天，我們將練習數個`data descriptor`的寫法(`註 1`)。今天會先分享一些有潛在問題的寫法，透過了解各方法的缺點或限制，漸漸學習反思。明天再分享一些通用的寫法。
+接下來兩天，我們將練習數個`data descriptor`的寫法（`註1`）。今天會先分享一些有潛在問題的寫法，透過了解各方法的缺點或限制，漸漸學習反思。明天再分享一些通用的寫法。
 
 以下將會用`desc_instance`來代稱`data descriptor instance`。
 
@@ -152,7 +152,7 @@ class MyClass:
 如果進行和`方法1`及`方法2`類似的檢查，可以發現`方法4`也沒有類似的問題，且如果我們利用`del`來刪除`instance`時，該`instance`也真的會被`gc`。僅管如此，`方法4`還是有一些缺點。
 
 ### 使用限制與缺點
-* 即使我們刪除了`instance`，其記憶體位置`id(instance)`，仍然以`int`型態存在`self._data`中。乍聽好像沒什麼關係，但是Python的記憶體位置是會重覆使用的。如果這個記憶體位置被其它`obj`使用了，我們的`descriptor`就隱含了這個不相關`obj`的資訊(雖然機率極低)。
+* 即使我們刪除了`instance`，其記憶體位置`id(instance)`，仍然以`int`型態存在`self._data`中。乍聽好像沒什麼關係，但是Python的記憶體位置是會重覆使用的。如果這個記憶體位置被其它`obj`使用了，我們的`descriptor`就隱含了這個不相關`obj`的資訊（雖然機率極低）。
 * 其次即使記憶體位置沒有被重覆使用，但如果我們大量使用這類型的`descriptor`，也會造成很多無謂的記憶體浪費。
 
 ## 充電區
@@ -173,7 +173,7 @@ def __get__(self, instance, owner_cls):
 ```python=
 __set_name__(self, owner_cls, name)
 ```
-`class`在定義時，會自動尋找有實作`__set_name__`的`attribute`，透過這個方法將他們在`class`的名字傳入`desc_instance`(`註2`)。舉例來說如果`Desc`實作有`__set_name__`，那麼`MyClass`中的`'x'`(`str`型態)於`MyClass`定義時，就會自動透過`x.__set_name__`傳入`desc_instance`。
+`class`在定義時，會自動尋找有實作`__set_name__`的`attribute`，透過這個方法將他們在`class`的名字傳入`desc_instance`（`註2`）。舉例來說如果`Desc`實作有`__set_name__`，那麼`MyClass`中的`'x'`(`str`型態)於`MyClass`定義時，就會自動透過`x.__set_name__`傳入`desc_instance`。
 ```python=
 class MyClass:
     x = Desc()

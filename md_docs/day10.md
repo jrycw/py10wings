@@ -1,5 +1,5 @@
 ## 四翼大綱
-一般我們從`instance`取得`attribute`或`function`時，會先由`instance.__dict__`找起，如果沒找到會再往上，順著生成`instance`的`class`的`mro`順序繼續找。`descriptor`是一種可以改變這種機制的有趣功能。雖然`descriptor`大部份應用會著重在由`instance`呼叫，這也會是我們接下來分享的重點，但是當其由`class`或是`super`呼叫時，各自有其細節要注意(`註1`)。
+一般我們從`instance`取得`attribute`或`function`時，會先由`instance.__dict__`找起，如果沒找到會再往上，順著生成`instance`的`class`的`mro`順序繼續找。`descriptor`是一種可以改變這種機制的有趣功能。雖然`descriptor`大部份應用會著重在由`instance`呼叫，這也會是我們接下來分享的重點，但是當其由`class`或是`super`呼叫時，各自有其細節要注意（`註1`）。
 
 `descriptor`分為`non-data descriptor`及`data descriptor`。`non-data descriptor`為一有實作`__get__`的`class`，而`data descriptor`為一有實作`__get__`加上`__set__`或是`__delete__`兩種其一的`class`。
 
@@ -110,7 +110,7 @@ my_inst.data_desc=None
 my_inst.__dict__={'data_desc': 10}
 ```
 * 我們一樣先確認`my_inst`剛由`MyClass`生成時，`my_inst.__dict__`為一個空的`dict`。
-* 接著我們直接於`my_inst.__dict__`中手動插入`data_desc`為`10`(`註2`)。
+* 接著我們直接於`my_inst.__dict__`中手動插入`data_desc`為`10`（`註2`）。
 * 接下來我們使用`my_inst.data_desc`來取值，由於`data_desc`會`shadow` `instance.__dict__`，所以將會呼叫`data_desc.__get__`。而我們在`__get__`中只有印出參數，所以回傳值為`None`。
 * 再來，我們使用`my_inst.data_desc=20`來賦值，這會呼叫`data_desc.__set__`來進行賦值(但`__set__`目前僅呼叫一次`print`，並未實際賦值)。
 * 最後，我們使用`my_inst.data_desc`來取值，此語法仍會呼叫`data_desc.__get__`，並回傳`None`。此時如果再次驗證`my_inst.__dict__`，會發現其中只有我們剛剛手動插入的`data_desc`，其值依然為`10`。
