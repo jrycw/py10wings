@@ -587,9 +587,9 @@ except* Exception as ex:  # This works
     print(type(ex), ex) # <class 'ExceptionGroup'> one (2 sub-exceptions)
 ```
 ## 參考資料
-* [PEP 654](https://peps.python.org/pep-0654/#naked-exceptions)
-* [Raise better errors with Exception Groups - presented by Or Chen](https://www.youtube.com/watch?v=w2aSfeXVn8A)
-* [Exception Groups and except: Irit Katriel](https://www.youtube.com/watch?v=uARIj9eAZcQ)
+* [PEP 654](https://peps.python.org/pep-0654/#naked-exceptions)。
+* [Raise better errors with Exception Groups - presented by Or Chen](https://www.youtube.com/watch?v=w2aSfeXVn8A)。
+* [Exception Groups and except: Irit Katriel](https://www.youtube.com/watch?v=uARIj9eAZcQ)。
 
 
 ## Code
