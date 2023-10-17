@@ -26,7 +26,7 @@ def my_func(*args, **kwargs):
 * 定義一個被`dec`裝飾的`function`，名為`my_func`，其可接受`*args`及`**kwargs`。
 
 
-藉由`decorator`，`my_func`已經從原先的`my_func`變成`dec_instance`了。由於`__call__`（`註1`）與原先的`my_func`接收相同的參數(即`*args`及`**kwargs`)，所以裝飾前後，`my_func`的呼叫方式是一致的。
+藉由`decorator`，`my_func`已經從原先的`my_func`變成`dec_instance`了。由於`__call__`（`註1`）與原先的`my_func`接收相同的參數（即`*args`及`**kwargs`），所以裝飾前後，`my_func`的呼叫方式是一致的。
 
 當呼叫`my_func`時，實際上是在呼叫`dec_instance`。舉例來說，此時的`my_func(1, 2)`，相當於呼叫`dec_instance(1, 2)`，即`dec_instance.__call__(1, 2)`。而`dec_instance.__call__`則返回原先傳入的`self.func`搭配上`args = (1, 2)，kwargs = {}`這些參數的計算結果。
 
@@ -54,7 +54,7 @@ if __name__ == '__main__':
 ```
 `01a`的錯誤訊息為`MyClass.my_func() missing 1 required positional argument: 'self'`。這是怎麼一回事呢？
 
-我們一樣回到核心原理開始思考，雖然`MyClass`中的`my_func`原本是個`function`，但經過`dec`的裝飾後，`my_func`已經變作`dec_instance`，所以上述的`MyClass`可視為下面這個寫法的簡潔版(記得`@dec`是語法糖嗎？)。
+我們一樣回到核心原理開始思考，雖然`MyClass`中的`my_func`原本是個`function`，但經過`dec`的裝飾後，`my_func`已經變作`dec_instance`，所以上述的`MyClass`可視為下面這個寫法的簡潔版（記得`@dec`是語法糖嗎？）。
 
 ```python=
 # 01a
@@ -320,7 +320,7 @@ INFO:root: `wrapper` is called, func=<function add at 0x0000024A7C3C4EA0>, args=
 INFO:root: `wrapper` is finished.
 3.5 <class 'float'>
 ```
-`# 06`與`decorator function`的`# 07`寫法不同的地方，只在：
+`# 06`與[[Day05]](https://ithelp.ithome.com.tw/articles/10317757)的`# 07`寫法不同的地方，只在：
 * `# 06`將接收的參數邏輯放在`__init__`。
 * `# 06`將`wrapper`放在`__call__`。
 
