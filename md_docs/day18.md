@@ -1,4 +1,4 @@
-# [Day18] 六翼 - 導讀Descriptor HowTo Guide: How dot works?
+# [Day18] 六翼 - 導讀Descriptor HowTo Guide: How dot works？
 ## 六翼大綱
 在經過前面數翼的洗禮後，我們具備了閱讀`Descriptor HowTo Guide`比較深入部份的知識了。
 
@@ -18,7 +18,7 @@
 3. How obj.attr=value works(obj is instance)?
 4. How obj.attr=value works(obj is class)?（實驗性質，待研究）
 
-至於`super().attr`，我們建議直接參考[`Guido`的tutorial](https://www.python.org/download/releases/2.2.3/descrintro/#cooperation)，但可能需要一些Python2的基礎，才能體會老爹於20年前建置`super()`的邏輯。但是即使是在有Python2及`descriptor`與`metaclasses`的基本知識下，這篇tutorial還是相當難啃呀! 期望未來有一天我們能靜下心來，像欣賞`Descriptor HowTo Guide`一樣，好好拜讀幾遍。
+至於`super().attr`，我們建議直接參考[`Guido`的tutorial](https://www.python.org/download/releases/2.2.3/descrintro/#cooperation)，但可能需要一些Python2的基礎，才能體會老爹於20年前建置`super()`的邏輯。但是即使是在有Python2及`descriptor`與`metaclasses`的基本知識下，這篇tutorial還是相當難啃呀！期望未來有一天我們能靜下心來，像欣賞`Descriptor HowTo Guide`一樣，好好拜讀幾遍。
 
 ## 名詞定義
 首先我們來看一段[Descriptor HowTo Guide](https://docs.python.org/3/howto/descriptor.html#overview-of-descriptor-invocation)開頭的描述：

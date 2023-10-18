@@ -8,7 +8,7 @@
 
 我們可以定義說，如果將`obj`傳遞給`iter`，能夠順利取得`iterator`而不`raise TypeError`的話，那麼該`obj`就是`iterable`。
 
-那`iterator`又該怎麼定義呢? 從`iterator`在[Python docs](https://docs.python.org/3/glossary.html#term-iterator)的說明：
+那`iterator`又該怎麼定義呢？從`iterator`在[Python docs](https://docs.python.org/3/glossary.html#term-iterator)的說明：
 > ...  Repeated calls to the iterator’s `__next__()` method (or passing it to the built-in function next()) return successive items in the stream. When no more data are available a StopIteration exception is raised instead. At this point, the iterator object is exhausted and any further calls to its `__next__()` method just raise StopIteration again. Iterators are required to have an `__iter__()` method that returns the iterator object itself so every iterator is also iterable and may be used in most places where other iterables are accepted. ...
 > 
 我們可以總結：

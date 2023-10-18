@@ -169,7 +169,7 @@ def load_toml(toml_name: str = 'edgedbcloud.toml',
     * 回傳長度不能超過一，`function`名為`query_single`開頭。
     * 回傳長度必須恰恰是一，`function`名為`query_required_single`開頭。
 
-於是我們開始思考，如何用`jsonify`與`required_single`兩個參數來組合出這六個`function`呢?此外，又要用什麼來區別各種可能的值呢?神奇的`12345`?還是`singleton`的`True`、`False`、`None`等?
+於是我們開始思考，如何用`jsonify`與`required_single`兩個參數來組合出這六個`function`呢？此外，又要用什麼來區別各種可能的值呢？神奇的`12345`？還是`singleton`的`True`、`False`、`None`等？
 
 Python的`Enum`可能是一個不錯的解決方法，於是我們在`data_structures.py`建立了`RespJson`與`RespConstraint`兩個`Enum`。值得一提的是，因為我們只會比較`Enum` `member`的`entity`，而不會比較其值，所以其值是多少並不重要，這也是為什麼會使用`enum.auto`自動賦值的原因。
 
@@ -285,7 +285,7 @@ def pack_imqry_records_by_args() -> list[QueryRecord]:
 
 當`database`在一定時間內，通常不會變動的情況下，可以設定一個快取時間`ttl`。在`ttl`內如果使用同樣的`query`與參數來讀取資料時，可以直接回傳快取結果，而不真正呼叫`database`。
 
-但是當`database`頻繁變動的話，對這類`query`進行快取就有很多眉角要注意。究竟使用者是真的想要快速發出多次同樣的`mutable` `query`，還是可能因為網路問題或`retry`等邏輯沒寫好，不小心發送多次，而我們應該只呼叫一次`database`就好?
+但是當`database`頻繁變動的話，對這類`query`進行快取就有很多眉角要注意。究竟使用者是真的想要快速發出多次同樣的`mutable` `query`，還是可能因為網路問題或`retry`等邏輯沒寫好，不小心發送多次，而我們應該只呼叫一次`database`就好？
 
 因此我們決定`EdgeDBCloudConn`預設`ttl=0`，即沒有快取。當`ttl>0`時，會使用`alru_cache`來將`_imquery`包上快取設定，而`_mquery`則一律執行。
 

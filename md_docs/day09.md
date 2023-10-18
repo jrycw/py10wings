@@ -92,7 +92,7 @@ class Red(Color):
 ```
 原來是因為我們在`Red`中已經`overwrite`了`color` `prop`，其只有具備`getter`功能。而在`Red`的`__init__`將呼叫`delegate`回`Color`的`__init__`時，其中的`self.color = color`會需要呼叫`color` `prop`的`setter`。
 
-請注意這邊有一個在使用`property`時常見的誤解。有些朋友可能會覺得我們於`Red`中只`overwrite`了`color`的`getter`，但是沒有`overwrite`的`color`的`setter`，所以不應該報錯呀?
+請注意這邊有一個在使用`property`時常見的誤解。有些朋友可能會覺得我們於`Red`中只`overwrite`了`color`的`getter`，但是沒有`overwrite`的`color`的`setter`，所以不應該報錯呀？
 
 這個誤解的來源是將`getter`與`setter`分別視為了兩個`prop`。但是正確的思路是，`Color` `class`其內的`color` `prop`同時實作有`fget`及`fset`，而`Red` `class`其內的`color` `prop`只有實作`fget`。而當我們由`red`來呼叫`color`時，`self`相當於`red`，而`self.color = color`相當於`red.color = color`，由於該`prop`沒有實作`fset`，所以會報錯。
 

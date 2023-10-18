@@ -92,7 +92,7 @@ class MyClass(object, metaclass=MyType):
 ## `__prepare__`
 本日內容至此，不知道您有沒有疑惑過下面這個問題。
 
-當我們利用`MyType`來建立`class`，其`cls_dict`是我們給予的。但是當利用`class關鍵字`搭配`MyType`作為`metaclass`這種建立`class`的方式時，其中的`cls_dict`是哪裡來的呢?
+當我們利用`MyType`來建立`class`，其`cls_dict`是我們給予的。但是當利用`class關鍵字`搭配`MyType`作為`metaclass`這種建立`class`的方式時，其中的`cls_dict`是哪裡來的呢？
 
 其實此`cls_dict`會由`__prepare__`提供。如果`help(type)`，可以看出`__prepare__`為`class method`。
 ```

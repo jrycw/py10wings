@@ -3,7 +3,7 @@
 
 相較於[[Day05]](https://ithelp.ithome.com.tw/articles/10317757)與[[Day06]](https://ithelp.ithome.com.tw/articles/10317758)會回傳新的`function`或是`instance`，`Func @ Class`這種`function`裝飾`class`的情況，較多情況是`mutate`接收的`cls`並回傳，而不產生新的`class`。
 
-至於實際上該如何使用呢?Python內建的``total_ordering``是一個絕佳的例子。今天我們先欣賞`total_ordering`的源碼後，再來做一個實例練習一下。
+至於實際上該如何使用呢？Python內建的``total_ordering``是一個絕佳的例子。今天我們先欣賞`total_ordering`的源碼後，再來做一個實例練習一下。
 
 ## `total_ordering`源碼
 客製化`class`的排序是依靠各種`rich comparison`的`dunder method`。[total_ordering](https://docs.python.org/3/library/functools.html#functools.total_ordering)可以幫助我們在只實作`__lt__`、`__le__`、`__gt__`及 `__ge__`四種方法其中之一加上`__eq__`的情況下，使得客製化`class`能擁有所有`comparison`的功能。
@@ -26,7 +26,7 @@ _convert = {
                ('__lt__', _lt_from_ge)]
 }
 ```
-* 這些方法可以由數學上推論而得，我們舉`_gt_from_lt`為例，如何在有`__lt__`及`__eq__`（`註1`）的情況下推得`__gt__`。由Python註解可知`a > b`相當於`not (a < b)`及` a != b`的，而後者都是我們可以使用的方法。靠著已知的操作組合出新的`comparison`功能，`total_ordering`是不是相當巧妙的設計呢!
+* 這些方法可以由數學上推論而得，我們舉`_gt_from_lt`為例，如何在有`__lt__`及`__eq__`（`註1`）的情況下推得`__gt__`。由Python註解可知`a > b`相當於`not (a < b)`及` a != b`的，而後者都是我們可以使用的方法。靠著已知的操作組合出新的`comparison`功能，`total_ordering`是不是相當巧妙的設計呢！
 ```python=
 def _gt_from_lt(self, other):
     'Return a > b.  Computed by @total_ordering from (not a < b) and (a != b).'
@@ -111,20 +111,20 @@ __所以實務上__ 還是建議依照Python docs的指示，自己實作`__eq__
 
 於是您決定在某版本後，將這些部份打包成其它`library`，並從現在開始，當使用者呼叫這些函數時，報給他們`Deprecation Warning`。
 
-這些需要報`Warning`的`function`都在`class`內且都是由`_call`開頭，您開始思考該怎麼樣完成這件事呢?
+這些需要報`Warning`的`function`都在`class`內且都是由`_call`開頭，您開始思考該怎麼樣完成這件事呢？
 * 每個`function`都進去改 => 應該有更好的方法吧...
-* 用`metaclasses`=> 但是某版本之後就不需要這個功能了，`metaclasses`會不會殺雞用牛刀了呢?
+* 用`metaclasses`=> 但是某版本之後就不需要這個功能了，`metaclasses`會不會殺雞用牛刀了呢？
 * ...
 
 思考良久，您決定使用`decorator`來裝飾所有需要報`Warning`的`class`。這樣在某版本後，只要移除這些加上的`decorator`就好。
 
 ## 解題思路
-* 總共需要寫兩個`decorator`:
+* 總共需要寫兩個`decorator`：
     * 第一個命名為`my_warn`，是用來裝飾在`class`之上。
     * 第二個命名為`warn_using_private_func`，是用來裝飾在需要報`Warning`的`function`之上。
 
 ### my_warn實作
-`my_warn`接收`cls`為變數，接下來我們對`cls.__dict__`打一個迴圈，如果該`obj`是`callable`且名字為`_call`開頭，則是我們要裝飾的對象（`註2`）。我們使用`setattr`重新將`cls.name`設定給裝飾過後的`obj`(即(`warn_using_private_func(obj)`)後，返回`cls`。
+`my_warn`接收`cls`為變數，接下來我們對`cls.__dict__`打一個迴圈，如果該`obj`是`callable`且名字為`_call`開頭，則是我們要裝飾的對象（`註2`）。我們使用`setattr`重新將`cls.name`設定給裝飾過後的`obj`（即`warn_using_private_func(obj)`）後，返回`cls`。
 ```python=
 #02
 def my_warn(cls):

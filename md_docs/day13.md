@@ -202,7 +202,7 @@ class PositiveInt:
         if not isinstance(value, int) or value <= 0:
             raise ValueError(f'{value} is not a positive integer.')
 ```
-藉助`PositiveInt`我們可以將`# 02a`改為`# 02b`，是不是清爽不少呢?
+藉助`PositiveInt`我們可以將`# 02a`改為`# 02b`，是不是清爽不少呢？
 ```python=
 # 02b
 ...

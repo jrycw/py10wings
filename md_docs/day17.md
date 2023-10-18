@@ -152,7 +152,7 @@ if __name__ == '__main__':
 #### MyType
 如果使用`MyClass.mcls_var_x`可以取回`'x'`，但若使用`my_inst.mcls_var_x`會`raise AttributeError`。
 
-不知道諸位對這個行為是否會感到疑惑呢? 如果要了解Python整個`attribute lookup`，可能要閱讀六翼的文章。
+不知道諸位對這個行為是否會感到疑惑呢？如果要了解Python整個`attribute lookup`，可能要閱讀六翼的文章。
 
 簡單解釋的話是當於`instance.__dict__`找不到某`attribute`時，會往生成其的`class`及其`MRO`的`__dict__`中尋找。
 

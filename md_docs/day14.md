@@ -1,6 +1,6 @@
 # [Day14] 五翼 - Metaclasses : Instance Creation
 ## 五翼大綱
-`metaclasses`可以說是Python最難掌握的範疇。如果是第一次接觸這些概念，很容易出現`我是誰?`，`我在幹麻?`，`我要去哪裡?`的徵狀。如果出現類似的情形，請不要驚慌，這是非常正常的XD
+`metaclasses`可以說是Python最難掌握的範疇。如果是第一次接觸這些概念，很容易出現`我是誰？`，`我在幹麻？`，`我要去哪裡？`的徵狀。如果出現類似的情形，請不要驚慌，這是非常正常的XD
 
 在日常應用中，直接使用`metaclasses`的機會不高，但了解`metaclasses`能讓我們由另一個視角，來欣賞Python的優雅。
 
@@ -234,7 +234,7 @@ if __name__ == '__main__':
 * 當繼承以`C`實作的`built-in` `type`時。
 
 ## 備註
-註1：`Tim Peters`也是著名`Zen of Python`的作者。什麼?您沒聽過嗎?那麼請打開Python的repl，輸入`import this`好好欣賞一下吧。
+註1：`Tim Peters`也是著名`Zen of Python`的作者。什麼？您沒聽過嗎？那麼請打開Python的repl，輸入`import this`好好欣賞一下吧。
 
 註2：如果不太熟悉`super()`的朋友，可以參考[這篇](https://rhettinger.wordpress.com/2011/05/26/super-considered-super/)由`Raymond Hettinger`所寫的介紹。
 

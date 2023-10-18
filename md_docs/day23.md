@@ -9,7 +9,7 @@ Python尋找變數的方法是透過`LEGB`，即`Local`、`Enclosing`、`Global`
 * [[Day24]](https://ithelp.ithome.com.tw/articles/10317776) 常見錯誤2(global與nonlocal)。
 
 ## UnBoundLocalError
-`UnBoundLocalError`是一個常見的錯誤。`# 01`中，當`unboundlocalerror_func`被呼叫時，會`raise UnboundLocalError`。您可能會覺得疑惑，覺得`print(x)`會因為找不到`L`的`x`，而`unboundlocalerror_func`又沒有`E`，所以會在`G`中來尋找`x`，為什麼會報錯呢?
+`UnBoundLocalError`是一個常見的錯誤。`# 01`中，當`unboundlocalerror_func`被呼叫時，會`raise UnboundLocalError`。您可能會覺得疑惑，覺得`print(x)`會因為找不到`L`的`x`，而`unboundlocalerror_func`又沒有`E`，所以會在`G`中來尋找`x`，為什麼會報錯呢？
 
 這是因為在`unboundlocalerror_func`有`x = 2`這個`assignment`。Python是在execute(或是想成compile)時就決定一個變數是不是`local variable`。由於`unboundlocalerror_func`中我們有指定`x`為`2`，Python於execute(或compile)階段就會先認定`x`是一個`local variable`。接著當我們真正呼叫`unboundlocalerror_func`時，Python會開始依照`LEGB`的原則尋找變數。由於`x`已被認定是一個`local variable`，所以Python只會在`unboundlocalerror_func`這個`L`中尋找`x`，而我們的確於定義`x`前，就使用了`print(x)`，所以會報錯。
 
@@ -193,7 +193,7 @@ my_inst1 = MyClass1(**kwds)
 
 ...
 ```
-但是如果觀察`my_inst1.x`與`my_inst1.y`，卻發現其值都為`2`，請問您有看出問題在哪嗎?
+但是如果觀察`my_inst1.x`與`my_inst1.y`，卻發現其值都為`2`，請問您有看出問題在哪嗎？
 ```python=
 >>> vars(my_inst1)  # {'_x': 1, '_y': 2}
 >>> my_inst1.x, my_inst1.y  # 2 2
