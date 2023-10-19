@@ -40,21 +40,21 @@ class MyClass:
 if __name__ == '__main__':
     my_inst = MyClass(1)
 ```
-* 首先我們將`property`裝飾於`function` `x`上，而此`function` `x`內具有當使用`my_inst.x`語法時的行為。此裝飾相當於`x = property(x)`:
+* 首先我們將`property`裝飾於`function` `x`上，而此`function` `x`內具有當使用`my_inst.x`語法時的行為。此裝飾相當於`x = property(x)`：
     * 將`function` `x`作為`property`的第一個參數`fget`，並返回`prop`，且命名為`x`。
     * 現在的`prop` `x`內已有`fget`及`doc`，但還未有`fset`及`fdel`。
 
-* 接著將`x.setter`裝飾於另一個`function` `x`上，而此`function` `x`內具有當使用`my_inst.x = value`語法時的行為。此裝飾相當於`x = x.setter(x)`:
+* 接著將`x.setter`裝飾於另一個`function` `x`上，而此`function` `x`內具有當使用`my_inst.x = value`語法時的行為。此裝飾相當於`x = x.setter(x)`：
     * `prop` `x`的`setter`接收這個`function` `x`。
     * 於`setter`中，將會生成一個新的`prop`，以第一步的`fget`作為`fget`及`doc`作為`doc`，再加上剛剛接收的`function` `x`作為`fset`。
     * 最後返回此新`prop`，且命名為`x`。現在的`prop` `x`內已有`fget`、`fset`及`doc`，但還未有`fdel`。
 
-* 最後將`x.deleter`裝飾於另一個`function` `x`上，而此`function` `x`內具有當使用`del my_inst.x`語法時的行為。此裝飾相當於`x = x.deleter(x)`:
+* 最後將`x.deleter`裝飾於另一個`function` `x`上，而此`function` `x`內具有當使用`del my_inst.x`語法時的行為。此裝飾相當於`x = x.deleter(x)`：
     *  `prop` `x`的`deleter`接收這個`function` `x`。
     * 於`deleter`中，將會生成一個新的`prop`，以上一步的`fget`作為`fget`、`doc`作為`doc`及`fset`作為`fset`，再加上剛剛接收的`function` `x`作為`fdel`。
     * 最後返回此新`prop`，且命名為`x`。現在的`prop` `x`內已完整擁有`fget`、`fset`、`fdel`及`doc`。
 
-* 乍看之下，`# 01`只是生成了`my_inst`，還沒有任何與`prop` `x`互動。但仔細看看`__init__`，`my_inst`已經透過`property`這個介面呼叫了`prop` `x`的`fset`來進行`self.x = x`(`self`就是`my_inst`啊)。
+* 乍看之下，`# 01`只是生成了`my_inst`，還沒有任何與`prop` `x`互動。但仔細看看`__init__`，`my_inst`已經透過`property`這個介面呼叫了`prop` `x`的`fset`來進行`self.x = x`(`self`就是`my_inst`)。
 
 * `@x.setter`與`@x.deleter`裝飾的`function`必須與`@property`所裝飾的`function`名一致，即`x`。如果使用不同名字，使用上會變得很困難，且容易出錯（`註1`）。
 
@@ -104,7 +104,7 @@ class MyClass:
 
 
 ## `property`適用時機
-* 當您於`instance`中有一個變數，不想直接被存取，而希望使用者透過給定的接口(`getter`、`setter`與`deleter`)來操作這個變數。由於使用`property`來存取變數，與存取一般變數的語法是相同的，所以我們寫`code`時，可以不用一開始就決定哪些變數要使用`property`，等到`code`的中後段再來判斷，而所有的`interface`並不需要因此修改。
+* 當您於`instance`中有一個變數，不想直接被存取，而希望使用者透過給定的接口（`getter`、`setter`與`deleter`）來操作這個變數。由於使用`property`來存取變數，與存取一般變數的語法是相同的，所以我們寫`code`時，可以不用一開始就決定哪些變數要使用`property`，等到`code`的中後段再來判斷，而所有的`interface`並不需要因此修改。
 * 當一個變數值是需要動態計算而得，一般會實作一個`function`。但有些時候，這個變數更像是`instance attribute`，並且大多會使用快取的機制時，也是一個適合使用`property`的時機。
 
 
@@ -118,7 +118,7 @@ class MyClass:
     * 第一個是`prop` `x`，擁有`fget`及`doc`。
     * 第二個是`prop` `set_x`，擁有`fget`、`fset`及`doc`。
     * 第三個是`prop` `del_x`，擁有`fget`、`fdel`及`doc`。
-* 僅管我們還是可以使用`my_inst.x`的語法，但：
+* 儘管我們還是可以使用`my_inst.x`的語法，但：
     * `my_inst.x = value`必須改成`my_inst.set_x = value`。
     * `del my_inst.x`必須改成`del my_inst.delx`。
 ```python=
