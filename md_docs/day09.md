@@ -1,3 +1,5 @@
+# [Day09] 三翼 - property : 實例說明
+
 今日我們透過解題，來練習看看如何活用`property`。以下會以`prop`來稱呼由`property`建立的`property` `instance`。
 
 ## 問題
