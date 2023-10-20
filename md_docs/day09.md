@@ -7,7 +7,7 @@
     * 接受一個參數`color`，其為一代表`(r, g, b)`格式的`tuple`。
     * 實作一個名為`color`的`prop` ，具有`getter`及`setter`功能。
     * 實作一個名為`hex`的`prop`，可動態計算`prop` `color`的`Hex color code`，並具備快取機制。
-2. 建立一個`class` `Red`繼承`Color`:
+2. 建立一個`class` `Red`繼承`Color`：
     * 實作一個名為`color`的`prop` ，其只有`getter`功能，而沒有`setter`功能。
 
 ### 解法1
@@ -46,7 +46,7 @@ class Color:
         self._color = color
         self._hex = None  # purge cache
 ```
-再來實作`hex` `prop`。先確認`self._hex`是否為`None`，若是的話代表第一次呼叫或是快取已被清除，此時需真正計算`Hex color code`，最後再返回`self._hex`。請注意我們使用`self.color`來存取`self._color`，而非直接使用`self._color`。雖然兩種方式都可以，但是當有`property`這種公開的`interface`可以使用時，建議優先使用，因為這麼一來當`interface`有問題時很容易發現，因為我們是第一個使用者。
+再來實作`hex` `prop`。先確認`self._hex`是否為`None`，若是的話代表第一次呼叫或是快取已被清除，此時需真正計算`Hex color code`，最後再返回`self._hex`。請注意我們使用`self.color`來存取`self._color`，而非直接使用`self._color`。雖然兩種方式都可以，但是當有`property`這種公開的`interface`時，建議優先使用。因為這麼一來當`interface`有問題時，身為第一個使用者的我們很容易發現。
 ```python=
 # 01
 class Color:
