@@ -45,7 +45,7 @@ Co-Founder兼CEO的[Yury Selivanov](https://github.com/1st1)是Python asyncio背
 ## EdgeDB-Python
 [EdgeDB-Python](https://github.com/edgedb/edgedb-python)為官方提供的library。由於我們的是目標是建立async的connection，所以直接查找說明文件中[AsyncIO API](https://www.edgedb.com/docs/clients/python/api/asyncio_client#edgedb-python-asyncio-api-reference)。
 
-經過一番查找之後，發現`edgedb.create_async_client`可以幫忙生成`AsyncIOClient`的`instance`，而`AsyncIOClient`提供六種不同情況的`query function`:
+經過一番查找之後，發現`edgedb.create_async_client`可以幫忙生成`AsyncIOClient`的`instance`，而`AsyncIOClient`提供六種不同情況的`query function`：
 * AsyncIOClient.query()
 * AsyncIOClient.query_single()
 * AsyncIOClient.query_required_single()
@@ -74,10 +74,10 @@ ECC
     ├── tests_qry_by_args.py
     └── utils.py
 ```
-* `ecc/connection.py` : `EdgeDBCloudConn` `class`。
-* `ecc/data_structures.py`:`Enum`及`Namedtuple`等資料結構。
-* `ecc/queries.py`: 提供寫好的`EdgeQL`。
-* `ecc/utils.py`: 小工具。
+* `ecc/connection.py`：`EdgeDBCloudConn` `class`。
+* `ecc/data_structures.py`：`Enum`及`Namedtuple`等資料結構。
+* `ecc/queries.py`：提供寫好的`EdgeQL`。
+* `ecc/utils.py`：小工具。
 
 ### data_structures.py
 內有兩個`Enum`及一個`NamedTuple`。
@@ -104,12 +104,12 @@ class RespConstraint(Enum):
     EXACTLY_ONE = auto()
 ```
 #### `QueryRecord(NamedTuple)`
-* `qry`(`str`): `EdgeQL`語法的`query` `str`。
-* `extra_args`(`tuple`): 當需要`Filter`時使用。
-* `jsonify`(`RespJson`): 返回結果是否為`json`格式。
-* `required_single`(`RespConstraint`): 是否檢驗返回結果長度。
-* `extra_kwargs`(`dict`): 當需要`Filter`時使用。
-* `task_name`(`str`): `asyncio task`的`task name`。
+* `qry`(`str`)：`EdgeQL`語法的`query` `str`。
+* `extra_args`(`tuple`)：當需要`Filter`時使用。
+* `jsonify`(`RespJson`)：返回結果是否為`json`格式。
+* `required_single`(`RespConstraint`)：是否檢驗返回結果長度。
+* `extra_kwargs`(`dict`)：當需要`Filter`時使用。
+* `task_name`(`str`)：`asyncio task`的`task name`。
 
 ```python=
 ...
