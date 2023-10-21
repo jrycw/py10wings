@@ -24,19 +24,19 @@ iteration protocol會先看看`obj`是否有實作`__iter__`，如果有的話�
 ## 如何生成iterator
 如何生成`iterator`，我們提供以下五種方法。
 
-### 方法1: 利用`iter`來得到其它`iterable`的`iterator`
+### 方法1：利用`iter`來得到其它`iterable`的`iterator`
 我們可以直接使用`iter(obj)`來取得`obj`的`iterator`。
 
-### 方法2: generator expression
+### 方法2：generator expression
 `generator expression`的寫法與`list comprehensions`幾乎一樣，只是將`[]`改成`()`，其回傳型態是`generator`，可以視為一種`iterator`。
 
-### 方法3: generator function by yield
+### 方法3：generator function by yield
 於`function`中使用`yield`關鍵字，使得`function`成為一個`generator function`，其回傳型態也是`generator`。
 
-### 方法4: generator function by yield from
+### 方法4：generator function by yield from
 於`function`中使用`yield from`關鍵字，使得`function`成為一個`generator function`，其回傳型態也是`generator`。
 
-### 方法5: iterator class
+### 方法5：iterator class
 `iterator class`即是參照`iterator`基本定義，建立一個`class`，並照其`protocol`實作`__iter__`及`__next__`。
 
 ## 實例
@@ -70,7 +70,7 @@ class Garage:
 ```
 * 因為`Garage`符合`sequence protocol`，所以其生成的`instance`會是一個`iterable`。但身為Python高手的您知道，這樣是比較沒有效率的，於是您決定試著實作上述五種生成`iterator`的方式。
 
-#### 方法1:
+#### 方法1
 ```python=
 # 01
 class Garage:
@@ -81,7 +81,7 @@ class Garage:
 ```
 `self._cars`是`list`型態，所以我們可以直接透過`iter`取得`list`的`iterator`回傳，其型態為`list_iterator`。
 
-#### 方法2:
+#### 方法2
 ```python=
 # 01
 class Garage:
@@ -92,7 +92,7 @@ class Garage:
 ```
 `self._cars`是`iterable`，所以我們可以對其打個迴圈，使用`generator expression`產生一個`generator`。
 
-#### 方法3:
+#### 方法3
 ```python=
 # 01
 class Garage:
@@ -103,7 +103,7 @@ class Garage:
 ```
 `self._cars`是`iterable`，所以我們可以對其打個迴圈，利用`yield`關鍵字產生一個`generator`。
 
-#### 方法4:
+#### 方法4
 ```python=
 # 01
 class Garage:
@@ -114,7 +114,7 @@ class Garage:
 ```
 `self._cars`是`iterable`，所以我們可以利用`yield from`關鍵字產生一個`generator`。
 
-#### 方法5:
+#### 方法5
 ```python=
 # 01
 class Garage:
