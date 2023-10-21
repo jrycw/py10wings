@@ -35,7 +35,7 @@ class Class:
 理論上，`Class`的`func`應該是`non-data descriptor instance`，但是為方便描述，我們將稱呼其為`non-data descriptor`。
 
 
-## 方法1: `instance.__dict__`
+## 方法1：`instance.__dict__`
 * 由於`func`為`non-data descriptor`，其由`instance`存取時，會返回由`types.MethodType`生成的`bound method`，所以`__init__`中一開始的`print(type(self.func))`為`method`。
 * `postman(item)`會返回帶有`item`資訊的`decorator` `function`。所以`postman(item)(self.func)`相當於`decorator(self.func)`，會返回一個帶有`item`資訊的`wrapper` `function`。
 * 由於`func`為`non-data descriptor`，其沒有`__set__`，所以`self.func = postman(item)(self.func)`相當於將帶有`item`資訊的`wrapper` `function`存於`inst.__dict__`中。此時觀察`print(type(self.func))`可以發現其已經變為`function`。
@@ -67,7 +67,7 @@ if __name__ == '__main__':
 
 雖然`方法1`只有短短幾行，但中間發生了很多事情。我們認為這是個`hacky`的方法，`production code`可能不適合這麼寫。
 
-## 方法2: `__new__`
+## 方法2：`__new__`
 `方法2`與`方法1`類似，只是我們改在`__new__`來做。
 ```python=
 # 02
@@ -90,7 +90,7 @@ if __name__ == '__main__':
 ```
 
 
-## 方法3: `__new__`
+## 方法3：`__new__`
 `方法3`於生成`instance`前，先使用了`cls.func = postman(item)(cls.func)`後，再生成`instance`。
 
 這麼做有個大問題，而且如果只利用`Class`生成一個`instance`的話，或許還觀察不出來。由於`__new__`是「每次」`Class`需要生成`instance`的時候，都會被呼叫一次。所以相當於每次生成`instance`，都會做一次`cls.func = postman(item)(cls.func)`。
@@ -121,7 +121,7 @@ if __name__ == '__main__':
     # item='xmas_card' is received
 ```
 
-## 方法4: decorator(1)
+## 方法4：decorator(1)
 `方法4`我們寫了一個名為`dec`的`decorator`，來裝飾在`Class`上。
 * `dec`接受一個`item`參數後，返回一個`wrapper` `function`。
 * `wrapper`接收一個`cls`參數，我們使用`vars(cls).get(name)`看看能不能從`cls.__dict__`中取到`func`。如果有取到的話，再進一步判斷其是否為`callable`。如果是的話，使用`setattr`重新設定`cls.name`為`postman(item)(obj))`。
@@ -176,7 +176,7 @@ if __name__ == '__main__':
     inst.func()   # nothing shown on the screen
 ```
 
-## 方法5: decorator(2)
+## 方法5：decorator(2)
 `方法5`與`方法4`類似，但我們使用`getattr`來尋找`cls.name`。
 
 ```python=
@@ -225,7 +225,7 @@ if __name__ == '__main__':
     inst.func()  # item='xmas_card' is received
 ```
 
-## 方法6: metaclass(1)
+## 方法6：metaclass(1)
 `方法6`使用了與`方法4`類似的邏輯，只是這次使用了`metaclass`而不是`decorator`。此時`item`需要於`Class`生成時，以`keyword-only argument`傳遞，並需要記得於`Meta.__new__`中加入`item`的`signature`，才能存取到`item`。
 
 ```python=
@@ -279,7 +279,7 @@ if __name__ == '__main__':
     inst.func()  # nothing shown on the screen
 ```
 
-## 方法7: metaclass(2)
+## 方法7：metaclass(2)
 `方法7`與`方法6`類似，但我們使用`getattr`來尋找`cls.name`。
 
 ```python=
@@ -331,7 +331,7 @@ if __name__ == '__main__':
     inst.func()  # item='xmas_card' is received
 ```
 
-## 方法8: another class(1)
+## 方法8：another class(1)
 `方法8`與`方法6`的`Meta`是一樣的，但我們另外建立了一個`send_item` `function`。
 * `send_item`接收一個參數`item`，並返回一個`wrapper` `function`。
 * `wrapper` `function`接收一個參數`cls`，並複製所有`cls`的資訊加上於`send_item`傳入的`item`作為`Meta`的參數，來生成一個全新的`class`返回。
@@ -391,7 +391,7 @@ if __name__ == '__main__':
     inst.func()  # nothing shown on the screen
 ```
 
-## 方法9: another class(2)
+## 方法9：another class(2)
 `方法9`與`方法8`類似，但我們使用`getattr`來尋找`cls.name`。
 ```python=
 # 09
@@ -447,7 +447,7 @@ if __name__ == '__main__':
     inst.func()  # item='xmas_card' is received
 ```
 
-## 方法10: pure function(1)
+## 方法10：pure function(1)
 `方法10`直接建立一個`function`，接收`cls`及`item`兩個參數後，直接於`function`中`mutate` `cls`，重新將`cls.name`指定為`postman(item)(obj)`後，返回`cls`。
 ```python=
 # 10
@@ -496,7 +496,7 @@ if __name__ == '__main__':
 ```
 
 
-## 方法11: pure function(2)
+## 方法11：pure function(2)
 `方法11`與`方法10`類似，但我們使用`getattr`來尋找`cls.name`。
 ```python=
 # 11
@@ -544,7 +544,7 @@ if __name__ == '__main__':
     inst = Class()
     inst.func()   # item='xmas_card' is received
 ```
-## 方法12: class body
+## 方法12：class body
 `方法12`為將`item`設定於`class body`中作為`class variable`。
 ```python=
 # 12
@@ -564,7 +564,7 @@ if __name__ == '__main__':
     inst.func()  # item='xmas_card' reveived
 ```
 
-## 方法13: global scope
+## 方法13：global scope
 `方法13`為將`item`設定於`global scope`中。
 ```python=
 # 13
