@@ -46,7 +46,7 @@ Python3.11相比於3.10，執行速度提高不少，有很大原因是因為微
 'This is the playlist: Take me back to Eden, Alkaline, Ascensionism'
 ```
 
-### Multi-line expressions and comments:
+### Multi-line expressions and comments
 可以使用`Multi-line expression`及加入`comment`。
 ```
 #python3.12
@@ -58,7 +58,7 @@ Python3.11相比於3.10，執行速度提高不少，有很大原因是因為微
 'This is the playlist: Take me back to Eden, Alkaline, Ascensionism'
 ```
 
-### Backslashes and unicode characters:
+### Backslashes and unicode characters
 可以使用`Backslash`。所以可以在`f-string`內直接使用像`'\n'`或`'\t'`等符號來連接`str`。此外，也會連帶影響[unicode escape sequence](https://docs.python.org/3.12/reference/lexical_analysis.html#escape-sequences)。
 ```
 #python3.12
