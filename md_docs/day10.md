@@ -64,9 +64,9 @@ my_inst.non_data_desc=10
 
 ## data descriptor
 
-當我們由`instance`存取`attribute`或`function`時，如果遇到`data descriptor`，會使用其實作的`__get__`及`__set__`(相當於`shadow` `instance.__dict__`)。
+當我們由`instance`存取`attribute`或`function`時，如果遇到`data descriptor`，會使用其實作的`__get__`及`__set__`（相當於`shadow` `instance.__dict__`）。
 
-`__set__`的`signature`如下:
+`__set__`的`signature`如下：
 ```python=
 __set__(self, instance, value)
 ```
@@ -114,7 +114,7 @@ my_inst.__dict__={'data_desc': 10}
 * 我們一樣先確認`my_inst`剛由`MyClass`生成時，`my_inst.__dict__`為一個空的`dict`。
 * 接著我們直接於`my_inst.__dict__`中手動插入`data_desc`為`10`（`註2`）。
 * 接下來我們使用`my_inst.data_desc`來取值，由於`data_desc`會`shadow` `instance.__dict__`，所以將會呼叫`data_desc.__get__`。而我們在`__get__`中只有印出參數，所以回傳值為`None`。
-* 再來，我們使用`my_inst.data_desc=20`來賦值，這會呼叫`data_desc.__set__`來進行賦值(但`__set__`目前僅呼叫一次`print`，並未實際賦值)。
+* 再來，我們使用`my_inst.data_desc=20`來賦值，這會呼叫`data_desc.__set__`來進行賦值（但`__set__`目前僅呼叫一次`print`，並未實際賦值）。
 * 最後，我們使用`my_inst.data_desc`來取值，此語法仍會呼叫`data_desc.__get__`，並回傳`None`。此時如果再次驗證`my_inst.__dict__`，會發現其中只有我們剛剛手動插入的`data_desc`，其值依然為`10`。
 
 ## 當日筆記
