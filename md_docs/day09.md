@@ -136,7 +136,7 @@ class Color:
             self._hex = ''.join(f'{c:02x}' for c in self.color)
         return self._hex
 ```
-此外，可以善用`Enum`來幫助我們枚舉各種顏色，假設我們現在需要建立`Red`、`Green`及`Blue`三個`class`時，可以這麼寫。
+此外，可以善用`Enum`來幫助我們枚舉各種顏色，假設我們現在需要建立`Red`、`Green`及`Blue`三個`class`時，可以這麼寫：
 ```python=
 # 02
 from enum import Enum
