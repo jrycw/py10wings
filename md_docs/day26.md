@@ -4,7 +4,7 @@
 * 應用2：retry
 * 應用3：context manager
 
-## 應用1: asyncio
+## 應用1：asyncio
 `asyncio`是開發`Exception Groups`與`except*`的主要推手之一。Python3.11前處理`asyncio`最常使用的方法是`asyncio.gather`與`asyncio.wait`，而於Python3.11新添加了`asyncio.TaskGroup`。以下我們將分別使用三種方法來同時處理`# 00`內的四個`coroutine function`。
 ```python=
 # 00
@@ -543,7 +543,7 @@ task=<Task finished name='Get user_1_posts' coro=<download() done, defined at xx
 task=<Task finished name='Get user_1_comments' coro=<download() done, defined at xxx.py> result=None>
 ```
 
-## 應用2: retry
+## 應用2：retry
 這個小節我們試著使用`decorator`並搭配`EG`。
 
 我們的目標是建立一個`retry`的`decorator function`:
@@ -638,7 +638,7 @@ my_func is running (1/2)
 my_func is running (2/2)
 (ValueError('2'), TypeError('1'))
 ```
-## 應用3: context manager
+## 應用3：context manager
 這個小節我們準備建立一個實作有`context mnager protocol`的`class`，並觀察其於`__exit__`報錯時，於外層補抓例外的行為。
 
 ### `try-except`
