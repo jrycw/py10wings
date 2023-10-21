@@ -1,4 +1,4 @@
-# [Day24] 八翼 - Scopes : 常見錯誤2(global與nonlocal)
+# [Day24] 八翼 - Scopes : 常見錯誤2（global與nonlocal）
 在使用`global`與`nonlocal`時，有一個常見的錯誤，我們以兩個例子來說明。
 
 ## `global`

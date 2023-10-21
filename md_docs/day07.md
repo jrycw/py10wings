@@ -1,4 +1,4 @@
-# [Day07] 次翼 - Decorator : @Func to Class
+# [Day07] 次翼 - Decorator : @func to class
 今天我們分享`decorator function`裝飾於`class`上的情況。本日接下來內容，會以`decorator`來作為`decorator function`的簡稱。
 
 相較於[[Day05]](https://ithelp.ithome.com.tw/articles/10317757)與[[Day06]](https://ithelp.ithome.com.tw/articles/10317758)會回傳新的`function`或是`instance`，`Func @ Class`這種`function`裝飾`class`的情況，較多情況是`mutate`接收的`cls`並回傳，而不產生新的`class`。
