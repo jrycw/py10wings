@@ -1,4 +1,4 @@
-# [Day28] 末翼 - Term Projects : Project ECC - 建立EdgeDB Cloud Connection(2)
+# [Day28] 末翼 - Term Projects：Project ECC - 建立EdgeDB Cloud Connection(2)
 
 ## streamlit app目標
 使用streamlit建立一個可以輸入`EdgeQL`、`query_args`及`query_kwargs`的`form`，並於`submit`之後，傳送`query`至`EdgeDB Cloud`執行（`註1`）。

@@ -1,4 +1,4 @@
-# [Day20] 七翼 - Protocols : Sequence Protocol
+# [Day20] 七翼 - Protocols：Sequence Protocol
 ## 七翼大綱
 接下來三天，我們介紹Python三種常用的protocols。
 * [[Day20]](https://ithelp.ithome.com.tw/articles/10317772)介紹Sequence Protocol。

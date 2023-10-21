@@ -1,4 +1,4 @@
-# [Day19] 六翼 - 導讀Descriptor HowTo Guide: Pure Python Equivalents
+# [Day19] 六翼 - 導讀Descriptor HowTo Guide：Pure Python Equivalents
 
 今天讓我們繼續跟著大神的腳步，一起閱讀[Descriptor HowTo Guide的Pure Python Equivalents](https://docs.python.org/3/howto/descriptor.html#pure-python-equivalents)，來看看如何用Python實作`property`、`function and bound method`, `staticmethod`、`classmethod`及`__slots__`。
 

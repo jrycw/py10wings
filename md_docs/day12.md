@@ -1,4 +1,4 @@
-# [Day12] 四翼 - Descriptor : Descriptor存取設計(2)
+# [Day12] 四翼 - Descriptor：Descriptor存取設計(2)
 
 今天我們來分享一些`descriptor`的通用寫法。由於今天的方法都能通過和`方法1`及`方法2`類似的檢查，所以以下將不再特別說明。
 

@@ -1,4 +1,4 @@
-# [Day10] 四翼 - Descriptor : Non-Data Descriptor vs Data Descriptor
+# [Day10] 四翼 - Descriptor：Non-Data Descriptor vs Data Descriptor
 
 ## 四翼大綱
 一般我們從`instance`取得`attribute`或`function`時，會先由`instance.__dict__`找起，如果沒找到會再往上，順著生成`instance`的`class`的`mro`順序繼續找。`descriptor`是一種可以改變這種機制的有趣功能。雖然`descriptor`大部份應用會著重在由`instance`呼叫，這也會是我們接下來分享的重點，但是當其由`class`或是`super`呼叫時，各自有其細節要注意（`註1`）。

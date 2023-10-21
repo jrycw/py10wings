@@ -1,4 +1,4 @@
-# [Day08] 三翼 - property : 核心原理與基本型態
+# [Day08] 三翼 - property：核心原理與基本型態
 
 ## 三翼大綱
 `property`實作有`__get__`、`__set__`及`__delete__`，所以是一種`data descriptor`。其具備有簡潔的語法能方便使用，而不用煩惱`descriptor`的實作細節。

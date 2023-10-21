@@ -1,4 +1,4 @@
-# [Day06] 次翼 - Decorator : @class to func
+# [Day06] 次翼 - Decorator：@class to func
 今天我們分享`decorator class`裝飾於`function`上的情況。本日接下來內容，會以`decorator`來作為`decorator class`的簡稱。
 
 另外，有些於`decorator function`提過的細節，將不特別重覆，直接入進本日重點。

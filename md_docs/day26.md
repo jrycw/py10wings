@@ -1,8 +1,8 @@
-# [Day26] 九翼 - Exception Groups與except* : 相關應用
+# [Day26] 九翼 - Exception Groups與except*：相關應用
 今天我們分享三個`Exception Groups`與`except*`的相關應用。
-* 應用1 : asyncio
-* 應用2 : retry
-* 應用3 : context manager
+* 應用1：asyncio
+* 應用2：retry
+* 應用3：context manager
 
 ## 應用1: asyncio
 `asyncio`是開發`Exception Groups`與`except*`的主要推手之一。Python3.11前處理`asyncio`最常使用的方法是`asyncio.gather`與`asyncio.wait`，而於Python3.11新添加了`asyncio.TaskGroup`。以下我們將分別使用三種方法來同時處理`# 00`內的四個`coroutine function`。

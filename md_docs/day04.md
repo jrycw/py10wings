@@ -1,4 +1,4 @@
-# [Day04] 初翼 - Tips : 11~15
+# [Day04] 初翼 - Tips：11~15
 今天我們繼續分享`tips 11~15`。
 
 ## 11. set的應用：在iterable_a裡卻不在iterable_b裡

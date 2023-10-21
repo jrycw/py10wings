@@ -1,4 +1,4 @@
-# [Day29] 末翼 - Term Projects : Project Postman: 研究如何傳遞decorator factory之參數
+# [Day29] 末翼 - Term Projects：Project Postman - 研究如何傳遞decorator factory之參數
 
 ## Postman源起
 會想要研究這個小project，是因為在實作`project ECC`時，想要動態傳遞`ttl`。原先以為不太難，很快可以搞定，可是在玩了一陣子之後發現，當中有不少有趣的地方，所以想要有系統地做成筆記。

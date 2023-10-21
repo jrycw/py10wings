@@ -1,4 +1,4 @@
-# [Day18] 六翼 - 導讀Descriptor HowTo Guide: How dot works？
+# [Day18] 六翼 - 導讀Descriptor HowTo Guide：How dot works？
 ## 六翼大綱
 在經過前面數翼的洗禮後，我們具備了閱讀`Descriptor HowTo Guide`比較深入部份的知識了。
 

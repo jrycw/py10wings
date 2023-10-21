@@ -1,4 +1,4 @@
-# [Day17] 五翼 - Metaclasses : Metaclasses相關整理
+# [Day17] 五翼 - Metaclasses：Metaclasses相關整理
 今天我們來歸納整理一下`metaclass`相關的知識。
 
 `# 01`為稍後會用到的程式碼，其內含有：

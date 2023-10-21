@@ -1,4 +1,4 @@
-# [Day27] 末翼 - Term Projects : Project ECC - 建立EdgeDB Cloud Connection(1)
+# [Day27] 末翼 - Term Projects：Project ECC - 建立EdgeDB Cloud Connection(1)
 
 ## 末翼大綱
 末翼我們將實作兩個小project，來活用前面九翼的內容。

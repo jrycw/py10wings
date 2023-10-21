@@ -1,3 +1,4 @@
+# [Day16] 五翼 - Metaclasses：`__call__``
 今天我們來聊聊`__call__`。希望透過今天的內容，我們更清楚` my_inst(...)`、`MyClass(...)`及`MyType(...)`或`class MyClass(metaclass=MyType)`等語法背後的意義。
 
 我們先記錄以下這段關於`type.__call__`的論述，稍後再輔以範例說明。

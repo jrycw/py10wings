@@ -1,4 +1,4 @@
-# [Day02] 初翼 - Tips : 1~5
+# [Day02] 初翼 - Tips：1~5
 ## 初翼大綱
 接下來，連續三天，我們會每天分享五個Python小技巧。
 * [[Day02]](https://ithelp.ithome.com.tw/articles/10317754)分享tips 1~5。

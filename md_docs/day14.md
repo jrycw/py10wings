@@ -1,4 +1,4 @@
-# [Day14] 五翼 - Metaclasses : Instance Creation
+# [Day14] 五翼 - Metaclasses：Instance Creation
 ## 五翼大綱
 `metaclasses`可以說是Python最難掌握的範疇。如果是第一次接觸這些概念，很容易出現`我是誰？`，`我在幹麻？`，`我要去哪裡？`的徵狀。如果出現類似的情形，請不要驚慌，這是非常正常的XD
 

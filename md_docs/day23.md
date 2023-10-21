@@ -1,4 +1,4 @@
-# [Day23] 八翼 - Scopes : 常見錯誤1（LEGB原則）
+# [Day23] 八翼 - Scopes：常見錯誤1（LEGB原則）
 
 ## 八翼大綱
 Python尋找變數的方法是透過`LEGB`，即`Local`、`Enclosing`、`Global`及`Built-in` scope，來層層尋找。有興趣深究的朋友，可以參考這篇[Real Python的講解](https://realpython.com/python-scope-legb-rule)。

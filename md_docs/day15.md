@@ -1,4 +1,4 @@
-# [Day15] 五翼 - Metaclasses : Class Creation
+# [Day15] 五翼 - Metaclasses：Class Creation
 今天我們分享`class`是如何生成的，其實關鍵都在`type`這個`built-in`。
 
 ## `type`

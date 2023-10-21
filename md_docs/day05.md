@@ -1,4 +1,4 @@
-# [Day05] 次翼 - Decorator : @func to func
+# [Day05] 次翼 - Decorator：@func to func
 
 ## 次翼大綱
 `decorator`為`meta programming`的技巧之一，可以改變被其裝飾`obj`之行為。

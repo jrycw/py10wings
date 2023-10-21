@@ -1,4 +1,4 @@
-# [Day22] 七翼 - Protocols : Context Manager Protocol
+# [Day22] 七翼 - Protocols：Context Manager Protocol
 [Context Manager](https://docs.python.org/3/library/stdtypes.html#context-manager-types)是一種可以讓我們使用`with`，於進出某段程式碼時，執行某些程式碼的功能。
 
 ## Context Manager Protocol

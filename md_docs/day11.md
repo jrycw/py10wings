@@ -1,5 +1,5 @@
-# [Day11] 四翼 - Descriptor : Descriptor存取設計(1)
-`descriptor`就像是Python的倉庫管理員之一，在某些情況下(如[[Day10]](https://ithelp.ithome.com.tw/articles/10317762)所述):
+# [Day11] 四翼 - Descriptor：Descriptor存取設計(1)
+`descriptor`就像是Python的倉庫管理員之一，在某些情況下(如[[Day10]](https://ithelp.ithome.com.tw/articles/10317762)所述)：
 * 當其為`non-data descriptor`時，可以提供取的功能。
 * 當其為`data descriptor`時，同時提供存取功能。
 
