@@ -12,7 +12,7 @@
 本翼筆記為嘗試交叉參考上述資料而做。由於本翼難度頗高，再加上有些自己試著修改的程式碼，如果有錯誤的話，還望諸位先進可以不吝斧正，相當感謝。
 
 ##  How dot works?
-今天我們將分別理解四個層面的dot:
+今天我們將分別理解四個層面的dot：
 1. How obj.attr works(obj is instance)?
 2. How obj.attr works(obj is class)?
 3. How obj.attr=value works(obj is instance)?
@@ -160,12 +160,12 @@ def getattr_hook(obj, name):
 
 ### 流程整理格式2
 `流程整理格式1`是根據`Raymond`的筆記整理的，`Dr. Fred Baptiste`則建議由`obj`是否在`cls_mro`來做為分支思考。
-*  如果`obj.attr in cls_mro`:
+*  如果`obj.attr in cls_mro`：
     * 如果`obj.attr`是`data_desc`，則使用`data_desc.__get__(obj, type(obj))`。
     * 如果`obj.attr in vars(obj)`，則返回`vars(obj)['attr']`。
     * 如果`obj.attr`是`non_data_desc`，則使用`non_data_desc.__get__(obj, type(obj))`。
     * 剩下的必定是`class variable`，返回`vars(base)['attr']`。
-* 如果`obj.attr not in cls_mro`:
+* 如果`obj.attr not in cls_mro`：
     * 如果`obj.attr in vars(obj)`，則返回`vars(obj)['attr']`。
     * 如果`obj.attr not in vars(obj)`，則`raise AttributeError`(自動呼叫`obj.__getattr__`)。
 
@@ -344,7 +344,7 @@ if __name__ == '__main__':
 ### 流程整理格式1
 我們試著將當`obj.attr`(`obj is class`)的`lookup`流程寫下來。
 * 如果`obj.attr in cls_mro`且`obj.attr`是`data_desc`，則使用`data_desc.__get__(obj, type(obj))`。
-* 如果`obj.attr in obj_cls_mro`:
+* 如果`obj.attr in obj_cls_mro`：
     * 如果`obj.attr`是`desc_inst`，則使用`desc.__get__(obj, type(obj))`。
     * 如果`obj.attr`不是`desc_inst`，則返回`vars(obj_base)['attr']`。
 * 如果`obj.attr in cls_mro`且`obj.attr`是`non_data_desc`，則使用`non_data_desc.__get__(obj, type(obj))`。
@@ -354,15 +354,15 @@ if __name__ == '__main__':
 ![class_get1](https://py10wings.jp-osa-1.linodeobjects.com/day18/class_get1.png)
 
 ### 流程整理格式2
-*  如果`obj.attr in cls_mro`:
+*  如果`obj.attr in cls_mro`：
     * 如果`obj.attr`是`data_desc`，則使用`data_desc.__get__(obj, type(obj))`。
-    * 如果`obj.attr in obj_cls_mro`:
+    * 如果`obj.attr in obj_cls_mro`：
         * 如果`obj.attr`是`desc_inst`，則使用`desc.__get__(obj, type(obj))`。
         * 如果`obj.attr`不是`desc_inst`，則返回`vars(obj_base)['attr']`。
     * 如果`obj.attr`是`non_data_desc`，則使用`non_data_desc.__get__(obj, type(obj))`。
     * 剩下的必定是`class variable`，返回`vars(base)['attr']`。
-* 如果`obj.attr not in cls_mro`:
-    * 如果`obj.attr in obj_cls_mro`:
+* 如果`obj.attr not in cls_mro`：
+    * 如果`obj.attr in obj_cls_mro`：
         * 如果`obj.attr`是`desc_inst`，則使用`desc.__get__(obj, type(obj))`。
         * 如果`obj.attr`不是`desc_inst`，則返回`vars(obj_base)['attr']`。
     * 如果`obj.attr not in obj_cls_mro`則`raise AttributeError`(自動呼叫`obj.__getattr__`)。
@@ -529,9 +529,9 @@ if __name__ == '__main__':
 
 
 ## 備註
-註1: Python有`object.__getattribute__`與`object.__getattr__` ，但只有`object.__setattr__`而沒有`object__setattribute__`。
+註1：Python有`object.__getattribute__`與`object.__getattr__` ，但只有`object.__setattr__`而沒有`object__setattribute__`。
 
-註2: 本日流程圖為`ChatGPT`及[PlantUML](https://plantuml.com/en/)協作繪製而成。為方便排版，所有的double underscore都使用single underscore代替。
+註2：本日流程圖為`ChatGPT`及[PlantUML](https://plantuml.com/en/)協作繪製而成。為方便排版，所有的double underscore都使用single underscore代替。
 
 ## Code
 [本日程式碼傳送門](https://github.com/jrycw/py10wings/tree/master/src/06_desc_how_to/day18_dot)。
