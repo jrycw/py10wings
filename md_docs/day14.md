@@ -238,7 +238,7 @@ if __name__ == '__main__':
 
 註2：如果不太熟悉`super()`的朋友，可以參考[這篇](https://rhettinger.wordpress.com/2011/05/26/super-considered-super/)由`Raymond Hettinger`所寫的介紹。
 
-註3：如果`__new__`所回傳的並非`cls`的`instance`，則不會自動呼叫`__init__`。但僅管如此，我們可以手動呼叫`__init__`，所以可以寫出如`# 101`的`code`。
+註3：如果`__new__`所回傳的並非`cls`的`instance`，則不會自動呼叫`__init__`。但儘管如此，我們可以手動呼叫`__init__`，所以可以寫出如`# 101`的`code`。
 ```Python=
 # 101
 from types import SimpleNamespace

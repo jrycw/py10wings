@@ -176,7 +176,7 @@ def getattr_hook(obj, name):
 `Descriptor HowTo Guide`講到[invocation from a class](https://docs.python.org/3/howto/descriptor.html#invocation-from-a-class)時，是這麼說的：
 > The logic for a dotted lookup such as A.x is in `type.__getattribute__()`. The steps are similar to those for `object.__getattribute__()` but the instance dictionary lookup is replaced by a search through the class’s method resolution order. If a descriptor is found, it is invoked with `desc.__get__(None, A)`.
 
-僅管文件中沒有提供相對應的Python程式碼。但是我們可以根據上面描述，試著實作看看。
+儘管文件中沒有提供相對應的Python程式碼。但是我們可以根據上面描述，試著實作看看。
 ```python=
 # 02 Experiment code, not verified
 def find_name_in_mro(cls, name, default):

@@ -1,7 +1,7 @@
 # [Day13] 四翼 - Descriptor：property vs Descriptor
 `property`內部實作了`descriptor protocol`，所以可以視其為一種簡易版，單次使用的`data descriptor`。在我們需要少量`descriptor`特性時，`property`是一個非常方便的工具。
 
-今天假設在剛開始實作一個`class`時，我們使用了`property`快速完成了一個prototype。當我們準備進一步往下，繼續實作更多細節的時候，發現使用了很多具有相同邏輯的`property`，所以決定自己實作一個`descriptor`，將這些邏輯包起來重覆利用。
+今天假設在剛開始實作一個`class`時，我們使用了`property`快速完成了一個prototype。當我們準備進一步往下，繼續實作更多細節的時候，發現使用了很多具有相同邏輯的`property`，所以決定自己實作一個`descriptor`，將這些邏輯包起來重複利用。
 
 我們會練習三個小題，`練習1`是概念說明，`練習2`及`練習3`是實戰例題。我們將使用`方法6`來實作，方便大家之後可以對照[Descriptor HowTo Guide](https://docs.python.org/3/howto/descriptor.html#overview-of-descriptor-invocation)中的講解，因這兩個小題皆是受其啟發而來。
 

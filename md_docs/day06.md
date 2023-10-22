@@ -1,7 +1,7 @@
 # [Day06] 次翼 - Decorator：@class to func
 今天我們分享`decorator class`裝飾於`function`上的情況。本日接下來內容，會以`decorator`來作為`decorator class`的簡稱。
 
-另外，有些於`decorator function`提過的細節，將不特別重覆，直接入進本日重點。
+另外，有些於`decorator function`提過的細節，將不特別重複，直接入進本日重點。
 
 ## 核心概念
 `decorator`的核心概念為接受一個`function`，從中做一些操作，最後返回一個`class`的`instance`。一般來說，返回的`instance`是個`callable`，會接收與原`function`相同的參數，並返回相同的結果，但卻能具有`decorator`額外賦予的功能。

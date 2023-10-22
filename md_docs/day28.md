@@ -285,7 +285,7 @@ async def main(tg: asyncio.TaskGroup, conn: EdgeDBCloudConn, token: str) -> None
 * ...
 
 
-僅管如此，還是學習到了很多，例如：
+儘管如此，還是學習到了很多，例如：
 * 更加了解[EdgeDB-Python](https://www.edgedb.com/docs/clients/python/index)的各種功能。
 * 使用新的`asyncio.TaskGroup`與`ExceptionGroup`來處理`asyncio`問題。
 * 更加熟悉structural pattern matching的技巧。

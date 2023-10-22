@@ -14,7 +14,7 @@ if __name__ == '__main__':
               if a not in iterable_b]
     print(f'{result=}')  # result=[1, 2]   
 ```
-如果`iterable_b`的數量很大，或是有重覆的元素，`# 11a`可以改成`# 11b`，這麼一來`in`的速度可以加快，也不會有重覆的元素。
+如果`iterable_b`的數量很大，或是有重複的元素，`# 11a`可以改成`# 11b`，這麼一來`in`的速度可以加快，也不會有重複的元素。
 ```python=
 # 11b
 iterable_a = range(1, 5)
@@ -26,7 +26,7 @@ if __name__ == '__main__':
               if a not in set(iterable_b)]
     print(f'{result=}')  # result=[1, 2]
 ```
-不過大多數情況是，我們不在意兩邊的元素順序及是否有重覆元素，這時可以直接用兩個`set`相減，如`# 11c`。
+不過大多數情況是，我們不在意兩邊的元素順序及是否有重複元素，這時可以直接用兩個`set`相減，如`# 11c`。
 ```python=
 # 11c
 iterable_a = range(1, 5)
@@ -83,7 +83,7 @@ none_type2 = types.NoneType
 print(none_type1 is none_type2)  # True
 ```
 ## 14. collections.defaultdict vs dict.setdefault
-當我們有很多筆資料想要整理成`dict`，但其中作為`key`的元素，卻可能重覆時，我們一般會希望將`value`作為一個`container`，收集該`key`的每筆資訊。
+當我們有很多筆資料想要整理成`dict`，但其中作為`key`的元素，卻可能重複時，我們一般會希望將`value`作為一個`container`，收集該`key`的每筆資訊。
 
 `# 14a`是一個常見的寫法，但是我們覺得這樣的寫法不太好。原因是當`if name not in dict1`時，總共做了兩件事，建立`[]`以及`append value`，而在`else`裡，只做`append value`。既然`append value`是兩邊共同會做的事，為何不抽出來呢？
 ```python=
