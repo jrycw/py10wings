@@ -22,7 +22,7 @@ PEP654摘要裡說明，`ExceptionGroup` 的功用是可以「同時」收集「
 
 文中舉了五個例子：
 1. Concurrent errors
-  Python的`asyncio.gather`是一般大家處理`concurrent`問題時，會呼叫的api。它提供了一個參數`return_exceptions`來協助例外處理，當其為`True`時，會返回一個`list`，裡面包含所有成功的結果及例外;當其為`False`時，當遇到第一個例外時就會馬上`raise`。但使用`asyncio.gather`無法同時處理多種例外，雖然有像`Trio`這樣的library[試著解決這些問題](https://peps.python.org/pep-0654/#programming-without-except)，但使用起來比較不便。
+  Python的`asyncio.gather`是一般大家處理`concurrent`問題時，會呼叫的api。它提供了一個參數`return_exceptions`來協助例外處理，當其為`True`時，會返回一個`list`，裡面包含所有成功的結果及例外；當其為`False`時，當遇到第一個例外時就會馬上`raise`。但使用`asyncio.gather`無法同時處理多種例外，雖然有像`Trio`這樣的library[試著解決這些問題](https://peps.python.org/pep-0654/#programming-without-except)，但使用起來比較不便。
 2. Multiple failures when retrying an operation
   假如一個操作被retry多次後失敗，我們會想知道其全部失敗的情況，而不是最後一個。
 3. Multiple user callbacks fail

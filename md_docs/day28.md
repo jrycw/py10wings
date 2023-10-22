@@ -186,7 +186,7 @@ if __name__ == '__main__':
 
 #### `_prepare_loop`
 * 透過`get_loop_dict`取得`loop_dict`。
-* 接著檢查`token`是否在`loop_dict`中。如果不在的話，呼叫`asyncio.new_event_loop`建立一個新`loop`;如果在的話，從中取出`loop`。
+* 接著檢查`token`是否在`loop_dict`中。如果不在的話，呼叫`asyncio.new_event_loop`建立一個新`loop`；如果在的話，從中取出`loop`。
 * 透過`loop_dict[token] = (loop, cur_ts)`更新`timestamp`。
 * 最後返回`loop`。
 ```python=
@@ -202,7 +202,7 @@ def _prepare_loop(cur_ts: int, token: str) -> asyncio.AbstractEventLoop:
 
 #### `_prepare_conn`
 * 透過`get_conn_dict`取得`conn_dict`。
-* 接著檢查`token`是否在`conn_dict`中。如果不在的話，呼叫`asyncio.new_event_loop`建立一個新`conn`;如果在的話，從中取出`conn`。
+* 接著檢查`token`是否在`conn_dict`中。如果不在的話，呼叫`asyncio.new_event_loop`建立一個新`conn`；如果在的話，從中取出`conn`。
 * 透過`conn_dict[token] = (conn, cur_ts)`更新`timestamp`。
 * 最後返回`conn`。
 ```python=

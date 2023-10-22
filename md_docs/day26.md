@@ -47,10 +47,10 @@ async def main():
 asyncio.run(main())
 ```
 此外，其也很明白地[定義](https://docs.python.org/3/library/asyncio-task.html#awaitables)了`coroutine function`與`coroutine object`。
-> a coroutine function: an async def function; 
+> a coroutine function: an async def function.
 > a coroutine object: an object returned by calling a coroutine function.
 
-簡單說，使用`async def`來定義的`function`稱為`coroutine function`;而呼叫`coroutine function`會返回一個`coroutine object`。雖然為了方便溝通，我們常常使用`coroutine`來同時代稱這兩種概念，但是作為優秀的Python開發者，我們一定要能清楚分辨兩者的不同。
+簡單說，使用`async def`來定義的`function`稱為`coroutine function`；而呼叫`coroutine function`會返回一個`coroutine object`。雖然為了方便溝通，我們常常使用`coroutine`來同時代稱這兩種概念，但是作為優秀的Python開發者，我們一定要能清楚分辨兩者的不同。
 
 ### asyncio.gather
 [asyncio.gather](https://docs.python.org/3/library/asyncio-task.html#asyncio.gather)的`signature`如下：
@@ -228,7 +228,7 @@ handling 1
 `wait`內，可以分為三段：
 * 第一段針對`aws`建立`task`。 
 * 第二段執行`asyncio.wait`，並取消所有`pending` `task`，並多`await asyncio.wait`一次。
-* 第三段為收集例外。如果有收例外的話，則生成一個`EG`返回;如果沒有的話就返回`done`。
+* 第三段為收集例外。如果有收例外的話，則生成一個`EG`返回；如果沒有的話就返回`done`。
 
 於`main`中，我們就可以使用`try-except*`的語法來處理例外。
 
