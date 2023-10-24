@@ -197,7 +197,7 @@ def match_func_name(jsonify: RespJson, required_single: RespConstraint) -> str:
 
 ### queries.py
 #### `pack_imqry_records`
-預先打包八種常用的`immutable` `query`為一`list`，做為測試之用。每個`query`型式都是一個`QueryRecord`的`instance`。
+預先打包八種常用的`immutable` `query`為一`list`，作為測試之用。每個`query`型式都是一個`QueryRecord`的`instance`。
 ```python=
 def pack_imqry_records() -> list[QueryRecord]:
     qries = ['SELECT Movie {title};',

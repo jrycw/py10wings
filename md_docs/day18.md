@@ -159,7 +159,7 @@ def getattr_hook(obj, name):
 ![inst_get1](https://py10wings.jp-osa-1.linodeobjects.com/day18/inst_get1.png)
 
 ### 流程整理格式2
-`流程整理格式1`是根據`Raymond`的筆記整理的，`Dr. Fred Baptiste`則建議由`obj`是否在`cls_mro`來做為分支思考。
+`流程整理格式1`是根據`Raymond`的筆記整理的，`Dr. Fred Baptiste`則建議由`obj`是否在`cls_mro`來作為分支思考。
 *  如果`obj.attr in cls_mro`：
     * 如果`obj.attr`是`data_desc`，則使用`data_desc.__get__(obj, type(obj))`。
     * 如果`obj.attr in vars(obj)`，則返回`vars(obj)['attr']`。

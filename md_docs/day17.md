@@ -48,7 +48,7 @@ my_inst = MyClass()
 
 ## class creation
 * 所有`class`都是繼承`object`而來，且預設`metaclass`為`type`。
-* 當Python看到`class`關鍵字後，知道我們想生成一個`class`時，會先呼叫`type.__prepare__`，準備一個`mapping`，做為稍後傳給`type.__new__`的`cls_dict`，裡面會幫我們加上一些`attribute`(如`__qualname__`)。
+* 當Python看到`class`關鍵字後，知道我們想生成一個`class`時，會先呼叫`type.__prepare__`，準備一個`mapping`，作為稍後傳給`type.__new__`的`cls_dict`，裡面會幫我們加上一些`attribute`(如`__qualname__`)。
 * 生成一個`class`，相當於我們要呼叫`type`，`type`本身是`callable`，因為其`metaclass`(還是`type`)有實作`__call__`。`type.__call__`會先呼叫`type.__new__`，如果回傳的是`MyClass`的話，則會再呼叫`type.__init__`。至此`MyClass`生成完畢。
 
 ## instance creation

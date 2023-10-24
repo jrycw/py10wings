@@ -58,7 +58,7 @@ class MyClass:
 * `方法6`解決了`方法5`的第一個問題，但是`_name`及`slots`的問題還是存在。
 
 ## 方法7
-`方法7`使用了`instance.__dict__`，並直接使用傳入的`name`(即`self._name`)作為`instance.__dict__`的`key`，給定的`value`作為`instance.__dict__`的`value`。乍看好像和`方法6`有些相似，但是這樣寫完全展現了對`descriptor`的高度了解。
+`方法7`使用了`instance.__dict__`，並直接使用傳入的`name`（即`self._name`）作為`instance.__dict__`的`key`，給定的`value`作為`instance.__dict__`的`value`。乍看好像和`方法6`有些相似，但是這樣寫完全展現了對`descriptor`的高度了解。
 * 由於我們實作的是`data descriptor`，當由`instance`存取`attribute`時，會優先使用其`__get__`及`__set__`。所以我們可以直接使用其在`MyClass`中定義的名字，如`'x'`或`'y'`，而不用使用類似`'_x'`或`'_y'`。這麼一來，我們也不用擔心`'_x'`或`'_y'`是否在`MyClass`的其它地方是否有被使用。
 * 請注意於`__get__`及`__set__`中，不能使用`getattr(instance, self.name, None)`或`setattr(instance, self.name, value)`，因為這樣會造成`RecursionError`，必須直接操作`instance.__dict__`。
 
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     print(f'{my_inst.__dict__=}')  # {'x': 0}
     print(f'{my_inst.x=}')  # 0 
 ```
-`# 07`中，當使用`my_inst.x = 0`時，會呼叫`__set__`，透過`instance.__dict__[self._name] = value`的語法將`'x'`作為`key`，`0`為`value`放入`my_inst`的`instance dict`中(即`my_inst.__dict__`)。當我們使用`my_inst.x`時，會呼叫`__get__`，透過`instance.__dict__.get(self._name)`取回`0`。
+`# 07`中，當使用`my_inst.x = 0`時，會呼叫`__set__`，透過`instance.__dict__[self._name] = value`的語法將`'x'`作為`key`，`0`為`value`放入`my_inst`的`instance dict`中（即`my_inst.__dict__`）。當我們使用`my_inst.x`時，會呼叫`__get__`，透過`instance.__dict__.get(self._name)`取回`0`。
 
 
 ### 使用限制與缺點

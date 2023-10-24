@@ -59,7 +59,7 @@ my_inst1.x=2
 * 所有`MyClass`生成的`instance`都擁有能修改`x`的權力。
 
 ## 方法2
-`方法2`試著將給定的值做為`instance variable`存在`instance`本身，即`# 02`中的`instance.hardcoded_name`。
+`方法2`試著將給定的值作為`instance variable`存在`instance`本身，即`# 02`中的`instance.hardcoded_name`。
 ```python=
 # 02
 class Desc:
@@ -128,7 +128,7 @@ class MyClass:
 
 ### 使用限制與缺點
 * 由於`self._data`是將`instance`本身作為`key`，這代表即使我們手動使用`del`指令刪除了`instance`，也會是個假象，`instance`不會被`gc`(`garbage collect`)，因為至少還有一個`strong reference`存在。這是個嚴重的`memoey leak`，該被`gc`的`obj`卻還是存在，且有機會被存取。
-* 即使不在意`memoey leak`，我們還必須確定`instance`是`hashalbe`，才能做為`self._data`的`key`。
+* 即使不在意`memoey leak`，我們還必須確定`instance`是`hashalbe`，才能作為`self._data`的`key`。
 
 ## 方法4
 `方法4`類似於`方法3`，但這次我們使用`id(instance)`為`self._data`的`key`。
@@ -205,7 +205,7 @@ if __name__ == '__main__':
     print(f'{my_inst2.__dict__=}')  # {}
 ```
 
-或許您會想，應該不會有很多`Class`使用`slots`吧？但事實上，當程式需要大量由同個`class`生成的`instance`時，選擇使用`slots`，可以節省蠻多的記憶體消耗。在一些與`database`相關的`ORM`應用或`iterator class`的實作上不算少見。
+或許您會想，應該不會有很多`Class`使用`slots`吧？但事實上，當程式需要大量由同個`class`生成的`instance`時，選擇使用`slots`，可以節省滿多的記憶體消耗。在一些與`database`相關的`ORM`應用或`iterator class`的實作上不算少見。
 
 ### `weak reference`
 Python內建有`weakref module`，可以讓我們建立對某`obj`的`weak reference`。當該`obj`的`strong reference`為`0`時，此`weak reference`會收到通知，並且在有提供`callback function`時，呼叫這個`function`。而`weakref.WeakKeyDictionary`是一個可以自動幫我們建立及移除`weak reference`的方便容器。

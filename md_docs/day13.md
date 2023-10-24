@@ -90,7 +90,7 @@ if __name__ == '__main__':
 
 解決辦法是於`myprop`中實作`__set__`和`__delete__`，但卻直接`raise AttributeError`。這是一個非常容易出錯的盲點，只要能夠了解這邊，相信就能輕鬆穿梭在`property`和`descriptor`之間。
 * 只實作`__get__`的 `descriptor` 是`non-data descriptor`，是有機會被`instance.__dict__`所`shadow`的。
-* 有實作`__get__`加上`__set__`或`__delete__`兩種中最少一種的`descriptor`是`data descriptor`，其必定會`shadow` `instance.__dict__`。即使我們只是於`__set__`和`__delete__` `raise AttributeError`，它依然是`data descriptor`。這就像我們只給`property` `getter`，但沒有指定`setter`及`deleter`，`property`依然是一個具有`data descriptor`行為的`obj`。
+* 有實作`__get__`加上`__set__`或`__delete__`兩種中至少一種的`descriptor`是`data descriptor`，其必定會`shadow` `instance.__dict__`。即使我們只是於`__set__`和`__delete__` `raise AttributeError`，它依然是`data descriptor`。這就像我們只給`property` `getter`，但沒有指定`setter`及`deleter`，`property`依然是一個具有`data descriptor`行為的`obj`。
 
 ### 第二次嘗試
 於`# 01c`中我們實作了`__set__`及`__delete__`，並模仿`property`的錯誤訊息，直接`raise AttributeError`。另外，為了讓`myprop`更像`property`，我們可以於`__init__`中選擇性接收`doc`來作為說明文件。
@@ -176,7 +176,7 @@ class MyClass:
         if not isinstance(value, int) or value <= 0:
             raise ValueError(f'{value} is not a positive integer.')
 ```
-首先，根據題意，我們可以給`descriptor`取一個適合的名字，`PositiveInt`。`PositiveInt`的`__get__`和`__set_name__`與`練習1`相似。
+首先，根據題意，我們可以給`descriptor`取一個適合的名字為`PositiveInt`。`PositiveInt`的`__get__`和`__set_name__`與`練習1`相似。
 ```python=
 # 02b
 class PositiveInt:
