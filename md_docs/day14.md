@@ -39,7 +39,7 @@ class MyClass(object):
 * `instantiate`則是指使用`__new__`建立`instance`。
 
 ## `__init__`
-`# 01`中，建立了客製化的`__init__`(即overwrite了`object.__init__`)，使得透過`MyClass`建立的`instance`，於初始化時，可以指定`instance variable` `self.x`的值。
+`# 01`中，建立了客製化的`__init__`（即overwrite了`object.__init__`），使得透過`MyClass`建立的`instance`於初始化時，可以指定`instance variable` `self.x`的值。
 ```python=
 # 01
 class MyClass:
@@ -51,14 +51,14 @@ if __name__ == '__main__':
     my_inst = MyClass(1)
     print(my_inst.__dict__)  # {'x': 1}
 ```
-`__init__`是個`instance method`，而`instance method`的第一個參數，一般約定俗成地取名為`self`。既然`self`能夠被傳入`__init__`代表`instance`本身是在`__init__`被呼叫前即已建立。
+`__init__`是個`instance method`，而`instance method`的第一個參數，一般約定俗成地取名為`self`。既然`self`能夠被傳入`__init__`，代表`instance`本身是在`__init__`被呼叫前即已建立。
 
 ## `__new__`
 事實上，`object.__new__`才是Python真正建立`instance`時所呼叫的。
 
-`# 02`中，建立了客製化的`__new__`(即overwrite了`object.__new__`)。
+`# 02`中，建立了客製化的`__new__`（即overwrite了`object.__new__`）。
 * `__new__`的第一個參數為`cls`，在`# 02`中即為`MyClass`，至於其它參數則需要與`__init__`一致（如果有的話）。
-* 在`__new__`中呼叫`super().__new__(cls)`來建立`instance`，在`# 02`中呼叫`super().__new__(cls)`相當於呼叫`object.__new__(cls)`，但習慣使用`super()`的寫法，可以幫助我們在繼承的時候，減少一些問題(`註2`)。
+* 在`__new__`中呼叫`super().__new__(cls)`來建立`instance`，在`# 02`中呼叫`super().__new__(cls)`相當於呼叫`object.__new__(cls)`，但習慣使用`super()`的寫法，可以幫助我們在繼承的時候，減少一些問題（`註2`）。
 * 當`__new__`回傳一個`MyClass`的`instance`時（`註3`），會自動呼叫`__init__`，我們可以`id`來確認`__new__`中的`instance`就是傳入`__init__`中的`self`。
 
 ```python=
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 ```
 理論上，任何在`__init__`中能做的事，都能夠在`__new__`中完成。
 
-`# 03`中，我們將`__init__`中指定的`instance variable` `self.x`，搬到`__new__`中，如此則可免去建立`__init__`。
+`# 03`中，我們將`__init__`中指定的`instance variable` `self.x`搬到`__new__`中，如此則可免去建立`__init__`。
 ```python=
 # 03
 class MyClass:
@@ -126,7 +126,7 @@ class SlowNewClass:
 ```
 題目要求：
 * 建立客製化的`class`，且必須繼承`SlowNewClass`。
-* 客製化的`class`僅接受`**kwargs`參數，且`kwargs`內所有`value`必須滿足`value>=0`，否則`raise ValueError`。若`kwargs`中有`x`變數，需要將其從`kwargs`移出，進行某些操作(以`self.x = x+100`表示)，再將剩下的`kwargs`利用`super().__init__`往上傳遞。
+* 客製化的`class`僅接受`**kwargs`參數，且`kwargs`內所有`value`必須滿足`value>=0`，否則`raise ValueError`。若`kwargs`中有`x`變數，需要將其從`kwargs`移出，進行某些操作（以`self.x = x+100`表示），再將剩下的`kwargs`利用`super().__init__`往上傳遞。
 
 於`# 05`中，我們建立了`MyClass`與`MyClass2`，並利用`timer`來觀察`instance`的生成速度。
 ```python=
@@ -228,7 +228,7 @@ if __name__ == '__main__':
 * 於`MyStr2`中，`super().__new__`，則可以成功得到`abc_123`。
 
 ## 當日筆記
-### 何時適合於`class`中實作`__new__`
+### 何時適合於`class`中實作`__new__`？
 * 想要搶在`__init__`之前，於建立`instance`前後做一些操作時（`實例說明1`）。
 * 於`__new__`中操控`cls`，暗指每次生成`instance`時，都會`mutate` `cls`，需謹慎考慮這是否為您想要的行為（`實例說明2`）。
 * 當繼承以`C`實作的`built-in` `type`時。
