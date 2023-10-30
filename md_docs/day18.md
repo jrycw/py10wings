@@ -65,7 +65,7 @@ if __name__ == '__main__':
 ```
 * `NonDataDescriptor`為`Non-data descriptor`，而`non_data_desc`為其生成的`instance`。
 * `DataDescriptor`是`data descriptor`，而`data_desc`為其生成的`instance`。
-* 如果`obj.attr`在生成`obj`的`class`或其`MRO`上任一`class`的`__dict__`內，我們以`obj.attr in cls_mro`代稱，並以`base`來代稱`attr`所在的`class`。例如，`# 01`中的`my_inst.a`，因為`a`在`MyClass`(`type(my_inst)`)的`MRO`上的`DummyClass.__dict__`，我們會稱`my_inst.a in cls_mro`，而其`base`則為`DummyClass`。
+* 如果`obj.attr`在生成`obj`的`class`或其`MRO`上任一`class`的`__dict__`內，我們以`obj.attr in cls_mro`代稱，並以`base`來代稱`attr`所在的`class`。例如，`# 01`中的`my_inst.a`，因為`a`在`MyClass`（`type(my_inst)`）的`MRO`上的`DummyClass.__dict__`，我們會稱`my_inst.a in cls_mro`，而其`base`則為`DummyClass`。
 * 如果`obj.attr`不在生成`obj`的`class`或其`MRO`上任一`class`的`__dict__`內，我們以`obj.attr not in cls_mro`代稱，
 * 如果`obj`為`class`且如果`obj.attr`在`obj`的`class`或其`MRO`上任一`class`的`__dict__`內，我們以`obj.attr in obj_cls_mro`代稱，並以`obj_base`來代稱`attr`所在的`class`。例如，`# 01`中的`MyClass.a`，因為`a`在`MyClass`的`MRO`上的`DummyClass.__dict__`，我們會稱`MyClass.a in obj_cls_mro`，而其`obj_base`則為`DummyClass`。
 
@@ -78,7 +78,7 @@ if __name__ == '__main__':
 ####  `find_name_in_mro`
 `find_name_in_mro`接受三個參數：
 * `cls`為生成`obj`的`class`。
-* `name`為想尋找的`attribute`(`str`型態)。
+* `name`為想尋找的`attribute`（`str`型態）。
 * `default`為一預設值。
 
 針對`cls.__mro__`打一個迴圈，依序在`MRO`上每個`class`的`__dict__`尋找有沒有`name`這個`attribute`，如果找到就馬上返回。當迴圈結束還是沒找到的話，則返回`default`。
@@ -95,7 +95,7 @@ def find_name_in_mro(cls, name, default):
 * 利用`object()`建立一個獨特的預設值`null`。
 * `obj_type`為生成`obj`的`class`。
 * `cls_var`為呼叫`find_name_in_mro`回傳的結果。注意，`cls_var`可以不是普通的`class variable`。也可以是`data_desc`或`non_data_desc`，因為他們也可以視為一種`class variable`，所以`Raymond`這樣命名。
-* `descr_get`為試圖由生成`cls_var`的`class`內去取`__get__`(即測試`cls_var`的`class`是否為`descriptor`)。如果取不到的話則返回預設值`null`。
+* `descr_get`為試圖由生成`cls_var`的`class`內去取`__get__`（即測試`cls_var`的`class`是否為`descriptor`）。如果取不到的話則返回預設值`null`。
 * 接下來依照註解，需要判斷最多四次，來決定如何取值。
     * 第一個判斷是看看`cls_var`是否為`data_desc`。判斷方法是確定`descr_get`不是`null`且生成`cls_var`的`class`中有`__set__`或是`__delete__`。如果符合的話，代表`cls_var`是`data_desc`，呼叫它的`__get__`來取值。可以使用`descr_get(cls_var, obj, objtype)`或是`cls_var.__get__(obj, objtype)`兩種語法。
     * 如果`cls_var`不是`data_desc`則進行第二個判斷。看看`obj`有沒有`__dict__`且`name`是否在`__dict__`中。如果是的話，代表`cls_var`是`instance variable`，使用`vars(obj)['attr']`取值。
@@ -124,7 +124,7 @@ def object_getattribute(obj, name):
 ```
 
 ### `object.__getattr__`
-當`obj.attr` `raise AttributeError`後，Python會呼叫[`obj.__getattr__`](https://docs.python.org/3/reference/datamodel.html#object.__getattr__)作為最後一個補救措施(預設行為是直接`raise AttributeError`)，如果還是有`AttributeError`不能處理的話，則`raise AttributeError`給使用者。
+當`obj.attr` `raise AttributeError`後，Python會呼叫[`obj.__getattr__`](https://docs.python.org/3/reference/datamodel.html#object.__getattr__)作為最後一個補救措施（預設行為是直接`raise AttributeError`）。如果還是有`AttributeError`不能處理的話，則`raise AttributeError`給使用者。
 
 由於`object.__getattribute__`的實作內，並未呼叫`object.__getattr__`，而是由Python自動偵測到`AttributeError`時呼叫。所以當顯性呼叫`obj.__getattribute__`或是`super().__getattribute__`時，`object.__getattr__`並不會被呼叫。
 
@@ -154,7 +154,7 @@ def getattr_hook(obj, name):
 * 如果`obj.attr in vars(obj)`，則返回`vars(obj)['attr']`。
 * 如果`obj.attr in cls_mro`且`obj.attr`是`non_data_desc`，則使用`non_data_desc.__get__(obj, type(obj))`。
 * 如果`obj.attr in cls_mro`則為`class variable`，返回`vars(base)['attr']`。
-* 如果還沒成功取值，`raise AttributeError`(自動呼叫`obj.__getattr__`)。
+* 如果還沒成功取值，`raise AttributeError`（自動呼叫`obj.__getattr__`）。
 
 ![inst_get1](https://py10wings.jp-osa-1.linodeobjects.com/day18/inst_get1.png)
 
@@ -167,7 +167,7 @@ def getattr_hook(obj, name):
     * 剩下的必定是`class variable`，返回`vars(base)['attr']`。
 * 如果`obj.attr not in cls_mro`：
     * 如果`obj.attr in vars(obj)`，則返回`vars(obj)['attr']`。
-    * 如果`obj.attr not in vars(obj)`，則`raise AttributeError`(自動呼叫`obj.__getattr__`)。
+    * 如果`obj.attr not in vars(obj)`，則`raise AttributeError`（自動呼叫`obj.__getattr__`）。
 
 ![inst_get2](https://py10wings.jp-osa-1.linodeobjects.com/day18/inst_get2.png)
 
@@ -342,14 +342,14 @@ if __name__ == '__main__':
 ```
 
 ### 流程整理格式1
-我們試著將當`obj.attr`(`obj is class`)的`lookup`流程寫下來。
+我們試著將`obj.attr`（`obj is class`）的`lookup`流程寫下來。
 * 如果`obj.attr in cls_mro`且`obj.attr`是`data_desc`，則使用`data_desc.__get__(obj, type(obj))`。
 * 如果`obj.attr in obj_cls_mro`：
     * 如果`obj.attr`是`desc_inst`，則使用`desc.__get__(obj, type(obj))`。
     * 如果`obj.attr`不是`desc_inst`，則返回`vars(obj_base)['attr']`。
 * 如果`obj.attr in cls_mro`且`obj.attr`是`non_data_desc`，則使用`non_data_desc.__get__(obj, type(obj))`。
 * 如果`obj.attr in cls_mro`則為`class variable`，返回`vars(base)['attr']`。
-* 如果還沒成功取值，`raise AttributeError`(自動呼叫`obj.__getattr__`)。
+* 如果還沒成功取值，`raise AttributeError`（自動呼叫`obj.__getattr__`）。
 
 ![class_get1](https://py10wings.jp-osa-1.linodeobjects.com/day18/class_get1.png)
 
@@ -365,15 +365,15 @@ if __name__ == '__main__':
     * 如果`obj.attr in obj_cls_mro`：
         * 如果`obj.attr`是`desc_inst`，則使用`desc.__get__(obj, type(obj))`。
         * 如果`obj.attr`不是`desc_inst`，則返回`vars(obj_base)['attr']`。
-    * 如果`obj.attr not in obj_cls_mro`則`raise AttributeError`(自動呼叫`obj.__getattr__`)。
+    * 如果`obj.attr not in obj_cls_mro`則`raise AttributeError`（自動呼叫`obj.__getattr__`）。
 
 ![class_get2](https://py10wings.jp-osa-1.linodeobjects.com/day18/class_get2.png)
 
 ## 3. How obj.attr=value works(obj is instance)?
 [`object.__setattr__`](https://docs.python.org/3/reference/datamodel.html#object.__setattr__)是Python設定`attribute`值的`dunder method`（`註1`）。
 
-根據`Dr. Fred Baptiste`的說明，我們可以將`obj.attr=value`整理如下
 ### 流程整理格式
+根據`Dr. Fred Baptiste`的說明，我們可以將`obj.attr=value`整理如下：
 * 如果`obj.attr in cls_mro`且`obj.attr`是`data_desc`，則使用`data_desc.__set__(obj, value)`。
 * 如果`obj.attr`有`__dict__`，則使用`obj.__dict__['attr']=value`。
 * 如果`obj.attr`沒有`__dict__`，則`raise AttributeError`。
