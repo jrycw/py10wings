@@ -71,7 +71,7 @@ class Property:
 ```
 
 ## function and bound method
-`method`與`function`不同的點是，`method`會自動傳入呼叫它的`instance`作為第一個參數，就是我們習慣的`self`。當由`instance`呼叫在`class`中的`function`時，其會變成一個`bound method`(`bound`在`self`上)。
+`method`與`function`不同的點是，`method`會自動傳入呼叫它的`instance`作為第一個參數，就是我們習慣的`self`。當由`instance`呼叫在`class`中的`function`時，其會變成一個`bound method`（`bound`在`self`上）。
 
 `types.MethodType`可以幫助我們生成`bound method`:
 * `MethodType`的`__init__`接受兩個參數，分別為`function`與要`bound`的對象。
@@ -176,7 +176,7 @@ class ClassMethod:
 `__slots__`的實作比較複雜，共分為五個部份：
 1. 建立`Member` `class`，此為一個`data descriptor`，用來控制已寫在`slot_names`內`attribute`的存取。
 2. 建立`Type` `metaclass`，其功用為針對`slot_names`中所列名字，建立`class variable`，並將其值指為相對應的`Member` `instance`。
-3. 建立`Object` `class`，其功用為設定`_slotvalues`(相當於模擬配置`__slots__`的記憶體)及當設定或刪除不在`slot_names`內的`attribute`時，需`raise AttributeError`。
+3. 建立`Object` `class`，其功用為設定`_slotvalues`（相當於模擬配置`__slots__`的記憶體）及當設定或刪除不在`slot_names`內的`attribute`時，需`raise AttributeError`。
 4. 建立可用的`H` `class`，將使用`Type`為其`metaclass`，並繼承`Object`。
 5. 由`H`生成`h` `instance`，實際測試使用。
 
@@ -184,8 +184,8 @@ class ClassMethod:
 `Member`是一個具有`__get__`、`__set__`及`__delete__`的`data descriptor`。
 * `__init__`中接收三個變數，分別為其在`class`中的名字，`class` `name`及其位於`_slotvalues`中的`index`。
 * `__get__`中一樣先檢查`obj`是否為`None`。如果是`None`的話，則表示是由`class`來取，會返回`Member` `instance`本身。接著透過`self.offset `為`index`向`obj._slotvalues`取值。如果取回來的是預設的`sentinel`值`null`的話，表示該`index`值沒被正確指定又或者已經被刪除，`raise AttributeError`。最後，如果通過上述檢查的話，則返回所取之值。
-* `__set__`中直接指定`value`到`obj._slotvalues`的`self.offset`位置。
-* `__delete__`中於`__get__`類似。透過`self.offset `為`index`向`obj._slotvalues`取值。如果取回來的是預設的`sentinel`值`null`的話，表示該`index`值沒被正確指定又或者已經被刪除，`raise AttributeError`。最後，如果通過上述檢查的話，則將`obj._slotvalues[self.offset] `重設為`null`。
+* `__set__`直接指定`value`到`obj._slotvalues`的`self.offset`位置。
+* `__delete__`與`__get__`類似。透過`self.offset `為`index`向`obj._slotvalues`取值。如果取回來的是預設的`sentinel`值`null`的話，表示該`index`值沒被正確指定又或者已經被刪除，`raise AttributeError`。最後，如果通過上述檢查的話，則將`obj._slotvalues[self.offset] `重設為`null`。
 * `__repr__`中，指定`Member` `instance`的顯示格式。
 ```python=
 null = object()
