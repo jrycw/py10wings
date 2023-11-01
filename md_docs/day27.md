@@ -104,12 +104,12 @@ class RespConstraint(Enum):
     EXACTLY_ONE = auto()
 ```
 #### `QueryRecord(NamedTuple)`
-* `qry`(`str`)：`EdgeQL`語法的`query` `str`。
-* `extra_args`(`tuple`)：當需要`Filter`時使用。
-* `jsonify`(`RespJson`)：返回結果是否為`json`格式。
-* `required_single`(`RespConstraint`)：是否檢驗返回結果長度。
-* `extra_kwargs`(`dict`)：當需要`Filter`時使用。
-* `task_name`(`str`)：`asyncio task`的`task name`。
+* `qry`（`str`）：`EdgeQL`語法的`query` `str`。
+* `extra_args`（`tuple`）：當需要`Filter`時使用。
+* `jsonify`（`RespJson`）：返回結果是否為`json`格式。
+* `required_single`（`RespConstraint`）：是否檢驗返回結果長度。
+* `extra_kwargs`（`dict`）：當需要`Filter`時使用。
+* `task_name`（`str`）：`asyncio task`的`task name`。
 
 ```python=
 ...
