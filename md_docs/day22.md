@@ -134,7 +134,7 @@ class ContextDecorator(object):
         return inner
 ```
 ### `contextmanager`
-當使用[contextmanager](https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager)裝飾在一個`generator function`上時，此`generator function`將具有`context manager`的特性，且其也可以作為`decorator`使用(因為`contextmanager`內部實作有使用`ContextDecorator`)。
+當使用[contextmanager](https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager)裝飾在一個`generator function`上時，此`generator function`將具有`context manager`的特性，且其也可以作為`decorator`使用（因為`contextmanager`內部實作有使用`ContextDecorator`）。
 
 下面是Python文件的示例。
 ```python=
