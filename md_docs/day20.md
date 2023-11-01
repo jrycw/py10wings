@@ -17,7 +17,7 @@
 `__getitem__`是一個有趣的`dunder method`，它讓我們能夠使用`[]`來取值，像`list`因此可以使用`整數`或`slice`作為`index`來取值，而`dict`因此可以使用`hashable`的`obj`作為`key`來取值。
 
 ### `__iter__`的備案
-當`__getitem__`符合下列條件時，`sequence`可以在不實作`__iter__`的情下況，視為`iterable`。
+當`__getitem__`符合下列條件時，`sequence`可以在不實作`__iter__`的情況下，視為`iterable`。
 
 > `index`會從0開始呼叫，當`index`在可取值範圍內回傳其值。當超出範圍時，`raise IndexError`。
 
