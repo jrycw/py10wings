@@ -19,7 +19,7 @@ def postman(item):
         return wrapper
     return decorator
 ```
-我們的目標是研究，有幾種方法可以動態傳遞`item`給`postman`，並裝飾(更精準的說法應該是`apply`)於`# 00`中`Class`的`func`上。
+我們的目標是研究，有幾種方法可以動態傳遞`item`給`postman`，並裝飾（更精準的說法應該是`apply`）於`# 00`中`Class`的`func`上。
 
 ```python=
 # 00
@@ -587,7 +587,7 @@ if __name__ == '__main__':
 
 ## 後記
 * 這個project的目標，是希望能夠動態傳入參數至已建立的`function`中。如果是要建立一個尚不存在的`function`，經裝飾後再設為`cls`或`self`的`attribute`的話，可能會需要`types.MethodType`的幫忙。
-* 這個project我們假設`function`的`name`(`func`)是已知的，其實我們可以考慮將需要裝飾的`name(s)`作為一個`container`收集起來，也當作參數與`item`一起傳遞到`decorator`或`Meta`內，再使用迴圈處理。
+* 這個project我們假設`function`的`name`（`func`）是已知的，其實我們可以考慮將需要裝飾的`name(s)`作為一個`container`收集起來，也當作參數與`item`一起傳遞到`decorator`或`Meta`內，再使用迴圈處理。
 
 ## Code
 [本日程式碼傳送門](https://github.com/jrycw/py10wings/tree/master/src/10_term_projects/day29_project_postman)。
