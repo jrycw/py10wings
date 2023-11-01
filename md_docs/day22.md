@@ -77,7 +77,7 @@ class MyContextManager:
 ### 型態2
 `型態2`通常只接收單個或少數參數，這些參數可以用來建構於`context manager`中「暫時」想要的行為。例如`redirect` `stdout`，或是暫時覆寫某些環境變數等。
 
-於`__enter__`中，我們會先使用`getter`儲存當前的狀態，再使用`setter`實現想要的行為。至於返回值，要看當前應用的情況，即使不返回(即返回`None`)也是常見的情況。
+於`__enter__`中，我們會先使用`getter`儲存當前的狀態，再使用`setter`實現想要的行為。至於返回值，要看當前應用的情況，即使不返回（即返回`None`）也是常見的情況。
 
  於`__exit__`中，我們再使用`setter`回復原先的狀態。一樣需視情況，處理遇到的例外，並決定返回`truthy`或`falsey`。
 
@@ -188,7 +188,7 @@ class _RedirectStream(AbstractContextManager):
 ```
 `_RedirectStream`於：
 * `__init__`中，接收一個參數，為想要`redirect`的新目標。另外建立了一個`self._old_targets`的`list`來收集舊目標。
-* `__enter__`中，將當前的`sys.stdout`或`sys.stderr`附加到`self._old_targets`後，返回`self._new_target`(不是`self`)。這麼一來，我們就可以在`as`的關鍵字後，得回`self._new_target`。
+* `__enter__`中，將當前的`sys.stdout`或`sys.stderr`附加到`self._old_targets`後，返回`self._new_target`（不是`self`）。這麼一來，我們就可以在`as`的關鍵字後，得回`self._new_target`。
 * `__enter__`中，將當前的`sys.stdout`或`sys.stderr`設為`self._old_targets`所`pop`出來的值。`list`的`pop`可以同時刪除最後一個元素並將其返回，用在此處可謂恰如其分。
 
 `_RedirectStream`屬於我們的`型態2`，於`__enter__`中儲存當前狀態後，改變到新狀態，最後再於`__exit__`中恢復原來狀態。而且其註解也寫明其是`re-entrant`的，這也是為什麼我們需要`self._old_targets`幫忙來儲存一個以上的狀態。
