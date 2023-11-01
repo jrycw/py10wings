@@ -13,7 +13,7 @@
 * [[Day29]](https://ithelp.ithome.com.tw/articles/10317781)為`Project postman`，目標為研究傳遞decorator factory參數的各種可能方法。
 
 ## ECC源起
-於七月底到八月初參加了[strealit connections hackathon](https://discuss.streamlit.io/t/connections-hackathon/47574)比賽(因為參加比賽就有送一件薄帽T...)，使用`EdgeDB`的`Blocking API`實作。後來於八月底排到了`EdgeDB Cloud`的使用權限，加上又新學了`asyncio.TaskGroup`與`Exception Groups`，於是便想趁著鐵人賽，使用`EdgeDB`的`AsyncIO API`來重新實作看看。
+於七月底到八月初參加了[strealit connections hackathon](https://discuss.streamlit.io/t/connections-hackathon/47574)比賽（因為參加比賽就有送一件薄帽T...），使用`EdgeDB`的`Blocking API`實作。後來於八月底排到了`EdgeDB Cloud`的使用權限，加上又新學了`asyncio.TaskGroup`與`Exception Groups`，於是便想趁著鐵人賽，使用`EdgeDB`的`AsyncIO API`來重新實作看看。
 
 ## ECC目標
 * 建立一個`EdgeDBCloudConn`的`class`，並實作`__aenter__`與`__aeit__`，使該`class`可以作為`async context manager`使用。
