@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
 這麼做有個大問題，而且如果只利用`Class`生成一個`instance`的話，或許還觀察不出來。由於`__new__`是「每次」`Class`需要生成`instance`的時候，都會被呼叫一次。所以相當於每次生成`instance`，都會做一次`cls.func = postman(item)(cls.func)`。
 
-`# 03`中我們只呼叫了一次`inst.func`，卻看到三個訊息被印出。因為 `Class('xmas_card')`	、` Class('mail')`及`Class('package')`分別於`__new__`中都`mutate`了一次`func`。
+`# 03`中我們只呼叫了一次`inst.func`，卻看到三個訊息被印出。因為 `Class('xmas_card')`、` Class('mail')`及`Class('package')`分別於`__new__`中都`mutate`了一次`func`。
 
 ```python=
 # 03
