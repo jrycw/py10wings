@@ -189,7 +189,7 @@ print(my_func.counts())  # 2
 * `__init__`接收被裝飾的`function`，存為`self._fn`。此外也順便定義了`self._count=0`，作為底層真正記錄呼叫次數的變數。
 * `__call__`中我們將`self._count`加上`1`，並回傳`self._fn`搭配`__call__`所接收`args`及`kwargs`的呼叫結果。
 * 定義一個`counts` `property`幫助我們回傳底層的`self._counts`。
-* 將`MyCounter`裝飾在`my_func`上
+* 將`MyCounter`裝飾在`my_func`上。
 * 連續呼叫`my_func`兩次。
 ```python=
 # 02c
