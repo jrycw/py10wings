@@ -5,13 +5,13 @@ Python尋找變數的方法是透過`LEGB`，即`Local`、`Enclosing`、`Global`
 
 雖然概念是清楚的，但仍然有一些需要注意的地方。本翼中，我們將分別以`L`、`E`、`G`及`B`來代稱`Local`、`Enclosing`、`Global`及`Built-in` scope。
 
-* [[Day23]](https://ithelp.ithome.com.tw/articles/10317775) 常見錯誤1(LEGB原則)。
-* [[Day24]](https://ithelp.ithome.com.tw/articles/10317776) 常見錯誤2(global與nonlocal)。
+* [[Day23]](https://ithelp.ithome.com.tw/articles/10317775) 常見錯誤1（LEGB原則）。
+* [[Day24]](https://ithelp.ithome.com.tw/articles/10317776) 常見錯誤2（global與nonlocal）。
 
 ## UnBoundLocalError
 `UnBoundLocalError`是一個常見的錯誤。`# 01`中，當`unboundlocalerror_func`被呼叫時，會`raise UnboundLocalError`。您可能會覺得疑惑，覺得`print(x)`會因為找不到`L`的`x`，而`unboundlocalerror_func`又沒有`E`，所以會在`G`中來尋找`x`，為什麼會報錯呢？
 
-這是因為在`unboundlocalerror_func`有`x = 2`這個`assignment`。Python是在execute(或是想成compile)時就決定一個變數是不是`local variable`。由於`unboundlocalerror_func`中我們有指定`x`為`2`，Python於execute(或compile)階段就會先認定`x`是一個`local variable`。接著當我們真正呼叫`unboundlocalerror_func`時，Python會開始依照`LEGB`的原則尋找變數。由於`x`已被認定是一個`local variable`，所以Python只會在`unboundlocalerror_func`這個`L`中尋找`x`，而我們的確於定義`x`前，就使用了`print(x)`，所以會報錯。
+這是因為在`unboundlocalerror_func`有`x = 2`這個`assignment`。Python是在execute（或是想成compile）時就決定一個變數是不是`local variable`。由於`unboundlocalerror_func`中我們有指定`x`為`2`，Python於execute（或compile）階段就會先認定`x`是一個`local variable`。接著當我們真正呼叫`unboundlocalerror_func`時，Python會開始依照`LEGB`的原則尋找變數。由於`x`已被認定是一個`local variable`，所以Python只會在`unboundlocalerror_func`這個`L`中尋找`x`，而我們的確於定義`x`前，就使用了`print(x)`，所以會報錯。
 
 ```python=
 # 01
@@ -74,7 +74,7 @@ n = 10
 for adder in adders:
     print(adder(1))  # 4 4 4
 ```
-事實上，comprehesion內就像一個小的`local` scope(或可以想成一個`namespace`)，`# 02c`與`# 02d`可以改寫為`# 02e`，至於`n = 10`放前放後，並不影響答案。
+事實上，comprehesion內就像一個小的`local` scope（或可以想成一個`namespace`），`# 02c`與`# 02d`可以改寫為`# 02e`，至於`n = 10`放前放後，並不影響答案。
 ```python=
 # 02e
 n = 10
@@ -138,8 +138,8 @@ print(basket.partition2)  # ['Apple', 'Apple', 'Apple']
 ### 題意
 寫一個`metaclasses`來生成如`TargetClass`的`class`。
 * `__init__`接受任意數目的`**kwargs`。
-* 自動將`kwargs`中的`key`加上`_` (underscore)後，設為`instance variable`，其值為原`key`所相對應的`value`。
-* 自動以`kwargs`中的`key`，建立`property`，並返回相對應加上`_`(underscore)的`instance variable`。
+* 自動將`kwargs`中的`key`加上`_(underscore）`後，設為`instance variable`，其值為原`key`所相對應的`value`。
+* 自動以`kwargs`中的`key`，建立`property`，並返回相對應加上`_(underscore）`的`instance variable`。
 ```python=
 # 04
 class TargetClass:
