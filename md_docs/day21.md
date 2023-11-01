@@ -139,7 +139,7 @@ class GarageIterator:
         self._index += 1
         return car
 ```
-`方法5`我們於`__iter__`中回傳`GarageIterator`的`instance`，其接受一個參數`self`(即`Garage`所生成的`instance`)。
+`方法5`我們於`__iter__`中回傳`GarageIterator`的`instance`，其接受一個參數`self`（即`Garage`所生成的`instance`）。
 
 我們逐一比對`GarageIterator`所生成的`instance`，是否會符合我們對`iterator`的定義：
 * 可以使用`obj`的`__next__`連續取值。

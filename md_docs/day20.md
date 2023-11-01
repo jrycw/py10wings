@@ -25,7 +25,7 @@
 
 
 ### `__contains__`的備案
-[`__contains__`](https://docs.python.org/3/reference/datamodel.html#object.__contains__)是Python用來處理[membership test](https://docs.python.org/3/reference/expressions.html#membership-test-details)的`dunder method`。當使用`in obj`，而`obj`沒有實作`__contains__`，會改使用`__iter__`，如果再沒有實作`__iter__` 會改使用`__getitem__`。
+[`__contains__`](https://docs.python.org/3/reference/datamodel.html#object.__contains__)是Python用來處理[membership test](https://docs.python.org/3/reference/expressions.html#membership-test-details)的`dunder method`。當使用`in obj`，而`obj`沒有實作`__contains__`時，會改使用`__iter__`。如果再沒有實作`__iter__`的話，會改使用`__getitem__`。
 
 ### `__reversed__`的備案
 [`__reversed__`](https://docs.python.org/3/reference/datamodel.html#object.__reversed__)一般被Python的`built-in` `reversed`所呼叫。當使用`reversed(obj)`，而`obj`沒有實作`__reversed__`時，會使用`__getitem___`和`__len__`來達成`reversed`的功能。
