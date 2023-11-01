@@ -103,7 +103,7 @@ subgroup:
       | TypeError: 2
       +------------------------------------
 ```
-如果是使用`split`的話，則會將結果分為選中與跟沒選中兩個`EG`(但當兩邊有一邊是空的話，則會回傳`None`，不是空的`EG`)。
+如果是使用`split`的話，則會將結果分為選中與跟沒選中兩個`EG`（但當兩邊有一邊是空的話，則會回傳`None`，不是空的`EG`）。
 ```python=
 # 01 
     match, rest = eg.split(lambda e: isinstance(e, TypeError))
@@ -494,7 +494,7 @@ except* OSError as e:
 ```
 從`traceback`可以清楚看出：
 * `except* ValueError as e`由於是顯性`raise e`，所以有自己的`metadata`，獨立了一個`EG`出來。
-* 而`except* OSError as e`於`raise`前，也是一個獨立的`EG`(記得`as e`之後，`e`一定是`EG`嗎？)，但因其又重新`raise`，所以會與還沒有被處理過的`TypeError`合併，成為最後被`raise`的`EG`。
+* 而`except* OSError as e`於`raise`前，也是一個獨立的`EG`（記得`as e`之後，`e`一定是`EG`嗎？），但因其又重新`raise`，所以會與還沒有被處理過的`TypeError`合併，成為最後被`raise`的`EG`。
 ```
 *ValueError: ExceptionGroup('eg', [ValueError(1), ExceptionGroup('nested', [ValueError(6)])])
 *OSError: ExceptionGroup('eg', [OSError(3), ExceptionGroup('nested', [OSError(4)])])
