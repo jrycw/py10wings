@@ -254,11 +254,11 @@ async def main():
     print("Both tasks have completed now.")
 ```
 * `async with`會自動`await`，直到`tg.create_task`所生成的`task`完成為止。
-* 於等待期間，新的`task`還是可以加入(例如可以將`tg`可以傳到另一個`coroutine`內，再次使用`tg.create_task`)。
+* 於等待期間，新的`task`還是可以加入（例如可以將`tg`可以傳到另一個`coroutine`內，再次使用`tg.create_task`）。
 * 一旦所有`task`完成，離開`async with`的範圍後，就無法添加新`task`。
 * 於執行`task`時，當遇到第一個非`asyncio.CancelledError`的例外時，所有剩下的`task`都會被取消，也不能加入新的`task`。此時，若程式還在`async with`的範圍內，則直接在`async with`內的`task`也會被取消。至於最後的`asyncio.CancelledError`只會形成`await`的情況，不會傳遞出`async with`。
-* 當所有`task`完成後，若有例外發生的話，會集合成`ExceptionGroup`或`BaseExceptionGroup`(例外為`KeyboardInterrupt`及`SystemExit`時)。
-* 程式若於離開`async with`出錯時(`__aexit__`被一個`exception set`呼叫時)，將會被視為任何一個`task`發生例外一樣，取消所有`task`，最後將無法取消的`task`集合成`EG`再`reraise`。傳入`__aexit__`的例外除非是`asyncio.CancelledError`，否則也會加入`EG`中(`KeyboardInterrupt`及`SystemExit`一樣是例外)。
+* 當所有`task`完成後，若有例外發生的話，會集合成`ExceptionGroup`或`BaseExceptionGroup`（例外為`KeyboardInterrupt`及`SystemExit`時）。
+* 程式若於離開`async with`出錯時（`__aexit__`被一個`exception set`呼叫時），將會被視為任何一個`task`發生例外一樣，取消所有`task`，最後將無法取消的`task`集合成`EG`再`reraise`。傳入`__aexit__`的例外除非是`asyncio.CancelledError`，否則也會加入`EG`中(`KeyboardInterrupt`及`SystemExit`一樣是例外)。
 
 #### 以`tg.create_task`代替`asyncio.create_task`
 `# 03a`寫法相比於前面兩種精簡了不少，`task`不需顯性的`await`，當任一`task`遇到錯誤時也會自動取消。
@@ -570,8 +570,8 @@ def my_func():
 接著實作`retry`:
 * 於一開始做一個`max_retries`的檢查，若無法通過的話，`raise EG`。
 * 接下來的`dec`是真正接收`my_func`的`decorator` `function`，其會返回內部真正執行計算的`wrapper`。
-* 於`wrapper`內最多需執行`max_retries+1`次(`1`是指`my_func`本身要先執行一次，如果有不成功的情況，才會進行`max_retries`次的retry)。當成功得到結果後，立即返回，若有例外的話，就累積到`exceptions`中。在經過`max_retries+1`次重新呼叫`my_func`仍然沒有返回的話，代表有例外，於最後生成一個`EG`來包住`exceptions`並返回。
-* 至於最後`return dec`或是`return dec(func)`這段，是方便我們可以同時使用`@retry`及`@retry()`兩種語法(可參考[[Day05]](https://ithelp.ithome.com.tw/articles/10317757)的內容)。
+* 於`wrapper`內最多需執行`max_retries+1`次（`1`是指`my_func`本身要先執行一次，如果有不成功的情況，才會進行`max_retries`次的retry）。當成功得到結果後，立即返回，若有例外的話，就累積到`exceptions`中。在經過`max_retries+1`次重新呼叫`my_func`仍然沒有返回的話，代表有例外，於最後生成一個`EG`來包住`exceptions`並返回。
+* 至於最後`return dec`或是`return dec(func)`這段，是方便我們可以同時使用`@retry`及`@retry()`兩種語法（可參考[[Day05]](https://ithelp.ithome.com.tw/articles/10317757)的內容）。
 ```python=
 # 04
 import random
