@@ -236,7 +236,7 @@ my_inst2 = MyClass2(**kwds)
 
 ## 當日筆記
 * 當取用不在當前scope的變數時，要特別小心，因為此變數可能會被指派為其它值或被`mutate`，而發生預期外的行為。
-* 在迴圈中，指定`function`(或`lambda`)的參數時，`keyword arguments`可能是您的好幫手。
+* 在迴圈中，指定`function`（或`lambda`）的參數時，`keyword arguments`可能是您的好幫手。
 
 ## 參考資料
 * 本日內容大多收集整理自[Python 3:Deep Dive](https://github.com/fbaptiste/python-deepdive)。這些概念`Dr. Fred Baptiste`於多個單元中，都曾反覆強調。
