@@ -17,7 +17,7 @@ __exit__(exc_type, exc_val, exc_tb)
 ```
 其接收三個參數：
 * `exc_type`為例外的`class`。
-* `exc_val`為例外的`obj`(或想成`exc_type`的`instance`)。
+* `exc_val`為例外的`obj`（或想成`exc_type`的`instance`）。
 * `exc_tb`為一個`traceback` `obj`。
 
 當`__exit__`回傳值為：
@@ -79,7 +79,7 @@ class MyContextManager:
 
 於`__enter__`中，我們會先使用`getter`儲存當前的狀態，再使用`setter`實現想要的行為。至於返回值，要看當前應用的情況，即使不返回（即返回`None`）也是常見的情況。
 
- 於`__exit__`中，我們再使用`setter`回復原先的狀態。一樣需視情況，處理遇到的例外，並決定返回`truthy`或`falsey`。
+ 於`__exit__`中，我們再使用`setter`回復原先的狀態。一樣需視情況來處理遇到的例外，並決定返回`truthy`或`falsey`。
 
 ```python=
 # 02 PSEUDO CODE!!!
@@ -111,7 +111,7 @@ Context Manager可以分為`single use`、`reusable`及`reentrant`三種[類型]
 `single use`是最常用的類型。每次需要使用這類型的`context manager`都需重新建立，重複使用將會`raise RuntimeError`。建議的使用方法是，盡量使用`with MyContextManager as ctx_mgr`的語法，而不要將其先存在一個變數，例如`ctx_mgr = MyContextManager()`，然後再`with ctx_mgr`，來降低發生重複使用的機率。
 
 ### reentrant
-`reentrant`是指在`with ctx`區塊內再產生一個或以上的`with ctx`區塊。`redirect_stdout`與`redirect_stderr`即是此種類型，我們稍後會欣賞其源碼。
+`reentrant`是指在`with ctx`區塊內再產生一個以上的`with ctx`區塊。`redirect_stdout`與`redirect_stderr`即是此種類型，我們稍後會欣賞其源碼。
 
 ### reusable
 `reusable`是排除有`reentrant`特性的`context manager`。其可以多次呼叫，但是如果將其當`reentrant`來使用時，會報錯或出現非預期的行為。
