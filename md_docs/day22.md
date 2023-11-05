@@ -194,8 +194,8 @@ class _RedirectStream(AbstractContextManager):
 `_RedirectStream`屬於我們的`型態2`，於`__enter__`中儲存當前狀態後，改變到新狀態，最後再於`__exit__`中恢復原來狀態。而且其註解也寫明其是`re-entrant`的，這也是為什麼我們需要`self._old_targets`幫忙來儲存一個以上的狀態。
 
 ## 參考資料
-* [Python Morsels - Creating a context manager in Python](https://www.pythonmorsels.com/creating-a-context-manager/)
-* [Python for network engineers - VI. Basics of object-oriented programming - 23. Special methods - Protocols - Context Manager](https://pyneng.readthedocs.io/en/latest/book/23_oop_special_methods/context_manager.html)
+* [Python Morsels - Creating a context manager in Python](https://www.pythonmorsels.com/creating-a-context-manager/)。
+* [Python for network engineers - VI. Basics of object-oriented programming - 23. Special methods - Protocols - Context Manager](https://pyneng.readthedocs.io/en/latest/book/23_oop_special_methods/context_manager.html)。
 
 ## Code
 [本日程式碼傳送門](https://github.com/jrycw/py10wings/tree/master/src/07_protocols/day22_context_manager_protocol)。
