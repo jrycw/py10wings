@@ -74,7 +74,7 @@ n = 10
 for adder in adders:
     print(adder(1))  # 4 4 4
 ```
-事實上，comprehesion內就像一個小的`local` scope（或可以想成一個`namespace`），`# 02c`與`# 02d`可以改寫為`# 02e`，至於`n = 10`放前放後，並不影響答案。
+事實上，`comprehension`內就像一個小的`local` scope（或可以想成一個`namespace`），`# 02c`與`# 02d`可以改寫為`# 02e`，至於`n = 10`放前放後，並不影響答案。
 ```python=
 # 02e
 n = 10
@@ -161,9 +161,9 @@ class TargetClass:
 ```
 ### 解題思路
 * 首先我們讓`MyType1`繼承`type`。
-* 於`MyType1.__new__`中使用`super().__new__`生成`cls`
+* 於`MyType1.__new__`中使用`super().__new__`生成`cls`。
 * 建立一個`init function`，其內部邏輯與上述`TargetClass.__init__`相同，並指定給`cls.__init__`。
-* 針對`kwargs`打個迴圈，將其`key`依續設為`property`，並返回相對應的底層加上`_(underscore)`的`instance variable`。
+* 針對`kwargs`打個迴圈，將其`key`依序設為`property`，並返回相對應的底層加上`_(underscore)`的`instance variable`。
 * 最後回傳`cls`。
 
 這麼一來我們就可以使用`MyType1`作為`MyClass1`的`metaclass`，並搭配`kwds`作為`MyType1.__new__`的最後一個參數`**kwargs`，來生成`MyClass1`，及使用`my_inst1 = MyClass1(**kwds)`生成`my_inst1`。
@@ -193,7 +193,7 @@ my_inst1 = MyClass1(**kwds)
 
 ...
 ```
-但是如果觀察`my_inst1.x`與`my_inst1.y`，卻發現其值都為`2`，請問您有看出問題在哪嗎？
+但是如果觀察`my_inst1.x`與`my_inst1.y`，卻發現其值都為`2`。
 ```python=
 >>> vars(my_inst1)  # {'_x': 1, '_y': 2}
 >>> my_inst1.x, my_inst1.y  # 2 2
@@ -240,9 +240,9 @@ my_inst2 = MyClass2(**kwds)
 
 ## 參考資料
 * 本日內容大多收集整理自[Python 3:Deep Dive](https://github.com/fbaptiste/python-deepdive)。這些概念`Dr. Fred Baptiste`於多個單元中，都曾反覆強調。
-    * 其中class body部份可以參考[Part 4-Section 02-Classes-14 Class Body Scope](https://github.com/fbaptiste/python-deepdive/blob/main/Part%204/Section%2002%20-%20Classes/14%20-%20Class%20Body%20Scope.ipynb)
-    * `牛刀小試`的例題改寫自參考[Part 4-Section 14 -Metaprogramming-11 Metaprogramming Application 1](https://github.com/fbaptiste/python-deepdive/blob/main/Part%204/Section%2014%20-%20Metaprogramming/11%20-%20Metaprogramming%20Application%201.ipynb)
-* [The Hitchhiker’s Guide to Python](https://docs.python-guide.org/writing/gotchas/)
+    * 其中class body部份可以參考[Part 4-Section 02-Classes-14 Class Body Scope](https://github.com/fbaptiste/python-deepdive/blob/main/Part%204/Section%2002%20-%20Classes/14%20-%20Class%20Body%20Scope.ipynb)。
+    * `牛刀小試`的例題改寫自參考[Part 4-Section 14 -Metaprogramming-11 Metaprogramming Application 1](https://github.com/fbaptiste/python-deepdive/blob/main/Part%204/Section%2014%20-%20Metaprogramming/11%20-%20Metaprogramming%20Application%201.ipynb)。
+* [The Hitchhiker’s Guide to Python](https://docs.python-guide.org/writing/gotchas/)。
 
 
 ## Code
