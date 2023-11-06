@@ -15,14 +15,14 @@
     * A new standard exception type, the ExceptionGroup, which represents a group of unrelated exceptions being propagated together.
     * A new syntax except* for handling ExceptionGroups.
 
-PEP654摘要裡說明，`ExceptionGroup` 的功用是可以「同時」收集「沒有相關」的`exception`，往後傳遞，並由`except*`語法來處理例外。
+PEP654摘要裡說明，`ExceptionGroup` 的功用是可以「同時」收集「沒有相關」的`exception`往後傳遞，並由`except*`語法來處理例外。
 
 ## PEP654動機
 由於Python3.11前的例外處理機制是，一次最多只能處理一個例外。但是有些情況，我們希望能同時`raise`多個「沒有關係」的例外，這在沒有引進新語法的情況下很難做到。
 
 文中舉了五個例子：
 1. Concurrent errors
-  Python的`asyncio.gather`是一般大家處理`concurrent`問題時，會呼叫的api。它提供了一個參數`return_exceptions`來協助例外處理，當其為`True`時，會返回一個`list`，裡面包含所有成功的結果及例外；當其為`False`時，當遇到第一個例外時就會馬上`raise`。但使用`asyncio.gather`無法同時處理多種例外，雖然有像`Trio`這樣的library[試著解決這些問題](https://peps.python.org/pep-0654/#programming-without-except)，但使用起來比較不便。
+  Python的`asyncio.gather`是一般大家處理`concurrent`問題時，會呼叫的API。它提供了一個參數`return_exceptions`來協助例外處理，當其為`True`時，會返回一個`list`，裡面包含所有成功的結果及例外；當其為`False`時，當遇到第一個例外時就會馬上`raise`。但使用`asyncio.gather`無法同時處理多種例外，雖然有像`Trio`這樣的library[試著解決這些問題](https://peps.python.org/pep-0654/#programming-without-except)，但使用起來比較不便。
 2. Multiple failures when retrying an operation
   假如一個操作被retry多次後失敗，我們會想知道其全部失敗的情況，而不是最後一個。
 3. Multiple user callbacks fail
@@ -36,13 +36,13 @@ PEP654摘要裡說明，`ExceptionGroup` 的功用是可以「同時」收集「
 `EG`與`except*`並非想要全面取代`Exception`與`except`語法，只是希望多提供一個選擇給開發者。已存在的library，若決定改使用`EG`與`except*`語法，應視為`API-breaking change`。文件建議應該引入新的API呼叫邏輯，而不要直接修改既有的。
 
 ## BaseExceptionGroup與ExceptionGroup
-為了解決上述問題，Python3.11引進兩個新的例外型態，`BaseExceptionGroup`與`Exception`。其中`BaseExceptionGroup`繼承`BaseException`，而`ExceptionGroup`同時繼承`BaseExceptionGroup`及`Exception`。從這邊可以觀察出`ExceptionGroup`除了是`BaseExceptionGroup`，也是我們熟悉的`Exception`。
+為了解決上述問題，Python3.11引進兩個新的例外型態，`BaseExceptionGroup`與`ExceptionGroup`。其中`BaseExceptionGroup`繼承`BaseException`，而`ExceptionGroup`同時繼承`BaseExceptionGroup`及`Exception`。從這邊可以觀察出`ExceptionGroup`除了是`BaseExceptionGroup`，也是我們熟悉的`Exception`。
 ```python=
 class BaseExceptionGroup(BaseException): ... 
 class ExceptionGroup(BaseExceptionGroup, Exception):
 ```   
 
-`BaseExceptionGroup`與`Exception`的`signature`如下：
+`BaseExceptionGroup`與`ExceptionGroup`的`signature`如下：
 ```python=
 BaseExceptionGroup(message, exceptions) : ...
 ExceptionGroup(message, exceptions) : ...
@@ -136,7 +136,7 @@ rest:
       | OSError: 4
       +------------------------------------
 ```
-`subgroup`與`split`除了可以接受`callable`外，也可以直接接受例外。
+`subgroup`與`split`除了可以接受`callable`外，也可以直接接受例外，
 ```python=
 # 01
     ...
@@ -152,7 +152,7 @@ rest:
 ```
 
 ### Subclassing Exception Groups
-與`Exception`一樣，我們可以透過繼承`EG`來客製化自己的`EG`。當然您可以選擇自己實作`subgroup`與`split`。但是文件建議實作`derive`，因為無論呼叫`subgroup`或`split`，`derive`都會被使用。
+與`Exception`一樣，我們可以透過繼承`EG`來客製化自己的`EG`。當然您可以選擇自己實作`subgroup`與`split`，但是文件建議實作`derive`，因為無論呼叫`subgroup`或`split`，`derive`都會被使用。
 `# 02`中我們繼承了`ExceptionGroup`，建立了客製化的`MyExceptionGroup` `class`。
 * 於`__new__`中，添加給`obj`一個`errcode` `attribute`。請注意文件中特別提到，必須使用`__new__`而不能使用`__init__`，因為`BaseExceptionGroup.__new__`需要知道我們接收的參數。
 * 於`derive`中，回傳了`MyExceptionGroup`的`instance`。如果沒有`overwrite` `derive`的話，當回傳全都是`Exception`的`instance`時會回傳`ExceptionGroup`，否則回傳`BaseExceptionGroup`。
@@ -290,7 +290,7 @@ except ValueError as e:
     print(f'caught ValueError: {e!r}') # caught ValueError: ValueError(12)
 ```
 
-### `except*`只考慮`try`中的`EG`或`Exception`
+### except*只考慮try中的EG或Exception
 `except*`只考慮`try`中的`EG`，至於在`except*`中再被`raise`的`EG`或`Exception`會直接`raise`，不會進到剩餘的`except*`。
 
 `# 07a`中，我們於`except* ValueError`又`raise`了一個`two` `EG`。
@@ -344,7 +344,7 @@ ValueError: 2
 ```
 
 ### Chaining
-#### `raise` `EG` in `except*`
+#### Raise EG in except*
 於`except*`中`raise` `EG`，會有chaining的效果。這是一個有趣的行為，可能直接從文件示例來看，會比較容易了解。
 
 `# 08a`於`except* ValueError`中又`raise`了一個`EG`。
@@ -419,11 +419,11 @@ During handling of the above exception, another exception occurred:
     | KeyError: 'y'
     +------------------------------------
 ```
-#### `raise` `Exception` in `except*`
+#### Raise Exception in except*
 文件對此段的說明是：
 > Raising a new instance of a naked exception does not cause this exception to be wrapped by an exception group. Rather, the exception is raised as is, and if it needs to be combined with other propagated exceptions, it becomes a direct child of the new exception group created for that:
 
-而我們的理解是當於`except*`中`raise` `Exception`時，若其需要與其它`EG`合併的話，會生成新的`EG`，並將此`Exception`加入到最後。雖然與chaining不太一樣，但純看`trackback`的感覺卻很相似，所以我們決定將此段一起整理到這邊。
+而我們的理解是，當於`except*`中`raise` `Exception`時，若其需要與其它`EG`合併的話，會生成新的`EG`，並將此`Exception`加入到最後。雖然與chaining不太一樣，但純看`trackback`的感覺卻很相似，所以我們決定將此段一起整理到這邊。
 
 ```python=
 # 08c
@@ -450,8 +450,8 @@ except* ValueError:
     | KeyError: 'x'
     +------------------------------------
 ```
-### Raising exceptions in an except* block
-此段文件花了不少篇幅講解，但主要就是說明下面兩種例外處理方式，即`raise e`與`raise`其實是不一樣的。差別是當顯性地`raise e`時，其會有自己的`metadata`，
+### Raise exceptions in except*
+此段文件花了不少篇幅講解，但主要就是說明下面兩種例外處理方式，即`raise e`與`raise`其實是不一樣的。差別是當顯性地`raise e`時，其會有自己的`metadata`。
 ```python=
 def foo():                           | def foo():
     try:                             |     try:
@@ -544,7 +544,7 @@ except* TypeError as e:
 print(eg.foo)  # 'foo'
 ```
 ### 語法整理
-不能於同一個`try`中，混合使用`except`及`except*`。
+* 不能於同一個`try`中，混合使用`except`及`except*`。
 ```python=1
 try:
     ...
@@ -554,7 +554,7 @@ except* CancelledError:  # <- SyntaxError:
     pass                 #    combining ``except`` and ``except*``
                          #    is prohibited
 ```
-可以使用傳統的`except`直接補抓`ExceptionGroup`，但不能使用`except*`。
+* 可以使用傳統的`except`直接補抓`ExceptionGroup`，但不能使用`except*`。
 ```python=
 try:
     ...
@@ -571,14 +571,14 @@ try:
 except* (TypeError, ExceptionGroup):  # <- Runtime error
     pass
 ```
-不能僅使用`except*`。
+* 不能僅使用`except*`。
 ```python=
 try:
     ...
 except*:   # <- SyntaxError
     pass
 ```
-有趣的是因為`ExceptionGroup`是繼承`Exception`而來，所以我們可以使用`except* Exception as ex`，此時`ex`一樣會是`EG`。
+* 有趣的是，因為`ExceptionGroup`是繼承`Exception`而來，所以我們可以使用`except* Exception as ex`，此時`ex`一樣會是`EG`。
 ```python=
 # 11
 try:
