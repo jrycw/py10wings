@@ -5,7 +5,7 @@
 * 應用3：context manager
 
 ## 應用1：asyncio
-`asyncio`是開發`Exception Groups`與`except*`的主要推手之一。Python3.11前處理`asyncio`最常使用的方法是`asyncio.gather`與`asyncio.wait`，而於Python3.11新添加了`asyncio.TaskGroup`。以下我們將分別使用三種方法來同時處理`# 00`內的四個`coroutine function`。
+`asyncio`是開發`Exception Groups`與`except*`的主要推手之一。在Python3.11前，處理`asyncio`相關問題最常使用的方法是`asyncio.gather`與`asyncio.wait`，而於Python3.11新添加了`asyncio.TaskGroup`。以下我們將分別使用三種方法來同時處理`# 00`內的四個`coroutine function`。
 ```python=
 # 00
 async def coro1():
@@ -693,7 +693,7 @@ handling DBCloseError...
 * 於離開`with Connection() as conn`時，`__exit__`中的`self._client.close()`會`raise DBCloseError`。
 * 於最外層我們試著捕捉`HTTPError`與`DBCloseError`，結果只會抓到`DBCloseError`。
 
-我們真正想做的操作是`conn.do_something()`（無例外）及`conn.send_report()`（有例外），但因為離開`context manager`時也有例外，導致我們於外層只能捕捉到`context manager`的例外，而無法捕捉到真正操作發生的例外。
+我們真正想做的操作是`conn.do_something()`（無例外）及`conn.send_report()`（有例外），但因為離開`context manager`時也有例外，導致我們於外層只能捕捉到`context manager`的例外，而無法捕捉到真正操作時，所發生的例外。
 
 ### try-except*
 `except*`語法可以改變這種行為。
@@ -729,13 +729,13 @@ handling DBCloseError...
 ```
 
 ## 參考資料
-* [import asyncio: Learn Python's AsyncIO by EdgeDB](https://www.youtube.com/playlist?list=PLhNSoGM2ik6SIkVGXWBwerucXjgP1rHmB)
-* [Lukasz Langa Keynote PyCon Colombia 2023](https://www.youtube.com/watch?v=B7U049ll4Rs)
-* [How Exception Groups Will Improve Error Handling in AsyncIO - Łukasz Langa | Power IT Conference](https://www.youtube.com/watch?v=Lfe2zsGS0Js)
-* [Asyncio Evolved: Enhanced Exception Handling with TaskGroup in Python 3.11 — Junya Fukuda](https://www.youtube.com/watch?v=FvWXyAXyb4Q)
-* [SuperFastPython - How to use asyncio.TaskGroup](https://superfastpython.com/asyncio-taskgroup/)
-* [Real Python - How to Catch Multiple Exceptions in Python](https://realpython.com/python-catch-multiple-exceptions/)
-* [Real Python - Python 3.11 Preview: Task and Exception Groups](https://realpython.com/python311-exception-groups/#exception-groups-and-except-in-python-311)
+* [import asyncio: Learn Python's AsyncIO by EdgeDB](https://www.youtube.com/playlist?list=PLhNSoGM2ik6SIkVGXWBwerucXjgP1rHmB)。
+* [Lukasz Langa Keynote PyCon Colombia 2023](https://www.youtube.com/watch?v=B7U049ll4Rs)。
+* [How Exception Groups Will Improve Error Handling in AsyncIO - Łukasz Langa | Power IT Conference](https://www.youtube.com/watch?v=Lfe2zsGS0Js)。
+* [Asyncio Evolved: Enhanced Exception Handling with TaskGroup in Python 3.11 — Junya Fukuda](https://www.youtube.com/watch?v=FvWXyAXyb4Q)。
+* [SuperFastPython - How to use asyncio.TaskGroup](https://superfastpython.com/asyncio-taskgroup/)。
+* [Real Python - How to Catch Multiple Exceptions in Python](https://realpython.com/python-catch-multiple-exceptions/)。
+* [Real Python - Python 3.11 Preview: Task and Exception Groups](https://realpython.com/python311-exception-groups/#exception-groups-and-except-in-python-311)。
 ## 備註
 註1：[Łukasz Langa](https://lukasz.langa.pl/a072a74b-19d7-41ff-a294-e6b1319fdb6e/)是Python基金會雇請的第一位`CPython Developer in Residence`，並進入第三年任期。此外，他也常在各地的PyCon演講，錄影大多可以在YouTube上找到。我們覺得他的講解十分清楚，在他身上學了很多，非常感謝他的分享。
 
