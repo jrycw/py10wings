@@ -89,7 +89,7 @@ def _populate_qry_args(qry_args_str: str) -> tuple[Any, ...]:
 ```
 
 #### `_populate_qry_kwargs`
-將接收到的`str`以`;`分隔，接著嘗試使用`exec(kwarg_str.strip(), globals(), qry_kwargs)`，將`kwarg_str` `populate`到`qry_kwargs`中，並於最後返回`qry_kwargs`。
+將接收到的`str`以`;`分隔，接著嘗試使用`exec(kwarg_str.strip(), globals(), qry_kwargs)`，將`kwarg_str`populate到`qry_kwargs`中，並於最後返回`qry_kwargs`。
 
 ```python=
 def _populate_qry_kwargs(qry_kwargs_str: str) -> dict[str, Any]:
