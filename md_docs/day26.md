@@ -59,7 +59,7 @@ awaitable asyncio.gather(*aws, return_exceptions=False)
 ```
 其可接收多個[awaitable](https://docs.python.org/3/library/asyncio-task.html#awaitables)，並有一個`return_exceptions`的flag。當`return_exceptions`為`True`時，會將例外與結果包在一個`list`中返回。如果為`False`的話，遇到第一個例外就會報錯，但是其它的`aws`並不會取消，而是會繼續執行。
 
-#### `return_exceptions`為`True`時
+#### return_exceptions為True時
 ```python=
 # 01a
 ...
@@ -94,7 +94,7 @@ Rest: coro4 is good
 ```
 從`results`中我們可以得到所以的結果及例外，但需要利用多個`if`或是新的`structural pattern matching`來分出各個情況。
 
-#### `return_exceptions`為`False`時
+#### return_exceptions為False時
 ```python=
 # 01b
 ...
@@ -143,7 +143,7 @@ for d in done:
 一般`asyncio.wait`之後，我們會針對`pending`打一個迴圈，來取消未完成的工作。然後再對`done`打一個迴圈，取出其結果。
 
 
-#### `return_when`為`ALL_COMPLETED`
+#### return_when為ALL_COMPLETED
 我們使用預設的`return_when=ALL_COMPLETED`來解決問題。
 * 處理`pending`時，`Or Chen`建議對每一個`pending` `task`都再`await asyncio.wait`一小段時間，確保它們都能順利被取消。
 * 處理`done`時，由於裡面同時有`result`及`Exception`，所以必須在`try-except`中分開處理。
@@ -260,7 +260,7 @@ async def main():
 * 當所有`task`完成後，若有例外發生的話，會集合成`ExceptionGroup`或`BaseExceptionGroup`（例外為`KeyboardInterrupt`及`SystemExit`時）。
 * 程式若於離開`async with`出錯時（`__aexit__`被一個`exception set`呼叫時），將會被視為任何一個`task`發生例外一樣，取消所有`task`，最後將無法取消的`task`集合成`EG`再`reraise`。傳入`__aexit__`的例外除非是`asyncio.CancelledError`，否則也會加入`EG`中(`KeyboardInterrupt`及`SystemExit`一樣是例外)。
 
-#### 以`tg.create_task`代替`asyncio.create_task`
+#### 以tg.create_task代替asyncio.create_task
 `# 03a`寫法相比於前面兩種精簡了不少，`task`不需顯性的`await`，當任一`task`遇到錯誤時也會自動取消。
 
 ```python=
@@ -380,9 +380,9 @@ handling 1
 我們先假設在不需要處理例外的情況下，如何解決這個問題。
 我們將此問題拆成四個`function`、`main`	、`download_many`	、`download`及`dump_json`
 
-#### `main`
+#### main
 * 為`asyncio`的入口。
-* 生成一個`task_info`，格式為`list`內含三個`tuple`。每個`tuple`的第一個元素為`task`的名字，第二個元素則為想下載的網址，
+* 生成一個`task_info`，格式為`list`內含三個`tuple`。每個`tuple`的第一個元素為`task`的名字，第二個元素則為想下載的網址。
 * 使用`httpx`library來發出`request`。
 * 使用`built-in`的`contextvars.ContextVar`功能來取得及設定`httpx.AsyncClient`，如此可以免去顯性傳遞`client`。
 * `await`實際工作的`download_many`。
@@ -504,7 +504,7 @@ async def download(url):
     content = resp.json()
     dump_json(file, content)
 ```
-於`main`中，我們可以使用`except*`語法來補捉所有發生的例外。
+於`main`中，我們可以使用`except*`語法來捕捉所有發生的例外。
 ```python=
 # 03e
 ...
@@ -546,7 +546,7 @@ task=<Task finished name='Get user_1_comments' coro=<download() done, defined at
 ## 應用2：retry
 這個小節我們試著使用`decorator`並搭配`EG`。
 
-我們的目標是建立一個`retry`的`decorator function`:
+我們的目標是建立一個`retry`的`decorator function`：
 * 其可利用`@retry(max_retries=n)`的語法，來對被裝飾的`function`，進行`n`次的retry。
 * 或是利用`@retry`的語法，來對被裝飾的`function`，執行預設次數（預設1次）的retry。
 * 若retry結束，被裝飾的`function`仍然無法成功完成的話，會收集所有retry過程中的例外，生成一個`EG`返回。
@@ -567,7 +567,7 @@ def my_func():
         case _:
             return lot
 ```
-接著實作`retry`:
+接著實作`retry`：
 * 於一開始做一個`max_retries`的檢查，若無法通過的話，`raise EG`。
 * 接下來的`dec`是真正接收`my_func`的`decorator` `function`，其會返回內部真正執行計算的`wrapper`。
 * 於`wrapper`內最多需執行`max_retries+1`次（`1`是指`my_func`本身要先執行一次，如果有不成功的情況，才會進行`max_retries`次的retry）。當成功得到結果後，立即返回，若有例外的話，就累積到`exceptions`中。在經過`max_retries+1`次重新呼叫`my_func`仍然沒有返回的話，代表有例外，於最後生成一個`EG`來包住`exceptions`並返回。
@@ -602,7 +602,7 @@ def retry(func=None, /, max_retries=1):
     return dec(func)
 ...
 ```
-最後執行程式，可能會有多種結果。而透過`except*`這個新語法，我們可以補抓到所有發生過的例外。
+最後執行程式，可能會有多種結果。而透過`except*`這個新語法，我們可以捕捉到所有發生過的例外。
 ```python=
 # 04
 ...
@@ -639,9 +639,9 @@ my_func is running (2/2)
 (ValueError('2'), TypeError('1'))
 ```
 ## 應用3：context manager
-這個小節我們準備建立一個實作有`context mnager protocol`的`class`，並觀察其於`__exit__`報錯時，於外層補抓例外的行為。
+這個小節我們準備建立一個實作有`context mnager protocol`的`class`，並觀察其於`__exit__`報錯時，於外層捕捉例外的行為。
 
-### `try-except`
+### try-except
 我們先觀察傳統`try-except`的行為。
 ```python=
 # 05a
@@ -691,14 +691,14 @@ handling DBCloseError...
 * `conn.do_something()` 正常執行，沒有例外。
 * `conn.send_report()`會`raise` `HTTPError`。
 * 於離開`with Connection() as conn`時，`__exit__`中的`self._client.close()`會`raise DBCloseError`。
-* 於最外層我們試著補抓`HTTPError`與`DBCloseError`，結果只會抓到`DBCloseError`。
+* 於最外層我們試著捕捉`HTTPError`與`DBCloseError`，結果只會抓到`DBCloseError`。
 
-我們真正想做的操作是`conn.do_something()`（無例外）及`conn.send_report()`（有例外），但因為離開`context manager`時也有例外，導致我們於外層只能補抓到`context manager`的例外，而無法補捉到真正操作發生的例外。
+我們真正想做的操作是`conn.do_something()`（無例外）及`conn.send_report()`（有例外），但因為離開`context manager`時也有例外，導致我們於外層只能捕捉到`context manager`的例外，而無法捕捉到真正操作發生的例外。
 
-### `try-except*`
+### try-except*
 `except*`語法可以改變這種行為。
 
-`# 05b`中。我們改在`__exit__`中先使用`try-except`補抓例外。如果有例外的話，我們將此例外與我們顯性`raise`的`e`，一起用一個`EG`包起來後回傳。
+`# 05b`中。我們改在`__exit__`中先使用`try-except`捕捉例外。如果有例外的話，我們將此例外與我們顯性`raise`的`e`，一起用一個`EG`包起來後回傳。
 ```python=
 # 05b
 ...
@@ -722,7 +722,7 @@ if __name__ == '__main__':
     except* DBCloseError:
         print('handling DBCloseError...')
 ```
-這麼一來，我們在外層就可以同時補抓到兩種例外。
+這麼一來，我們在外層就可以同時捕捉到兩種例外。
 ```
 handling HTTPError...
 handling DBCloseError...
