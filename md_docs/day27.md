@@ -26,7 +26,7 @@
 ## EdgeDB
 [EdgeDB](https://www.edgedb.com/)建基於`Postgres`之上，有著自己的`EdgeQL`語法與type system。其`EdgeQL query`會於底層compile為相對應的`Postgres query`，由於其不是一個`ORM`，所以理論上所有想對`Postgres`做的操作，應該都能使用更簡潔的`EdgeQL`語法達成。
 
-Co-Founder兼CEO的[Yury Selivanov](https://github.com/1st1)是Python asyncio背後的主要推手，也是asyncio威力加強版[uvloop](https://github.com/MagicStack/uvloop)的主要開發者。因此不難想像`EdgeDB`從一開始就以async思維開發，因此其效率極高。下圖為官方的benchmark。
+Co-Founder兼CEO的[Yury Selivanov](https://github.com/1st1)是Python asyncio背後的主要推手，也是asyncio威力加強版[uvloop](https://github.com/MagicStack/uvloop)的主要開發者。因此不難想像`EdgeDB`從一開始就以async思維開發，故其效率極高。下圖為官方的benchmark。
 
 ![benchmark](https://www.edgedb.com/benchmarks.svg)
 
@@ -56,7 +56,7 @@ Co-Founder兼CEO的[Yury Selivanov](https://github.com/1st1)是Python asyncio背
 這幾個功能將是我們建立`EdgeDBCloudConn`的好幫手。
 
 ## ECC架構
-`ECC`架構如下。
+`ECC`架構如下：
 ```
 ECC
 ├── ecc
@@ -83,7 +83,7 @@ ECC
 內有兩個`Enum`及一個`NamedTuple`。
 
 #### `RespJson(Enum)`
-內有`NO`及`YES`兩個member，並使用`enum.auto`為其自動賦值。其功用是用來區別，`query`是否需要返回`json`格式，會於`QueryRecord` 中使用。
+內有`NO`及`YES`兩個member，並使用`enum.auto`為其自動賦值。其功用是用來區別`query`是否需要返回`json`格式，會於`QueryRecord` 中使用。
 ```python=
 from enum import Enum, auto
 
@@ -93,7 +93,7 @@ class RespJson(Enum):
     YES = auto()
 ```
 #### `RespConstraint(Enum)`
-內有`FREE`、`NO_MORE_THAN_ONE`及`EXACTLY_ONE`三個member，並使用`enum.auto`為其自動賦值。其功用是用來區別，是否需要檢驗`query`返回結果長度，會於`QueryRecord` 中使用。
+內有`FREE`、`NO_MORE_THAN_ONE`及`EXACTLY_ONE`三個member，並使用`enum.auto`為其自動賦值。其功用是用來區別是否需要檢驗`query`返回結果的長度，會於`QueryRecord` 中使用。
 
 ```python=
 ...
@@ -107,7 +107,7 @@ class RespConstraint(Enum):
 * `qry`（`str`）：`EdgeQL`語法的`query` `str`。
 * `extra_args`（`tuple`）：當需要`Filter`時使用。
 * `jsonify`（`RespJson`）：返回結果是否為`json`格式。
-* `required_single`（`RespConstraint`）：是否檢驗返回結果長度。
+* `required_single`（`RespConstraint`）：是否檢驗返回結果的長度。
 * `extra_kwargs`（`dict`）：當需要`Filter`時使用。
 * `task_name`（`str`）：`asyncio task`的`task name`。
 
@@ -285,7 +285,7 @@ def pack_imqry_records_by_args() -> list[QueryRecord]:
 
 當`database`在一定時間內，通常不會變動的情況下，可以設定一個快取時間`ttl`。在`ttl`內如果使用同樣的`query`與參數來讀取資料時，可以直接回傳快取結果，而不真正呼叫`database`。
 
-但是當`database`頻繁變動的話，對這類`query`進行快取就有很多眉角要注意。究竟使用者是真的想要快速發出多次同樣的`mutable` `query`，還是可能因為網路問題或`retry`等邏輯沒寫好，不小心發送多次，而我們應該只呼叫一次`database`就好？
+但是當`database`頻繁變動的話，對這類`query`進行快取就有很多眉角要注意。究竟使用者是真的想要快速發出多次同樣的`mutable` `query`？還是可能因為網路問題或`retry`等邏輯沒寫好，不小心發送多次，而我們應該只呼叫一次`database`就好？
 
 因此我們決定`EdgeDBCloudConn`預設`ttl=0`，即沒有快取。當`ttl>0`時，會使用`alru_cache`來將`_imquery`包上快取設定，而`_mquery`則一律執行。
 
@@ -344,7 +344,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
             self._imquery = alru_cache(ttl=ttl)(self._imquery)
 ```
 #### `client`
-為一`property`，用來包住底層的`self._client`。由於我們希望只建立一個`client`，所以每當`self.client`被呼叫時，我們會先檢查`self._client`是否為`None`，如果是的話，表示我們還沒有建立`client`，此時會先呼叫`edgedb.create_async_client`並搭配由`load_toml`所提供的各個參數來建立`async-client`。由於在建立`client`後，就不需要用到`self._secret_key`，與其讓它待在`instance`內，我們選擇刪除它。最後回傳`self._client`。
+為一`property`，用來包住底層的`self._client`。由於我們希望只建立一個`client`，所以每當`self.client`被呼叫時，我們會先檢查`self._client`是否為`None`，如果是的話，表示我們還沒有建立`client`，此時會先呼叫`edgedb.create_async_client`並搭配由`load_toml`所提供的各個參數來建立`async-client`。由於在建立`client`後，就不需要用到`self._secret_key`，與其讓它待在`instance`內，我們選擇刪除它，最後回傳`self._client`。
 
 ```python=
 class EdgeDBCloudConn(AbstractAsyncContextManager):
@@ -385,7 +385,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
 ```
 
 #### `_is_qry_immutable`
-是用來判斷我們的`query`內是否含有，可能會`mutate` database的關鍵字。我們定義當`query`內含有`insert`、`update`或 `delete`時，就將此`query`判定為會`mutate` `database`。由於`_mutated_kws`不會隨著不同`instance`而改變，所以我們將其設為`class variable`。
+是用來判斷我們的`query`內是否含有可能會`mutate` database的關鍵字。我們定義當`query`內含有`insert`、`update`或 `delete`時，就將此`query`判定為會`mutate` `database`。由於`_mutated_kws`不會隨著不同`instance`而改變，所以我們將其設為`class variable`。
 
 ```python=
 class EdgeDBCloudConn(AbstractAsyncContextManager):
@@ -485,7 +485,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
 * 開頭使用`await asyncio.sleep(1e-5)`的原因是，這樣可以方便UI可以即時更新。
 * 進行兩次`logging.info`，一次記錄已經進入`__aexit__`，另一次記錄實際呼叫`database`次數。
 * 如果有`exception`發生的話，以`logging.error`記錄。
-* 將`self._dbcalls`加總至`self._total_dbcalls`後，呼叫`self._reset_db_calls`重設`self._dbcalls`為0。
+* 將`self._dbcalls`加總至`self._total_dbcalls`後，呼叫`self._reset_db_calls`重設`self._dbcalls`為`0`。
 * 離開`__aexit__`前，計算在`with`中的時間，並以`logging.info`記錄。
 * 最後於離開`__aexit__`，呼叫`self._reset_start`重設`self._start`為`0.0`。
 ```python=
@@ -558,7 +558,7 @@ class EdgeDBCloudConn(AbstractAsyncContextManager):
 ## 備註
 註1：由於這個project的目標是建立與`EdgeDB cloud`連結的`connection`，而不是學習`EdgeQL`的語法。如果是對其語法有興趣的朋友：
 * 可以參考[說明文件](https://www.edgedb.com/docs/edgeql/index)。
-* 或是從[Easy EdgeDB](https://www.edgedb.com/easy-edgedb)開始學習，它就像一本20回的小說一樣，學習起來十分有趣。其作者為[Dave MacLeod](https://www.youtube.com/@mithradates)，在YouTube上有不少精彩的`Rust`影片解說，此外其也是[Learn Rust in a Month of Lunches](https://www.manning.com/books/learn-rust-in-a-month-of-lunches)的作者。
+* 或是從[Easy EdgeDB](https://www.edgedb.com/easy-edgedb)開始學習，它就像一本20回的小說一樣，學習起來十分有趣。其作者為[Dave MacLeod](https://www.youtube.com/@mithradates)，在YouTube上有不少精彩的`Rust`影片解說，此外他也是[Learn Rust in a Month of Lunches](https://www.manning.com/books/learn-rust-in-a-month-of-lunches)的作者。
 
 
 註2：如果您想要的是一個可以連接`local`或是`host`在其它雲端的`EdgeDB` `connection`，需要考慮較複雜的建立方式，包括支援[DSN](https://www.edgedb.com/docs/reference/dsn#dsn-specification)。
