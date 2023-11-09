@@ -37,9 +37,9 @@ class Class:
 
 ## 方法1：`instance.__dict__`
 * 由於`func`為`non-data descriptor`，其由`instance`存取時，會返回由`types.MethodType`生成的`bound method`，所以`__init__`中一開始的`print(type(self.func))`為`method`。
-* `postman(item)`會返回帶有`item`資訊的`decorator` `function`。所以`postman(item)(self.func)`相當於`decorator(self.func)`，會返回一個帶有`item`資訊的`wrapper` `function`。
+* `postman(item)`會返回帶有`item`資訊的`decorator` `function`，所以`postman(item)(self.func)`相當於`decorator(self.func)`，會返回一個帶有`item`資訊的`wrapper` `function`。
 * 由於`func`為`non-data descriptor`，其沒有`__set__`，所以`self.func = postman(item)(self.func)`相當於將帶有`item`資訊的`wrapper` `function`存於`inst.__dict__`中。此時觀察`print(type(self.func))`可以發現其已經變為`function`。
-* 當我們呼叫`inst.func`時，相當於呼叫`wrapper`。其會呼叫`self.func`這個`bound method`後回傳。由於`self.func`是`bound method`，`self`會自己傳遞，所以`inst.func`，使用起來就像是一般的`instance method`。
+* 當我們呼叫`inst.func`時，相當於呼叫`wrapper`。其會呼叫`self.func`這個`bound method`後回傳。由於`self.func`是`bound method`，`self`會自己傳遞，所以`inst.func`使用起來就像是一般的`instance method`。
 * 最後假使將`func`由`inst.__dict__`中移除，我們還是可以使用`inst.func()`的語法來呼叫原來的`func`。
 
 ```python=
@@ -93,9 +93,9 @@ if __name__ == '__main__':
 ## 方法3：`__new__`
 `方法3`於生成`instance`前，先使用了`cls.func = postman(item)(cls.func)`後，再生成`instance`。
 
-這麼做有個大問題，而且如果只利用`Class`生成一個`instance`的話，或許還觀察不出來。由於`__new__`是「每次」`Class`需要生成`instance`的時候，都會被呼叫一次。所以相當於每次生成`instance`，都會做一次`cls.func = postman(item)(cls.func)`。
+這麼做有個大問題，而且如果只利用`Class`生成一個`instance`的話，或許還觀察不出來。由於`__new__`是「每次」`Class`需要生成`instance`的時候，都會被呼叫一次，所以相當於每次生成`instance`，都會做一次`cls.func = postman(item)(cls.func)`。
 
-`# 03`中我們只呼叫了一次`inst.func`，卻看到三個訊息被印出。因為 `Class('xmas_card')`、` Class('mail')`及`Class('package')`分別於`__new__`中都`mutate`了一次`func`。
+`# 03`中我們只呼叫了一次`inst.func`，卻看到三個訊息被印出，因為 `Class('xmas_card')`、` Class('mail')`及`Class('package')`分別於`__new__`中都`mutate`了一次`func`。
 
 ```python=
 # 03
@@ -126,7 +126,7 @@ if __name__ == '__main__':
 * `dec`接受一個`item`參數後，返回一個`wrapper` `function`。
 * `wrapper`接收一個`cls`參數，我們使用`vars(cls).get(name)`看看能不能從`cls.__dict__`中取到`func`。如果有取到的話，再進一步判斷其是否為`callable`。如果是的話，使用`setattr`重新設定`cls.name`為`postman(item)(obj))`。
 
-由於我們`mutate`了`cls`，所以不管是在`mutate`前或後生成的`instance`都將會受影響。`mutate`的語法可以直接使用`dec('xmas_card')(Class)`。不過如果想寫成`Class = dec('xmas_card')(Class)`或是於`Class`上加上`@dec('xmas_card')`也是可以的。
+由於我們`mutate`了`cls`，所以不管是在`mutate`前或後生成的`instance`都將會受影響。`mutate`的語法可以直接使用`dec('xmas_card')(Class)`，不過如果想寫成`Class = dec('xmas_card')(Class)`或是於`Class`上加上`@dec('xmas_card')`也是可以的。
 
 ```python=
 # 04
@@ -204,7 +204,7 @@ if __name__ == '__main__':
     dec('xmas_card')(Class)  # Class is mutated
     inst.func()  # item='xmas_card' is received
 ```
-由於這是`class`級別的`lookup`(可以參考[[Day18]](https://ithelp.ithome.com.tw/articles/10317770))，所以如`# 05a`中`func`定義於`ParentClass`而非`Class`的情況，此方法也可適用。
+由於這是`class`級別的`lookup`（可以參考[[Day18]](https://ithelp.ithome.com.tw/articles/10317770)），所以如`# 05a`中`func`定義於`ParentClass`而非`Class`的情況，此方法也可適用。
 
 ```python=
 # 05a
