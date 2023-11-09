@@ -26,7 +26,7 @@ ECC
 內有著許多小工具，我們挑選幾個比較重要的`function`來說明。
 
 #### `get_loop_dict`與`get_conn_dict`
-皆使用`@st.cache_resource`裝飾。這麼一來當任何`session`一進來，都可以取得同一個`loop_dict`與`conn_dict`，可以幫助我們使用現在的`timestamp`與存在其中的`timestamp`進行對比，進而執行想要的操作。
+皆使用`@st.cache_resource`裝飾。這麼一來，當任何`session`一進來，都可以取得同一個`loop_dict`與`conn_dict`，可以幫助我們使用現在的`timestamp`與存在其中的`timestamp`進行對比，進而執行想要的操作。
 ```python=
 @st.cache_resource
 def get_loop_dict() -> dict[str, Any]:
@@ -218,7 +218,7 @@ def _prepare_conn(cur_ts: int, token: str) -> EdgeDBCloudConn:
 
 #### `run`
 為`asyncio`所執行的`coroutine`，其內為一個`try-except*-else`結構。
-* 於`try`中，使用`asyncio.TaskGroup`將`app`整體布局的`algo`(即`main` `function`)加入到`task`。請注意，這邊我們用到[[Day26]](https://ithelp.ithome.com.tw/articles/10317778)新學到的技巧，來將`tg`往下傳給`algo`。這麼一來，除了當前這個`task`外，`algo`內也可以新增其它的`task`。
+* 於`try`中，使用`asyncio.TaskGroup`將`app`整體布局的`algo`（即`main` `function`）加入到`task`。請注意，這邊我們用到[[Day26]](https://ithelp.ithome.com.tw/articles/10317778)新學到的技巧，來將`tg`往下傳給`algo`。這麼一來，除了當前這個`task`外，`algo`內也可以新增其它的`task`。
 * 於`except* Exception as ex`中，經過`render`後，印出各`Exception`的錯誤資訊。
 * 於`else`中，呈現`query`的結果。
 
