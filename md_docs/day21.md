@@ -204,9 +204,9 @@ if __name__ == '__main__':
 當需要生成`iterator`時，我們應該優先使用`方法1~4`，因為這幾個方法都能快速生成`iterator`。但當我們需要在`iteration`過程中改變`iterator`狀態，或需要有特殊的`attribute`或`function`可以使用的話，就得依照`iterator`的基本定義，來實作像`方法5`的`iterator class`。
 
 ## 參考資料
-* [Python Morsels - Iterator Protocol](https://www.pythonmorsels.com/iterator-protocol/)
-* [Python Morsels - How to make an iterator in Python](https://www.pythonmorsels.com/how-to-make-an-iterator-in-python/)
-* [Python for network engineers - VI. Basics of object-oriented programming - 23. Special methods - Protocols - Iteration protocol](https://pyneng.readthedocs.io/en/latest/book/23_oop_special_methods/iterable_iterator.html)
+* [Python Morsels - Iterator Protocol](https://www.pythonmorsels.com/iterator-protocol/)。
+* [Python Morsels - How to make an iterator in Python](https://www.pythonmorsels.com/how-to-make-an-iterator-in-python/)。
+* [Python for network engineers - VI. Basics of object-oriented programming - 23. Special methods - Protocols - Iteration protocol](https://pyneng.readthedocs.io/en/latest/book/23_oop_special_methods/iterable_iterator.html)。
 
 ## Code
 [本日程式碼傳送門](https://github.com/jrycw/py10wings/tree/master/src/07_protocols/day21_iteration_protocol)。
