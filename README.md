@@ -1,3 +1,35 @@
 # py10wings
 
-The repo for https://ithelp.ithome.com.tw/2023ironman
+[Python十翼：與未來的自己對話](https://py10wings.ycwu.space/)為我於[2023 iThome 鐵人賽](https://ithelp.ithome.com.tw/2023ironman)所寫的30篇Python系列文。
+
+Articles: 
+* [[Day01] 緣起及Python學習資源分享](https://ithelp.ithome.com.tw/articles/10317752)
+* [[Day02] 初翼 - Tips：1~5](https://ithelp.ithome.com.tw/articles/10317754)
+* [[Day03] 初翼 - Tips：6~10](https://ithelp.ithome.com.tw/articles/10317755)
+* [[Day04] 初翼 - Tips：11~15](https://ithelp.ithome.com.tw/articles/10317756)
+* [[Day05] 次翼 - Decorator：@func to func](https://ithelp.ithome.com.tw/articles/10317757)
+* [[Day06] 次翼 - Decorator：@class to func](https://ithelp.ithome.com.tw/articles/10317758)
+* [[Day07] 次翼 - Decorator：@func to class](https://ithelp.ithome.com.tw/articles/10317759)
+* [[Day08] 三翼 - property：核心原理與基本型態](https://ithelp.ithome.com.tw/articles/10317760)
+* [[Day09] 三翼 - property：實例說明](https://ithelp.ithome.com.tw/articles/10317761)
+* [[Day10] 四翼 - Descriptor：Non-Data Descriptor vs Data Descriptor](https://ithelp.ithome.com.tw/articles/10317762)
+* [[Day11] 四翼 - Descriptor：Descriptor存取設計(1)](https://ithelp.ithome.com.tw/articles/10317763)
+* [[Day12] 四翼 - Descriptor：Descriptor存取設計(2)](https://ithelp.ithome.com.tw/articles/10317764)
+* [[Day13] 四翼 - Descriptor：property vs Descriptor](https://ithelp.ithome.com.tw/articles/10317765)
+* [[Day14] 五翼 - Metaclasses：Instance Creation](https://ithelp.ithome.com.tw/articles/10317766)
+* [[Day15] 五翼 - Metaclasses：Class Creation](https://ithelp.ithome.com.tw/articles/10317767)
+* [[Day16] 五翼 - Metaclasses：`__call__`](https://ithelp.ithome.com.tw/articles/10317768)
+* [[Day17] 五翼 - Metaclasses：Metaclasses相關整理](https://ithelp.ithome.com.tw/articles/10317769)
+* [[Day18] 六翼 - 導讀Descriptor HowTo Guide：How dot works？](https://ithelp.ithome.com.tw/articles/10317770)
+* [[Day19] 六翼 - 導讀Descriptor HowTo Guide：Pure Python Equivalents](https://ithelp.ithome.com.tw/articles/10317771)
+* [[Day20] 七翼 - Protocols：Sequence Protocol](https://ithelp.ithome.com.tw/articles/10317772)
+* [[Day21] 七翼 - Protocols：Iteration Protocol](https://ithelp.ithome.com.tw/articles/10317773)
+* [[Day22] 七翼 - Protocols：Context Manager Protocol](https://ithelp.ithome.com.tw/articles/10317774)
+* [[Day23] 八翼 - Scopes：常見錯誤1（LEGB原則）](https://ithelp.ithome.com.tw/articles/10317775)
+* [[Day24] 八翼 - Scopes：常見錯誤2（global與nonlocal）](https://ithelp.ithome.com.tw/articles/10317776)
+* [[Day25] 九翼 - Exception Groups與except*：導讀PEP654](https://ithelp.ithome.com.tw/articles/10317777)
+* [[Day26] 九翼 - Exception Groups與except*：相關應用](https://ithelp.ithome.com.tw/articles/10317778)
+* [[Day27] 末翼 - Term Projects：Project ECC - 建立EdgeDB Cloud Connection(1)](https://ithelp.ithome.com.tw/articles/10317779)
+* [[Day28] 末翼 - Term Projects：Project ECC - 建立EdgeDB Cloud Connection(2)](https://ithelp.ithome.com.tw/articles/10317780)
+* [[Day29] 末翼 - Term Projects：Project Postman - 研究如何傳遞decorator factory之參數](https://ithelp.ithome.com.tw/articles/10317781)
+* [[Day30] specialist與Python3.12 f-strings in the grammar](https://ithelp.ithome.com.tw/articles/10317782)
